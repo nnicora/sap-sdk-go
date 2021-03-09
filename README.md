@@ -1,1 +1,1 @@
-# sap-sdk-go
+# SAP SDK for Golang
