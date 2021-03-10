@@ -32,11 +32,25 @@ func NewBtpClient(ctx context.Context, cfg *Config) (*Client, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	ga, err := btpglobalaccounts.New(cfg.Endpoint.Account, http)
+	if err != nil {
+		return nil, err
+	}
+	sa, err := btpsubaccounts.New(cfg.Endpoint.Account, http)
+	if err != nil {
+		return nil, err
+	}
+	e, err := btpentitlements.New(cfg.Endpoint.Entitlement, http)
+	if err != nil {
+		return nil, err
+	}
+
 	return &Client{
 		config: cfg,
 
-		GlobalAccounts: btpglobalaccounts.New(cfg.Endpoint.Account, http),
-		SubAccounts:    btpsubaccounts.New(cfg.Endpoint.Account, http),
-		Entitlements:   btpentitlements.New(cfg.Endpoint.Entitlement, http),
+		GlobalAccounts: ga,
+		SubAccounts:    sa,
+		Entitlements:   e,
 	}, nil
 }

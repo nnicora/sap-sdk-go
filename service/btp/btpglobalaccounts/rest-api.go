@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/nnicora/sap-sdk-go/internal/utils"
 	"github.com/nnicora/sap-sdk-go/sap/times"
 	"github.com/nnicora/sap-sdk-go/service"
 	"github.com/nnicora/sap-sdk-go/service/btp/btpsubaccounts"
@@ -92,7 +93,7 @@ func (ga *GlobalAccounts) GetRestApiWithParams(ctx context.Context, params *Glob
 
 	resp, err := ga.httpClient.Do(request)
 	if err != nil {
-		return nil, err
+		return nil, utils.GetDnsError(err)
 	}
 
 	body, err := ioutil.ReadAll(resp.Body)
@@ -131,7 +132,7 @@ func (ga *GlobalAccounts) UpdateRestApi(ctx context.Context, req *GlobalAccountR
 
 	resp, err := ga.httpClient.Do(request)
 	if err != nil {
-		return nil, err
+		return nil, utils.GetDnsError(err)
 	}
 
 	responseData, err := ioutil.ReadAll(resp.Body)

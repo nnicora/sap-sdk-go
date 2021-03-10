@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/nnicora/sap-sdk-go/internal/utils"
 	"github.com/nnicora/sap-sdk-go/sap/times"
 	"github.com/nnicora/sap-sdk-go/service"
 	"io/ioutil"
@@ -57,7 +58,7 @@ func (a *SubAccounts) GetAllRestApi(ctx context.Context) ([]SubAccount, error) {
 
 	resp, err := a.httpClient.Do(request)
 	if err != nil {
-		return nil, err
+		return nil, utils.GetDnsError(err)
 	}
 
 	responseData, err := ioutil.ReadAll(resp.Body)
@@ -105,7 +106,7 @@ func (a *SubAccounts) CreateRestApi(ctx context.Context, req *SubAccountRequest)
 
 	resp, err := a.httpClient.Do(request)
 	if err != nil {
-		return nil, err
+		return nil, utils.GetDnsError(err)
 	}
 
 	responseData, err := ioutil.ReadAll(resp.Body)
@@ -154,7 +155,7 @@ func (a *SubAccounts) CloneRestApi(ctx context.Context, sourceSubAccountGUID str
 
 	resp, err := a.httpClient.Do(request)
 	if err != nil {
-		return nil, err
+		return nil, utils.GetDnsError(err)
 	}
 
 	responseData, err := ioutil.ReadAll(resp.Body)
@@ -185,7 +186,7 @@ func (a *SubAccounts) GetRestApi(ctx context.Context, subAccountGUID string) (*S
 
 	resp, err := a.httpClient.Do(request)
 	if err != nil {
-		return nil, err
+		return nil, utils.GetDnsError(err)
 	}
 
 	responseData, err := ioutil.ReadAll(resp.Body)
@@ -220,7 +221,7 @@ func (a *SubAccounts) DeleteRestApi(ctx context.Context, subAccountGUID string) 
 
 	resp, err := a.httpClient.Do(request)
 	if err != nil {
-		return nil, err
+		return nil, utils.GetDnsError(err)
 	}
 
 	if resp.StatusCode != 200 {
@@ -262,7 +263,7 @@ func (a *SubAccounts) PatchRestApi(ctx context.Context, subAccountGUID string, r
 
 	resp, err := a.httpClient.Do(request)
 	if err != nil {
-		return nil, err
+		return nil, utils.GetDnsError(err)
 	}
 
 	responseData, err := ioutil.ReadAll(resp.Body)
@@ -293,7 +294,7 @@ func (a *SubAccounts) GetCustomPropertiesRestApi(ctx context.Context, subAccount
 
 	resp, err := a.httpClient.Do(request)
 	if err != nil {
-		return nil, err
+		return nil, utils.GetDnsError(err)
 	}
 
 	responseData, err := ioutil.ReadAll(resp.Body)
@@ -346,7 +347,7 @@ func (a *SubAccounts) MoveManyRestApi(ctx context.Context, req *MoveSubAccountsR
 
 	resp, err := a.httpClient.Do(request)
 	if err != nil {
-		return nil, err
+		return nil, utils.GetDnsError(err)
 	}
 
 	responseData, err := ioutil.ReadAll(resp.Body)
@@ -382,7 +383,7 @@ func (a *SubAccounts) MoveRestApi(ctx context.Context, subAccountGUID string, re
 
 	resp, err := a.httpClient.Do(request)
 	if err != nil {
-		return nil, err
+		return nil, utils.GetDnsError(err)
 	}
 
 	responseData, err := ioutil.ReadAll(resp.Body)
@@ -422,7 +423,7 @@ func (a *SubAccounts) GetServiceManagementBindingRestApi(ctx context.Context, su
 
 	resp, err := a.httpClient.Do(request)
 	if err != nil {
-		return nil, err
+		return nil, utils.GetDnsError(err)
 	}
 
 	responseData, err := ioutil.ReadAll(resp.Body)
@@ -452,7 +453,7 @@ func (a *SubAccounts) CreateServiceManagementBindingRestApi(ctx context.Context,
 
 	resp, err := a.httpClient.Do(request)
 	if err != nil {
-		return nil, err
+		return nil, utils.GetDnsError(err)
 	}
 
 	responseData, err := ioutil.ReadAll(resp.Body)
@@ -482,7 +483,7 @@ func (a *SubAccounts) DeleteServiceManagementBindingRestApi(ctx context.Context,
 
 	resp, err := a.httpClient.Do(request)
 	if err != nil {
-		return false, err
+		return false, utils.GetDnsError(err)
 	}
 
 	if resp.StatusCode != 200 {

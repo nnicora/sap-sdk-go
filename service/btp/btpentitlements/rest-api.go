@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"github.com/nnicora/sap-sdk-go/internal/utils"
 	"github.com/nnicora/sap-sdk-go/service"
 	"io/ioutil"
 	"net/http"
@@ -36,7 +37,7 @@ func (e *Entitlements) GetDataCentersRestApi(ctx context.Context) ([]DataCenter,
 
 	resp, err := e.httpClient.Do(request)
 	if err != nil {
-		return nil, err
+		return nil, utils.GetDnsError(err)
 	}
 
 	responseData, err := ioutil.ReadAll(resp.Body)
