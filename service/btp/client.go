@@ -17,22 +17,26 @@ type Client struct {
 }
 
 type Config struct {
-	AccountsHost     string
-	EntitlementsHost string
+	Endpoint *Endpoint
 
-	Auth2Config *oauth2.Config
+	OAuth2 *oauth2.Config
+}
+
+type Endpoint struct {
+	Account     string
+	Entitlement string
 }
 
 func NewBtpClient(ctx context.Context, cfg *Config) (*Client, error) {
-	http, err := oauth2.NewOAuth2ClientWithContext(ctx, cfg.Auth2Config)
+	http, err := oauth2.NewOAuth2ClientWithContext(ctx, cfg.OAuth2)
 	if err != nil {
 		return nil, err
 	}
 	return &Client{
 		config: cfg,
 
-		GlobalAccounts: btpglobalaccounts.New(cfg.AccountsHost, http),
-		SubAccounts:    btpsubaccounts.New(cfg.AccountsHost, http),
-		Entitlements:   btpentitlements.New(cfg.EntitlementsHost, http),
+		GlobalAccounts: btpglobalaccounts.New(cfg.Endpoint.Account, http),
+		SubAccounts:    btpsubaccounts.New(cfg.Endpoint.Account, http),
+		Entitlements:   btpentitlements.New(cfg.Endpoint.Entitlement, http),
 	}, nil
 }
