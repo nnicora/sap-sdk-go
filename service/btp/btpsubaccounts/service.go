@@ -21,7 +21,7 @@ type SubAccounts struct {
 func New(host string, httpClient *http.Client) (*SubAccounts, error) {
 	host = strings.TrimSuffix(host, "/")
 
-	if ok, err := utils.IsUrl(host); err != nil {
+	if ok, err := utils.IsValidUrl(host); err != nil {
 		return nil, fmt.Errorf("invalid Sub Accounts host; %v", err)
 	} else if !ok {
 		return nil, fmt.Errorf("invalid Sub Accounts host '%s'", host)

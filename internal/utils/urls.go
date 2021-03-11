@@ -24,7 +24,7 @@ func ipLookup(host string) (bool, error) {
 	return true, nil
 }
 
-func IsUrl(str string) (bool, error) {
+func IsValidUrl(str string) (bool, error) {
 	if u, err := url.Parse(str); err != nil {
 		return false, err
 	} else {

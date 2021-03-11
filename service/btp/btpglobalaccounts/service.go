@@ -16,7 +16,7 @@ type GlobalAccounts struct {
 func New(host string, httpClient *http.Client) (*GlobalAccounts, error) {
 	host = strings.TrimSuffix(host, "/")
 
-	if ok, err := utils.IsUrl(host); err != nil {
+	if ok, err := utils.IsValidUrl(host); err != nil {
 		return nil, fmt.Errorf("invalid Global Accounts host; %v", err)
 	} else if !ok {
 		return nil, fmt.Errorf("invalid Global Accounts host '%s'", host)
