@@ -5,7 +5,8 @@ import (
 	"encoding/json"
 	"errors"
 	"github.com/nnicora/sap-sdk-go/internal/utils"
-	"github.com/nnicora/sap-sdk-go/service"
+	"github.com/nnicora/sap-sdk-go/sap/http/headerkey"
+	"github.com/nnicora/sap-sdk-go/sap/http/mimetype"
 	"io/ioutil"
 	"net/http"
 )
@@ -33,7 +34,7 @@ func (e *Entitlements) GetDataCentersRestApi(ctx context.Context) ([]DataCenter,
 	if err != nil {
 		return nil, err
 	}
-	request.Header.Set(service.ContentType, service.JSON)
+	request.Header.Set(headerkey.ContentType, mimetype.ApplicationJson)
 
 	resp, err := e.httpClient.Do(request)
 	if err != nil {

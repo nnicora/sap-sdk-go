@@ -7,8 +7,9 @@ import (
 	"errors"
 	"fmt"
 	"github.com/nnicora/sap-sdk-go/internal/utils"
+	"github.com/nnicora/sap-sdk-go/sap/http/headerkey"
+	"github.com/nnicora/sap-sdk-go/sap/http/mimetype"
 	"github.com/nnicora/sap-sdk-go/sap/times"
-	"github.com/nnicora/sap-sdk-go/service"
 	"github.com/nnicora/sap-sdk-go/service/btp/btpsubaccounts"
 	"io/ioutil"
 	"net/http"
@@ -89,7 +90,7 @@ func (ga *GlobalAccounts) GetRestApiWithParams(ctx context.Context, params *Glob
 	if err != nil {
 		return nil, err
 	}
-	request.Header.Set(service.ContentType, service.JSON)
+	request.Header.Set(headerkey.ContentType, mimetype.ApplicationJson)
 
 	resp, err := ga.httpClient.Do(request)
 	if err != nil {
@@ -128,7 +129,7 @@ func (ga *GlobalAccounts) UpdateRestApi(ctx context.Context, req *GlobalAccountR
 	if err != nil {
 		return nil, err
 	}
-	request.Header.Set(service.ContentType, service.JSON)
+	request.Header.Set(headerkey.ContentType, mimetype.ApplicationJson)
 
 	resp, err := ga.httpClient.Do(request)
 	if err != nil {

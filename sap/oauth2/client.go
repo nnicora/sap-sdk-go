@@ -3,6 +3,7 @@ package oauth2
 import (
 	"errors"
 	"fmt"
+	"github.com/nnicora/sap-sdk-go/internal/utils"
 	"golang.org/x/net/context"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/clientcredentials"
@@ -61,6 +62,12 @@ func NewOAuth2ClientWithContext(ctx context.Context, conf *Config) (*http.Client
 	httpClient := &http.Client{Timeout: conf.Timeout}
 	ctx = context.WithValue(ctx, oauth2.HTTPClient, httpClient)
 
+	if ok, err := utils.HostAlive(conf.TokenURL); err != nil {
+		return nil, fmt.Errorf("oauth2 token url unreachable; %v", err)
+	} else if !ok {
+		return nil, fmt.Errorf("oauth2 token url unreachable")
+	}
+
 	if conf.GrantType == "client_credentials" {
 		config := &clientcredentials.Config{
 			ClientID:       conf.ClientID,
@@ -84,6 +91,12 @@ func NewOAuth2ClientWithContext(ctx context.Context, conf *Config) (*http.Client
 		// URL. Exchange will do the handshake to retrieve the
 		// initial access token. The HTTP Client returned by
 		// conf.Client will refresh the token as necessary.
+
+		if ok, err := utils.HostAlive(conf.AuthURL); err != nil {
+			return nil, fmt.Errorf("oauth2 authorization url unreachable; %v", err)
+		} else if !ok {
+			return nil, fmt.Errorf("oauth2 authorization url unreachable")
+		}
 
 		config := &oauth2.Config{
 			ClientID:     conf.ClientID,

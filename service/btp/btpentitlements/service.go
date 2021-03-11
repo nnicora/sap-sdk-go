@@ -16,12 +16,10 @@ type Entitlements struct {
 func New(host string, httpClient *http.Client) (*Entitlements, error) {
 	host = strings.TrimSuffix(host, "/")
 
-	if !utils.IsUrl(host) {
-		return nil, fmt.Errorf("invalid Entitlements url '%s'", host)
-	}
-
-	if !utils.CheckUrlSchema(host) {
-		return nil, fmt.Errorf("invalid Entitlements url schema '%s'", host)
+	if ok, err := utils.IsUrl(host); err != nil {
+		return nil, fmt.Errorf("invalid Entitlements host; %v", err)
+	} else if !ok {
+		return nil, fmt.Errorf("invalid Entitlements host '%s'", host)
 	}
 
 	return &Entitlements{

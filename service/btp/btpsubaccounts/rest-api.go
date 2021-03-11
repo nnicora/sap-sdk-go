@@ -7,8 +7,9 @@ import (
 	"errors"
 	"fmt"
 	"github.com/nnicora/sap-sdk-go/internal/utils"
+	"github.com/nnicora/sap-sdk-go/sap/http/headerkey"
+	"github.com/nnicora/sap-sdk-go/sap/http/mimetype"
 	"github.com/nnicora/sap-sdk-go/sap/times"
-	"github.com/nnicora/sap-sdk-go/service"
 	"io/ioutil"
 	"net/http"
 )
@@ -54,7 +55,7 @@ func (a *SubAccounts) GetAllRestApi(ctx context.Context) ([]SubAccount, error) {
 	if err != nil {
 		return nil, err
 	}
-	request.Header.Set(service.ContentType, service.JSON)
+	request.Header.Set(headerkey.ContentType, mimetype.ApplicationJson)
 
 	resp, err := a.httpClient.Do(request)
 	if err != nil {
@@ -102,7 +103,7 @@ func (a *SubAccounts) CreateRestApi(ctx context.Context, req *SubAccountRequest)
 	if err != nil {
 		return nil, err
 	}
-	request.Header.Set(service.ContentType, service.JSON)
+	request.Header.Set(headerkey.ContentType, mimetype.ApplicationJson)
 
 	resp, err := a.httpClient.Do(request)
 	if err != nil {
@@ -151,7 +152,7 @@ func (a *SubAccounts) CloneRestApi(ctx context.Context, sourceSubAccountGUID str
 	if err != nil {
 		return nil, err
 	}
-	request.Header.Set(service.ContentType, service.JSON)
+	request.Header.Set(headerkey.ContentType, mimetype.ApplicationJson)
 
 	resp, err := a.httpClient.Do(request)
 	if err != nil {
@@ -182,7 +183,7 @@ func (a *SubAccounts) GetRestApi(ctx context.Context, subAccountGUID string) (*S
 	if err != nil {
 		return nil, err
 	}
-	request.Header.Set(service.ContentType, service.JSON)
+	request.Header.Set(headerkey.ContentType, mimetype.ApplicationJson)
 
 	resp, err := a.httpClient.Do(request)
 	if err != nil {
@@ -217,7 +218,7 @@ func (a *SubAccounts) DeleteRestApi(ctx context.Context, subAccountGUID string) 
 	if err != nil {
 		return nil, err
 	}
-	request.Header.Set(service.ContentType, service.JSON)
+	request.Header.Set(headerkey.ContentType, mimetype.ApplicationJson)
 
 	resp, err := a.httpClient.Do(request)
 	if err != nil {
@@ -259,7 +260,7 @@ func (a *SubAccounts) PatchRestApi(ctx context.Context, subAccountGUID string, r
 	if err != nil {
 		return nil, err
 	}
-	request.Header.Set(service.ContentType, service.JSON)
+	request.Header.Set(headerkey.ContentType, mimetype.ApplicationJson)
 
 	resp, err := a.httpClient.Do(request)
 	if err != nil {
@@ -290,7 +291,7 @@ func (a *SubAccounts) GetCustomPropertiesRestApi(ctx context.Context, subAccount
 	if err != nil {
 		return nil, err
 	}
-	request.Header.Set(service.ContentType, service.JSON)
+	request.Header.Set(headerkey.ContentType, mimetype.ApplicationJson)
 
 	resp, err := a.httpClient.Do(request)
 	if err != nil {
@@ -343,7 +344,7 @@ func (a *SubAccounts) MoveManyRestApi(ctx context.Context, req *MoveSubAccountsR
 	if err != nil {
 		return nil, err
 	}
-	request.Header.Set(service.ContentType, service.JSON)
+	request.Header.Set(headerkey.ContentType, mimetype.ApplicationJson)
 
 	resp, err := a.httpClient.Do(request)
 	if err != nil {
@@ -379,7 +380,7 @@ func (a *SubAccounts) MoveRestApi(ctx context.Context, subAccountGUID string, re
 	if err != nil {
 		return nil, err
 	}
-	request.Header.Set(service.ContentType, service.JSON)
+	request.Header.Set(headerkey.ContentType, mimetype.ApplicationJson)
 
 	resp, err := a.httpClient.Do(request)
 	if err != nil {
@@ -419,7 +420,7 @@ func (a *SubAccounts) GetServiceManagementBindingRestApi(ctx context.Context, su
 	if err != nil {
 		return nil, err
 	}
-	request.Header.Set(service.ContentType, service.JSON)
+	request.Header.Set(headerkey.ContentType, mimetype.ApplicationJson)
 
 	resp, err := a.httpClient.Do(request)
 	if err != nil {
@@ -449,7 +450,7 @@ func (a *SubAccounts) CreateServiceManagementBindingRestApi(ctx context.Context,
 	if err != nil {
 		return nil, err
 	}
-	request.Header.Set(service.ContentType, service.JSON)
+	request.Header.Set(headerkey.ContentType, mimetype.ApplicationJson)
 
 	resp, err := a.httpClient.Do(request)
 	if err != nil {
@@ -479,7 +480,7 @@ func (a *SubAccounts) DeleteServiceManagementBindingRestApi(ctx context.Context,
 	if err != nil {
 		return false, err
 	}
-	request.Header.Set(service.ContentType, service.JSON)
+	request.Header.Set(headerkey.ContentType, mimetype.ApplicationJson)
 
 	resp, err := a.httpClient.Do(request)
 	if err != nil {
