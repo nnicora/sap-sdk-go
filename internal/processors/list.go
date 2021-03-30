@@ -169,7 +169,7 @@ func (l *list) Exec(arg interface{}) {
 		it := item{
 			index: i, processor: h, arg: arg,
 		}
-		if l.afterEachFn != nil && !l.afterEachFn(it) {
+		if l.afterEachFn != nil && l.afterEachFn(it) {
 			return
 		}
 	}
