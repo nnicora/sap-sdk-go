@@ -6,6 +6,19 @@ import (
 	"github.com/nnicora/sap-sdk-go/sap/session"
 )
 
+// TODO: - IMPORTANT -- Don't Commit Credentials
+const (
+	oauth2Username    = ""
+	oauth2Password    = ""
+	globalAccountGuid = ""
+)
+
+var oauth2Config = &oauth2.Config{
+	GrantType: "password",
+	Username:  oauth2Username,
+	Password:  oauth2Password,
+}
+
 var cfg = &sap.Config{
 	Endpoints: map[string]*sap.EndpointConfig{
 		"accounts": {
