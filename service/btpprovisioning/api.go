@@ -38,7 +38,7 @@ type ServicePlanQuotaAssignment struct {
 	//	[ PLATFORM, SERVICE, ELASTIC_SERVICE, ELASTIC_LIMITED, APPLICATION, QUOTA_BASED_APPLICATION, ENVIRONMENT ]
 	ServiceCategory string `json:"serviceCategory"`
 	//Unique ID of the subaccount for which to get quota.
-	SubAccountGUID string `json:"subaccountGUID"`
+	SubAccountGuid string `json:"subaccountGUID"`
 	//The ID of the tenant for the subaccount.
 	TenantId string `json:"tenantId"`
 	//Whether an unlimited quantity of quota can be provisioned.
@@ -169,7 +169,7 @@ type EnvironmentInstance struct {
 	//	[ cloudfoundry, kubernetes, neo ]
 	EnvironmentType string `json:"environmentType"`
 	//The GUID of the global account that is associated with the environment instance.
-	GlobalAccountGUID string `json:"globalAccountGUID"`
+	GlobalAccountGuid string `json:"globalAccountGUID"`
 	//Automatically generated unique identifier for the environment instance.
 	Id string `json:"id"`
 	//Broker-specified key-value pairs that specify attributes of a service instance.
@@ -201,7 +201,7 @@ type EnvironmentInstance struct {
 	//Information about the current state of the environment instance.
 	StateMessage string `json:"stateMessage"`
 	//The GUID of the subaccount associated with the environment instance.
-	SubAccountGUID string `json:"subaccountGUID"`
+	SubAccountGuid string `json:"subaccountGUID"`
 	//The ID of the tenant that owns the environment instance.
 	TenantId string `json:"tenantId"`
 	//The last provisioning operation on the environment instance.

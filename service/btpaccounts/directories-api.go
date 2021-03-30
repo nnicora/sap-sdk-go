@@ -184,7 +184,7 @@ func (c *AccountsV1) createDirectoryRequest(ctx context.Context,
 // Get a directory
 type GetDirectoryInput struct {
 	//The GUID of the directory for which to get details.
-	DirectoryGUID string `dest:"uri" dest-name:"directoryGUID"`
+	DirectoryGuid string `dest:"uri" dest-name:"directoryGUID"`
 
 	// The range of authorizations for which to return information.
 	//
@@ -227,7 +227,7 @@ func (c *AccountsV1) getDirectoryRequest(ctx context.Context,
 // Delete a directory
 type DeleteDirectoryInput struct {
 	//The GUID of the directory to update.
-	DirectoryGUID string `dest:"uri" dest-name:"directoryGUID"`
+	DirectoryGuid string `dest:"uri" dest-name:"directoryGUID"`
 
 	//Whether to delete the directory even if it contains data. If not set to true,
 	//the request fails when the directory contains data.
@@ -264,7 +264,7 @@ func (c *AccountsV1) deleteDirectoryRequest(ctx context.Context,
 // Update a directory
 type UpdateDirectoryInput struct {
 	//The GUID of the directory to update.
-	DirectoryGUID string `dest:"uri" dest-name:"directoryGUID"`
+	DirectoryGuid string `dest:"uri" dest-name:"directoryGUID"`
 
 	//Additional Properties of the directory.
 	customProperties []CustomProperties `json:"customProperties"`
@@ -306,7 +306,7 @@ func (c *AccountsV1) updateDirectoryRequest(ctx context.Context,
 // Add features to a directory
 type AddFeatureToDirectoryInput struct {
 	//The GUID of the directory to update.
-	DirectoryGUID string `dest:"uri" dest-name:"directoryGUID"`
+	DirectoryGuid string `dest:"uri" dest-name:"directoryGUID"`
 
 	//Additional admins of the directory. Do not add yourself as you are assigned as a directory admin by default.
 	//Use only with directories that are configured to manage their authorizations.
@@ -368,7 +368,7 @@ func (c *AccountsV1) addFeatureToDirectoryRequest(ctx context.Context,
 // Get directory custom properties
 type GetDirectorCustomPropertiesInput struct {
 	//The GUID of the directory to update.
-	DirectoryGUID string `dest:"uri" dest-name:"directoryGUID"`
+	DirectoryGuid string `dest:"uri" dest-name:"directoryGUID"`
 }
 type GetDirectorCustomPropertiesOutput struct {
 	Value []CustomProperties `json:"value"`

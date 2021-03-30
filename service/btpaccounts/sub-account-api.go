@@ -18,7 +18,7 @@ type GetSubAccountsInput struct {
 	DerivedAuthorizations string `dest:"querystring" dest-name:"derivedAuthorizations"`
 
 	//Returns only the subaccounts in a given directory. Provide the unique ID of the directory.
-	DirectoryGUID string `dest:"querystring" dest-name:"directoryGUID"`
+	DirectoryGuid string `dest:"querystring" dest-name:"directoryGUID"`
 }
 type GetSubAccountsOutput struct {
 	Value []SubAccount `json:"value"`
