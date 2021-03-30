@@ -297,7 +297,7 @@ func (c *AccountsV1) updateSubAccountRequest(ctx context.Context, input *UpdateS
 	op := &request.Operation{
 		Name: subAccounts,
 		Http: request.HTTP{
-			Method: request.DELETE,
+			Method: request.PATCH,
 			Path:   "/subaccounts/{subaccountGUID}",
 		},
 	}

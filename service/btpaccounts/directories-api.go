@@ -384,7 +384,7 @@ func (c *AccountsV1) getDirectorCustomPropertiesRequest(ctx context.Context,
 	op := &request.Operation{
 		Name: directories,
 		Http: request.HTTP{
-			Method: request.PATCH,
+			Method: request.GET,
 			Path:   "/directories/{directoryGUID}/changeDirectoryFeatures",
 		},
 	}
