@@ -12,6 +12,7 @@ import (
 	"time"
 )
 
+// OAuth2 Config allowing to use
 type Config struct {
 	GrantType string
 
@@ -28,17 +29,17 @@ type Config struct {
 	ClientSecret string
 
 	// AuthURL is the resource server's token endpoint
-	// URL. This is a constant specific to each server.
+	// Host. This is a constant specific to each server.
 	// Used only when grant_type ==  authorization_code
 	AuthURL string
 
-	// RedirectURL is the URL to redirect users going through
+	// RedirectURL is the Host to redirect users going through
 	// the OAuth flow, after the resource owner's URLs.
 	// Used only when grant_type ==  authorization_code
 	RedirectURL string
 
 	// TokenURL is the resource server's token endpoint
-	// URL. This is a constant specific to each server.
+	// Host. This is a constant specific to each server.
 	TokenURL string
 
 	// Scope specifies optional requested permissions.
@@ -53,6 +54,8 @@ type Config struct {
 	AuthStyle oauth2.AuthStyle
 
 	Timeout time.Duration
+
+	DefaultHttpClient *http.Client
 }
 
 func NewOAuth2Client(conf *Config) (*http.Client, error) {
@@ -84,12 +87,12 @@ func NewOAuth2ClientWithContext(ctx context.Context, conf *Config) (*http.Client
 	// Redirect user to consent page to ask for permission
 	// for the scopes specified above.
 	//url := config.AuthCodeURL("state", oauth2.AccessTypeOffline)
-	//fmt.Printf("Visit the URL for the auth dialog: %v", url)
+	//fmt.Printf("Visit the Host for the auth dialog: %v", url)
 
 	if conf.GrantType == "authorization_code" {
-		// Use the authorization code that is pushed to the redirect
-		// URL. Exchange will do the handshake to retrieve the
-		// initial access token. The HTTP Client returned by
+		// Using the authorization code that is pushed to the redirect
+		// Host. Exchange will do the handshake to retrieve the
+		// initial access token. The Http Client returned by
 		// conf.Client will refresh the token as necessary.
 
 		if ok, err := utils.HostAlive(conf.AuthURL); err != nil {

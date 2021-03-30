@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"errors"
 	"net"
 	"net/url"
 )
@@ -24,10 +25,11 @@ func ipLookup(host string) (bool, error) {
 	return true, nil
 }
 
-func IsValidUrl(str string) (bool, error) {
+func IsValidUrl(str string) error {
 	if u, err := url.Parse(str); err != nil {
-		return false, err
-	} else {
-		return u.Scheme != "" && u.Host != "", nil
+		return err
+	} else if u.Scheme == "" || u.Host == "" {
+		return errors.New("invalid url, having schema of host empty")
 	}
+	return nil
 }
