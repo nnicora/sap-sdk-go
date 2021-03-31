@@ -2,6 +2,7 @@ package btpaccounts
 
 import (
 	"context"
+	"github.com/nnicora/sap-sdk-go/internal/times"
 	"github.com/nnicora/sap-sdk-go/sap/http/request"
 )
 
@@ -31,7 +32,7 @@ type Directory struct {
 	CreatedBy string `json:"createdBy"`
 
 	// The date the directory was created. Dates and times are in UTC format.
-	CreatedDate string `json:"createdDate"`
+	CreatedDate times.JavaTime `json:"createdDate"`
 
 	// Custom properties assigned to the directory as key-value pairs.
 	CustomProperties []CustomProperties `json:"customProperties"`
@@ -91,7 +92,7 @@ type Directory struct {
 	LegalLinks LegalLinks `json:"legalLinks"`
 
 	// The date the directory was last modified. Dates and times are in UTC format.
-	ModifiedDate string `json:"modifiedDate"`
+	ModifiedDate times.JavaTime `json:"modifiedDate"`
 
 	// The GUID of the directory's parent entity. Typically this is the global account.
 	ParentGuid string `json:"parentGuid"`
