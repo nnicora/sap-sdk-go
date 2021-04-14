@@ -145,6 +145,9 @@ func (r *Request) Build() error {
 
 func (r *Request) Sign() error {
 	r.BuildAndSanitize()
+	if r.Error != nil {
+		return r.Error
+	}
 	r.Processors.Using(Sign).Exec(r)
 	return r.Error
 }
@@ -161,6 +164,10 @@ func (r *Request) BuildAndSanitize() error {
 
 func (r *Request) Send() error {
 	defer func() {
+		if r.OutputDataFilled() {
+			r.readFromHttpResponseTo(r.OutputData)
+		}
+
 		r.Processors.Using(Complete).Exec(r)
 	}()
 
@@ -169,7 +176,7 @@ func (r *Request) Send() error {
 	}
 
 	if r.InputDataFilled() {
-		r.updateHttpRequestWithParamsTags()
+		r.writeToHttpRequestFrom(r.InputData)
 		//r.buildBody()
 	}
 
@@ -177,10 +184,12 @@ func (r *Request) Send() error {
 		r.Error = nil
 		r.AttemptTime = time.Now()
 
+		r.Processors.Using(Validate).Exec(r)
+		if r.Error != nil {
+			return r.Error
+		}
+
 		if err := r.sendRequest(); err == nil {
-			if r.OutputDataFilled() {
-				r.readFromHttpResponseToDataTags()
-			}
 			if r.Error != nil {
 				return r.Error
 			}

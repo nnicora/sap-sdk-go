@@ -15,7 +15,7 @@ func TestGetGlobalAccount(t *testing.T) {
 		if data, err := json.Marshal(out); err != nil {
 			t.Error(err)
 		} else {
-			t.Logf("\nSuccess Response: %s\n", string(data))
+			t.Logf("\nSuccess StatusAndBodyFromResponse: %s\n", string(data))
 		}
 	}
 }
@@ -31,7 +31,7 @@ func TestUpdateGlobalAccount(t *testing.T) {
 		if data, err := json.Marshal(out); err != nil {
 			t.Error(err)
 		} else {
-			t.Logf("\nSuccess Response: %s\n", string(data))
+			t.Logf("\nSuccess StatusAndBodyFromResponse: %s\n", string(data))
 		}
 	}
 }

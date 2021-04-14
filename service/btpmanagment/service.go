@@ -24,7 +24,7 @@ const (
 func New(p service.RequesterConfig) *ServiceManagementV1 {
 	c, err := p.ServiceConfig(EndpointsID)
 	if err != nil {
-		c.Processors.Using(request.Validate).PushBack(func(t interface{}) {
+		c.Processors.Using(request.Validate).PushFrontHandler(func(t interface{}) {
 			r := t.(*request.Request)
 			r.Error = err
 		})
@@ -48,14 +48,14 @@ func newRequester(cfg *sap.RuntimeConfig, p *processors.Processors, endpoint *en
 
 	// Processors
 	p.Using(request.Build).
-		PushBackNamed(&jsonbuiltin.BuildProcessor).
-		PushBackNamed(&jsonbuiltin.MarshalToRequestJSONBodyProcessor)
+		PushBack(&jsonbuiltin.BuildProcessor).
+		PushBack(&jsonbuiltin.MarshalToRequestJSONBodyProcessor)
 
 	p.Using(request.Unmarshal).
-		PushBackNamed(&jsonbuiltin.UnmarshalResponseJSONBodyProcessor)
+		PushBack(&jsonbuiltin.UnmarshalResponseJSONBodyProcessor)
 
 	p.Using(request.UnmarshalMeta).
-		PushBackNamed(&jsonbuiltin.UnmarshalMetaProcessor)
+		PushBack(&jsonbuiltin.UnmarshalMetaProcessor)
 
 	return svc
 }

@@ -32,7 +32,7 @@ var byteSliceType = reflect.TypeOf([]byte{})
 
 func init() {
 	for i := 0; i < len(noEscape); i++ {
-		// AWS expects every character except these to be escaped
+		// expects every character except these to be escaped
 		noEscape[i] = (i >= 'A' && i <= 'Z') ||
 			(i >= 'a' && i <= 'z') ||
 			(i >= '0' && i <= '9') ||
@@ -43,51 +43,62 @@ func init() {
 	}
 }
 
-func (r *Request) readFromHttpResponseToDataTags() {
-	v := reflect.ValueOf(r.OutputData).Elem()
+func (r *Request) readFromHttpResponseTo(obj interface{}) {
+	v := reflect.ValueOf(obj).Elem()
 
 	for i := 0; i < v.NumField(); i++ {
-		m := v.Field(i)
-		if n := v.Type().Field(i).Name; n[0:1] == strings.ToLower(n[0:1]) {
-			continue
+		field := v.Field(i)
+		fieldType := field.Kind()
+
+		if fieldType == reflect.Struct {
+			nestObj := field.Addr().Interface()
+			r.readFromHttpResponseTo(nestObj)
+		} else {
+			structField := v.Type().Field(i)
+			r.readFromHttpResponseToStruct(field, structField)
 		}
 
-		if m.IsValid() {
-			field := v.Type().Field(i)
-			name := field.Tag.Get(fieldTagSrcName)
-			if name == "" {
-				name = field.Name
-			}
-			if kind := m.Kind(); kind == reflect.Ptr {
-				m = m.Elem()
-			} else if kind == reflect.Interface {
-				if !m.Elem().IsValid() {
-					continue
-				}
-			}
-			if !m.IsValid() {
-				continue
-			}
-			if field.Tag.Get("ignore") != "" {
-				continue
-			}
-
-			var err error
-			switch field.Tag.Get(fieldTagSrc) {
-			case "header":
-				err = updateFromHeader(&r.HTTPResponse.Header, m, name)
-			case "body":
-				err = updateFromBody(r.ResponseBody, m, name)
-			case "status":
-				err = updateFromStatus(r.HTTPResponse, m, name)
-			default:
-				// ignore
-			}
-			r.Error = err
-		}
 		if r.Error != nil {
 			return
 		}
+	}
+}
+func (r *Request) readFromHttpResponseToStruct(value reflect.Value, structField reflect.StructField) {
+	if n := structField.Name; n[0:1] == strings.ToLower(n[0:1]) {
+		return
+	}
+
+	if value.IsValid() {
+		name := structField.Tag.Get(fieldTagSrcName)
+		if name == "" {
+			name = structField.Name
+		}
+		if kind := value.Kind(); kind == reflect.Ptr {
+			value = value.Elem()
+		} else if kind == reflect.Interface {
+			if !value.Elem().IsValid() {
+				return
+			}
+		}
+		if !value.IsValid() {
+			return
+		}
+		if structField.Tag.Get("ignore") != "" {
+			return
+		}
+
+		var err error
+		switch structField.Tag.Get(fieldTagSrc) {
+		case "header":
+			err = updateFromHeader(&r.HTTPResponse.Header, value, name)
+		case "body":
+			err = updateFromBody(r.ResponseBody, value, name)
+		case "status":
+			err = updateFromStatus(r.HTTPResponse, value, name)
+		default:
+			// ignore
+		}
+		r.Error = err
 	}
 }
 func updateFromHeader(header *http.Header, v reflect.Value, name string) error {
@@ -154,8 +165,8 @@ func updateFromStatus(resp *http.Response, v reflect.Value, name string) error {
 	return err
 }
 
-func (r *Request) updateHttpRequestWithParamsTags() {
-	v := reflect.ValueOf(r.InputData).Elem()
+func (r *Request) writeToHttpRequestFrom(obj interface{}) {
+	v := reflect.ValueOf(obj).Elem()
 
 	query := r.HTTPRequest.URL.Query()
 

@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/nnicora/sap-sdk-go/internal/times"
 	"github.com/nnicora/sap-sdk-go/sap/http/request"
+	"github.com/nnicora/sap-sdk-go/service/types"
 )
 
 const globalAccounts = "GlobalAccounts"
@@ -191,11 +192,7 @@ type GlobalAccountOutput struct {
 	//A unique ID to track this event.
 	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
-	// Request Response Status Code
-	StatusCode int32 `src:"status"`
-
-	// Request Response Status Message
-	Status string `src:"status"`
+	types.StatusAndBodyFromResponse
 }
 type LegalLinks struct {
 	Privacy string `json:"privacy"`

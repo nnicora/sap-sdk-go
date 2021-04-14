@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/nnicora/sap-sdk-go/internal/times"
 	"github.com/nnicora/sap-sdk-go/sap/http/request"
+	"github.com/nnicora/sap-sdk-go/service/types"
 )
 
 const directories = "Directory Operations"
@@ -160,11 +161,7 @@ type CreateDirectoryOutput struct {
 	//A unique ID to track this event.
 	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
-	// Request Response Status Code
-	StatusCode int32 `src:"status"`
-
-	// Request Response Status Message
-	Status string `src:"status"`
+	types.StatusAndBodyFromResponse
 }
 
 func (c *AccountsV1) CreateDirectory(ctx context.Context,
@@ -212,11 +209,7 @@ type GetDirectoryOutput struct {
 	//A unique ID to track this event.
 	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
-	// Request Response Status Code
-	StatusCode int32 `src:"status"`
-
-	// Request Response Status Message
-	Status string `src:"status"`
+	types.StatusAndBodyFromResponse
 }
 
 func (c *AccountsV1) GetDirectory(ctx context.Context,
@@ -258,11 +251,7 @@ type DeleteDirectoryOutput struct {
 	//A unique ID to track this event.
 	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
-	// Request Response Status Code
-	StatusCode int32 `src:"status"`
-
-	// Request Response Status Message
-	Status string `src:"status"`
+	types.StatusAndBodyFromResponse
 }
 
 func (c *AccountsV1) DeleteDirectory(ctx context.Context,
@@ -309,11 +298,7 @@ type UpdateDirectoryOutput struct {
 	//A unique ID to track this event.
 	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
-	// Request Response Status Code
-	StatusCode int32 `src:"status"`
-
-	// Request Response Status Message
-	Status string `src:"status"`
+	types.StatusAndBodyFromResponse
 }
 
 func (c *AccountsV1) UpdateDirectory(ctx context.Context,
@@ -380,11 +365,7 @@ type AddFeatureToDirectoryOutput struct {
 	//A unique ID to track this event.
 	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
-	// Request Response Status Code
-	StatusCode int32 `src:"status"`
-
-	// Request Response Status Message
-	Status string `src:"status"`
+	types.StatusAndBodyFromResponse
 }
 
 func (c *AccountsV1) AddFeatureToDirectory(ctx context.Context,
@@ -422,11 +403,7 @@ type GetDirectorCustomPropertiesOutput struct {
 	//A unique ID to track this event.
 	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
-	// Request Response Status Code
-	StatusCode int32 `src:"status"`
-
-	// Request Response Status Message
-	Status string `src:"status"`
+	types.StatusAndBodyFromResponse
 }
 
 func (c *AccountsV1) GetDirectorCustomProperties(ctx context.Context,

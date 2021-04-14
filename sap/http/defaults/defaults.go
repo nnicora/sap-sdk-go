@@ -9,16 +9,16 @@ import (
 func Processors() processors.Processors {
 	ps := processors.New()
 	ps.Using(request.Validate).
-		PushBackNamed(&coreprocessors.ValidateEndpointProcessor).
+		PushBack(&coreprocessors.ValidateEndpointProcessor).
 		StopOnError()
 	ps.Using(request.Build).
 		StopOnError()
 	ps.Using(request.Sign).
-		PushBackNamed(&coreprocessors.BuildContentLengthProcessor)
+		PushBack(&coreprocessors.BuildContentLengthProcessor)
 	ps.Using(request.Send).
-		PushBackNamed(&coreprocessors.ValidateReqSigProcessor).
-		PushBackNamed(&coreprocessors.SendProcessor)
+		PushBack(&coreprocessors.ValidateReqSigProcessor).
+		PushBack(&coreprocessors.SendProcessor)
 	ps.Using(request.ValidateResponse).
-		PushBackNamed(&coreprocessors.ValidateResponseProcessor)
+		PushBack(&coreprocessors.ValidateResponseProcessor)
 	return ps
 }

@@ -50,7 +50,7 @@ func MarshalToJSONRequestBody(t interface{}) {
 
 func UnmarshalJSONResponseBody(t interface{}) {
 	r := t.(*request.Request)
-	if r.OutputData != nil {
+	if r.OutputData != nil && len(r.ResponseBody) > 0 {
 		if err := json.Unmarshal(r.ResponseBody, r.OutputData); err != nil {
 			r.Error = saperr.New(saperr.Serialization, "failed reading request body", err)
 			return

@@ -19,24 +19,24 @@ type RuntimeSession struct {
 
 // Preparing the service configuration, coming out of runtime session
 func (s *RuntimeSession) ServiceConfig(serviceId string) (*service.Config, error) {
+	baseProcessors := s.Processors.Copy()
+	cfg := &service.Config{
+		RuntimeConfig: s.RuntimeConfig,
+		Processors:    &baseProcessors,
+
+		Endpoint: &endpoints.Endpoint{},
+	}
+
 	v, ok := s.RuntimeConfig.Endpoints[serviceId]
 	if !ok {
-		return nil, fmt.Errorf("endpoint not identified for service '%s'", serviceId)
+		return cfg, fmt.Errorf("endpoint not identified for service '%s'", serviceId)
 	}
 	if err := utils.IsValidUrl(v.Host); err != nil {
-		return nil, err
+		return cfg, err
 	}
-
-	baseProcessors := s.Processors.Copy()
-	return &service.Config{
-		RuntimeConfig: s.RuntimeConfig,
-
-		Processors: &baseProcessors,
-		Endpoint: &endpoints.Endpoint{
-			Host:   v.Host,
-			Client: v.Client,
-		},
-	}, nil
+	cfg.Endpoint.Host = v.Host
+	cfg.Endpoint.Client = v.Client
+	return cfg, nil
 }
 
 // Light Update of RuntimeSession Configuration, by skiping existent endpoint, added only new one from config.
@@ -52,18 +52,20 @@ func (s *RuntimeSession) HardUpdate(c *sap.Config) error {
 // Update the existent RuntimeSession Configuration; Used for cases when new endpoints was added into configuration and
 // session should be updated to have it too.
 func (s *RuntimeSession) update(c *sap.Config, light bool) error {
-	defaultHttpClient, _ := oauth2.NewOAuth2Client(c.DefaultOAuth2)
+	defaultHttpClient, defErr := oauth2.NewOAuth2Client(c.DefaultOAuth2)
 	for k, v := range c.Endpoints {
 		if _, ok := s.RuntimeConfig.Endpoints[k]; light && ok {
 			continue
 		}
 		if httpClient, err := createOAuth2Client(v.OAuth2, defaultHttpClient); err != nil {
 			return err
-		} else {
+		} else if httpClient != nil {
 			s.RuntimeConfig.Endpoints[k] = &endpoints.Endpoint{
 				Host:   v.Host,
 				Client: httpClient,
 			}
+		} else if defErr != nil {
+			return defErr
 		}
 	}
 

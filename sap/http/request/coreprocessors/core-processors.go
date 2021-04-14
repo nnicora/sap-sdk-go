@@ -58,8 +58,7 @@ var BuildContentLengthProcessor = processors.DefaultProcessor{
 
 var reStatusCode = regexp.MustCompile(`^(\d{3})`)
 
-// ValidateReqSigProcessor is a request handler to ensure that the request's
-// signature doesn't expire before it is sent.
+// ValidateReqSigProcessor is a request handler to request's are valid
 var ValidateReqSigProcessor = processors.DefaultProcessor{
 	Name: "core.ValidateReqSigProcessor",
 	Handler: func(t interface{}) {

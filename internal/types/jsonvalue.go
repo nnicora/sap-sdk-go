@@ -12,7 +12,7 @@ import (
 //
 //	Example:
 //
-//	values := aws.JSONValue{
+//	values := JSONValue{
 //		"Foo": "Bar",
 //	}
 //	values["Baz"] = "Qux"

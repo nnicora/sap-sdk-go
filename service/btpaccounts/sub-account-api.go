@@ -3,6 +3,7 @@ package btpaccounts
 import (
 	"context"
 	"github.com/nnicora/sap-sdk-go/sap/http/request"
+	"github.com/nnicora/sap-sdk-go/service/types"
 )
 
 const subAccounts = "SubAccounts"
@@ -26,11 +27,7 @@ type GetSubAccountsOutput struct {
 	//A unique ID to track this event.
 	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
-	// Request Response Status Code
-	StatusCode int32 `src:"status"`
-
-	// Request Response Status Message
-	Status string `src:"status"`
+	types.StatusAndBodyFromResponse
 }
 
 func (c *AccountsV1) GetSubAccounts(ctx context.Context, input *GetSubAccountsInput) (*GetSubAccountsOutput, error) {
@@ -113,11 +110,7 @@ type CreateSubAccountOutput struct {
 	//A unique ID to track this event.
 	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
-	// Request Response Status Code
-	StatusCode int32 `src:"status"`
-
-	// Request Response Status Message
-	Status string `src:"status"`
+	types.StatusAndBodyFromResponse
 }
 
 func (c *AccountsV1) CreateSubAccount(ctx context.Context, input *CreateSubAccountInput) (*CreateSubAccountOutput, error) {
@@ -205,11 +198,7 @@ type CloneSubAccountOutput struct {
 	//A unique ID to track this event.
 	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
-	// Request Response Status Code
-	StatusCode int32 `src:"status"`
-
-	// Request Response Status Message
-	Status string `src:"status"`
+	types.StatusAndBodyFromResponse
 }
 
 func (c *AccountsV1) CloneSubAccount(ctx context.Context, input *CloneSubAccountInput) (*CloneSubAccountOutput, error) {
@@ -252,11 +241,7 @@ type GetSubAccountOutput struct {
 	//A unique ID to track this event.
 	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
-	// Request Response Status Code
-	StatusCode int32 `src:"status"`
-
-	// Request Response Status Message
-	Status string `src:"status"`
+	types.StatusAndBodyFromResponse
 }
 
 func (c *AccountsV1) GetSubAccount(ctx context.Context, input *GetSubAccountInput) (*GetSubAccountOutput, error) {
@@ -292,11 +277,7 @@ type DeleteSubAccountOutput struct {
 	//A unique ID to track this event.
 	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
-	// Request Response Status Code
-	StatusCode int32 `src:"status"`
-
-	// Request Response Status Message
-	Status string `src:"status"`
+	types.StatusAndBodyFromResponse
 }
 
 func (c *AccountsV1) DeleteSubAccount(ctx context.Context, input *DeleteSubAccountInput) (*DeleteSubAccountOutput, error) {
@@ -351,11 +332,7 @@ type UpdateSubAccountOutput struct {
 	//A unique ID to track this event.
 	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
-	// Request Response Status Code
-	StatusCode int32 `src:"status"`
-
-	// Request Response Status Message
-	Status string `src:"status"`
+	types.StatusAndBodyFromResponse
 }
 
 func (c *AccountsV1) UpdateSubAccount(ctx context.Context, input *UpdateSubAccountInput) (*UpdateSubAccountOutput, error) {
@@ -391,11 +368,7 @@ type GetCustomPropertiesOutput struct {
 	//A unique ID to track this event.
 	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
-	// Request Response Status Code
-	StatusCode int32 `src:"status"`
-
-	// Request Response Status Message
-	Status string `src:"status"`
+	types.StatusAndBodyFromResponse
 }
 
 func (c *AccountsV1) GetSubAccountCustomProperties(ctx context.Context, input *GetCustomPropertiesInput) (*GetCustomPropertiesOutput, error) {
@@ -443,11 +416,7 @@ type MoveManySubAccountsOutput struct {
 	//A unique ID to track this event.
 	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
-	// Request Response Status Code
-	StatusCode int32 `src:"status"`
-
-	// Request Response Status Message
-	Status string `src:"status"`
+	types.StatusAndBodyFromResponse
 }
 
 func (c *AccountsV1) MoveManySubAccounts(ctx context.Context, input *MoveManySubAccountsInput) (*MoveManySubAccountsOutput, error) {
@@ -488,11 +457,7 @@ type MoveSubAccountOutput struct {
 	//A unique ID to track this event.
 	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
-	// Request Response Status Code
-	StatusCode int32 `src:"status"`
-
-	// Request Response Status Message
-	Status string `src:"status"`
+	types.StatusAndBodyFromResponse
 }
 
 func (c *AccountsV1) MoveSubAccount(ctx context.Context, input *MoveSubAccountInput) (*MoveSubAccountOutput, error) {
@@ -529,11 +494,7 @@ type GetServiceManagementBindingOutput struct {
 	//A unique ID to track this event.
 	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
-	// Request Response Status Code
-	StatusCode int32 `src:"status"`
-
-	// Request Response Status Message
-	Status string `src:"status"`
+	types.StatusAndBodyFromResponse
 }
 
 //OAuth 2.0 Client Credentials Grant Type to obtain an access token to use the Service Management APIs in a subaccount context.
@@ -562,7 +523,7 @@ func (c *AccountsV1) GetSubAccountServiceManagementBinding(ctx context.Context,
 func (c *AccountsV1) getSubAccountServiceManagementBindingRequest(ctx context.Context,
 	input *GetServiceManagementBindingInput) (*request.Request, *GetServiceManagementBindingOutput) {
 	op := &request.Operation{
-		Name: subAccounts,
+		Name: "Sub Account Service Management Bindings",
 		Http: request.HTTP{
 			Method: request.GET,
 			Path:   "/subaccounts/{subaccountGUID}/serviceManagementBinding",
@@ -589,11 +550,7 @@ type CreateServiceManagementBindingOutput struct {
 	//A unique ID to track this event.
 	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
-	// Request Response Status Code
-	StatusCode int32 `src:"status"`
-
-	// Request Response Status Message
-	Status string `src:"status"`
+	types.StatusAndBodyFromResponse
 }
 
 func (c *AccountsV1) CreateSubAccountServiceManagementBinding(ctx context.Context,
@@ -604,7 +561,7 @@ func (c *AccountsV1) CreateSubAccountServiceManagementBinding(ctx context.Contex
 func (c *AccountsV1) createSubAccountServiceManagementBindingRequest(ctx context.Context,
 	input *CreateServiceManagementBindingInput) (*request.Request, *CreateServiceManagementBindingOutput) {
 	op := &request.Operation{
-		Name: subAccounts,
+		Name: "Sub Account Service Management Bindings",
 		Http: request.HTTP{
 			Method: request.POST,
 			Path:   "/subaccounts/{subaccountGUID}/serviceManagementBinding",
@@ -630,11 +587,7 @@ type DeleteServiceManagementBindingOutput struct {
 	//A unique ID to track this event.
 	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
-	// Request Response Status Code
-	StatusCode int32 `src:"status"`
-
-	// Request Response Status Message
-	Status string `src:"status"`
+	types.StatusAndBodyFromResponse
 }
 
 func (c *AccountsV1) DeleteSubAccountServiceManagementBinding(ctx context.Context,
@@ -645,7 +598,7 @@ func (c *AccountsV1) DeleteSubAccountServiceManagementBinding(ctx context.Contex
 func (c *AccountsV1) deleteSubAccountServiceManagementBindingRequest(ctx context.Context,
 	input *DeleteServiceManagementBindingInput) (*request.Request, *DeleteServiceManagementBindingOutput) {
 	op := &request.Operation{
-		Name: subAccounts,
+		Name: "Sub Account Service Management Bindings",
 		Http: request.HTTP{
 			Method: request.DELETE,
 			Path:   "/subaccounts/{subaccountGUID}/serviceManagementBinding",

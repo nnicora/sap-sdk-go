@@ -48,14 +48,14 @@ func (l *list) Len() int {
 	return len(l.list)
 }
 
-// PushBack pushes processor f to the back of the processor list.
-func (l *list) PushBack(f func(arg interface{})) *list {
-	l.PushBackNamed(&DefaultProcessor{"-", f})
+// PushBackHandler pushes processor f to the back of the processor list.
+func (l *list) PushBackHandler(f func(arg interface{})) *list {
+	l.PushBack(&DefaultProcessor{"-", f})
 	return l
 }
 
-// PushBackNamed pushes named processor f to the back of the processor list.
-func (l *list) PushBackNamed(n Processor) *list {
+// PushBack pushes named processor f to the back of the processor list.
+func (l *list) PushBack(n Processor) *list {
 	if cap(l.list) == 0 {
 		l.list = make([]Processor, 0, 5)
 	}
@@ -139,7 +139,7 @@ func (l *list) Swap(name string, replace Processor) bool {
 // If the processor does not exist the processor will be added to the end of the list.
 func (l *list) SetBackNamed(n Processor) *list {
 	if !l.SwapNamed(n) {
-		l.PushBackNamed(n)
+		l.PushBack(n)
 	}
 	return l
 }
