@@ -187,6 +187,15 @@ type GlobalAccountOutput struct {
 	//Demo: For creating demos.
 	//Production: For delivering a service in a production landscape.
 	UseFor string `json:"useFor"`
+
+	//A unique ID to track this event.
+	XCorrelationId string `src:"header" src-name:"x-correlationid"`
+
+	// Request Response Status Code
+	StatusCode int32 `src:"status"`
+
+	// Request Response Status Message
+	Status string `src:"status"`
 }
 type LegalLinks struct {
 	Privacy string `json:"privacy"`

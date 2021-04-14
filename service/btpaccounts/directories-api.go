@@ -156,6 +156,15 @@ type CreateDirectoryInput struct {
 }
 type CreateDirectoryOutput struct {
 	Directory
+
+	//A unique ID to track this event.
+	XCorrelationId string `src:"header" src-name:"x-correlationid"`
+
+	// Request Response Status Code
+	StatusCode int32 `src:"status"`
+
+	// Request Response Status Message
+	Status string `src:"status"`
 }
 
 func (c *AccountsV1) CreateDirectory(ctx context.Context,
@@ -199,6 +208,15 @@ type GetDirectoryInput struct {
 }
 type GetDirectoryOutput struct {
 	Directory
+
+	//A unique ID to track this event.
+	XCorrelationId string `src:"header" src-name:"x-correlationid"`
+
+	// Request Response Status Code
+	StatusCode int32 `src:"status"`
+
+	// Request Response Status Message
+	Status string `src:"status"`
 }
 
 func (c *AccountsV1) GetDirectory(ctx context.Context,
@@ -236,6 +254,15 @@ type DeleteDirectoryInput struct {
 }
 type DeleteDirectoryOutput struct {
 	Directory
+
+	//A unique ID to track this event.
+	XCorrelationId string `src:"header" src-name:"x-correlationid"`
+
+	// Request Response Status Code
+	StatusCode int32 `src:"status"`
+
+	// Request Response Status Message
+	Status string `src:"status"`
 }
 
 func (c *AccountsV1) DeleteDirectory(ctx context.Context,
@@ -278,6 +305,15 @@ type UpdateDirectoryInput struct {
 }
 type UpdateDirectoryOutput struct {
 	Directory
+
+	//A unique ID to track this event.
+	XCorrelationId string `src:"header" src-name:"x-correlationid"`
+
+	// Request Response Status Code
+	StatusCode int32 `src:"status"`
+
+	// Request Response Status Message
+	Status string `src:"status"`
 }
 
 func (c *AccountsV1) UpdateDirectory(ctx context.Context,
@@ -340,6 +376,15 @@ type AddFeatureToDirectoryInput struct {
 }
 type AddFeatureToDirectoryOutput struct {
 	Directory
+
+	//A unique ID to track this event.
+	XCorrelationId string `src:"header" src-name:"x-correlationid"`
+
+	// Request Response Status Code
+	StatusCode int32 `src:"status"`
+
+	// Request Response Status Message
+	Status string `src:"status"`
 }
 
 func (c *AccountsV1) AddFeatureToDirectory(ctx context.Context,
@@ -373,6 +418,15 @@ type GetDirectorCustomPropertiesInput struct {
 }
 type GetDirectorCustomPropertiesOutput struct {
 	Value []CustomProperties `json:"value"`
+
+	//A unique ID to track this event.
+	XCorrelationId string `src:"header" src-name:"x-correlationid"`
+
+	// Request Response Status Code
+	StatusCode int32 `src:"status"`
+
+	// Request Response Status Message
+	Status string `src:"status"`
 }
 
 func (c *AccountsV1) GetDirectorCustomProperties(ctx context.Context,
