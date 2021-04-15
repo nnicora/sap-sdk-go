@@ -11,7 +11,7 @@ const directories = "Directory Operations"
 
 type Directory struct {
 	// The response object containing information about the directories.
-	Children []Directory `json:"children"`
+	Children []map[string]interface{} `json:"children"`
 
 	// The status of the customer contract and its associated root global account.
 	//
@@ -284,13 +284,13 @@ type UpdateDirectoryInput struct {
 	DirectoryGuid string `dest:"uri" dest-name:"directoryGUID"`
 
 	//Additional Properties of the directory.
-	customProperties []CustomProperties `json:"customProperties"`
+	CustomProperties []CustomProperties `json:"customProperties"`
 
 	//The description of the directory for the customer-facing UIs.
-	description string `json:"description"`
+	Description string `json:"description"`
 
 	//The new descriptive name of the directory.
-	displayName string `json:"displayName"`
+	DisplayName string `json:"displayName"`
 }
 type UpdateDirectoryOutput struct {
 	Directory
