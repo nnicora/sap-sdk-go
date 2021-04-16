@@ -107,7 +107,7 @@ type GlobalAccountAssignmentsInput struct {
 
 	//Specify if to include also services that are automatically assigned to a subaccount when the subaccount is created.
 	//	Default is false.
-	IncludeAutoManagedPlans string `dest:"querystring" dest-name:"includeAutoManagedPlans"`
+	IncludeAutoManagedPlans bool `dest:"querystring" dest-name:"includeAutoManagedPlans"`
 
 	//Use the parameter to specify for which subaccount to view assigned entitlements.
 	//If left empty, the API returns the entitlements for the global account and all its subaccounts.
