@@ -7,8 +7,6 @@ import (
 	"github.com/nnicora/sap-sdk-go/service/types"
 )
 
-const directories = "Directory Operations"
-
 type Directory struct {
 	// The response object containing information about the directories.
 	Children []map[string]interface{} `json:"children"`
@@ -148,7 +146,6 @@ type CreateDirectoryInput struct {
 	// The display name of the directory.
 	DisplayName string `json:"displayName"`
 
-	//	string
 	//Relevant only for directories that are enabled to manage their authorizations. The subdomain that becomes part
 	//of the path used to access the authorization tenant of the directory. Must be unique in the defined region.
 	//Use only letters (a-z), digits (0-9), and hyphens (not at start or end). Maximum length is 63 characters.
@@ -172,7 +169,7 @@ func (c *AccountsV1) CreateDirectory(ctx context.Context,
 func (c *AccountsV1) createDirectoryRequest(ctx context.Context,
 	input *CreateDirectoryInput) (*request.Request, *CreateDirectoryOutput) {
 	op := &request.Operation{
-		Name: directories,
+		Name: "Create Account Directory",
 		Http: request.HTTP{
 			Method: request.POST,
 			Path:   "/directories",
@@ -220,7 +217,7 @@ func (c *AccountsV1) GetDirectory(ctx context.Context,
 func (c *AccountsV1) getDirectoryRequest(ctx context.Context,
 	input *GetDirectoryInput) (*request.Request, *GetDirectoryOutput) {
 	op := &request.Operation{
-		Name: directories,
+		Name: "Get Account Directory",
 		Http: request.HTTP{
 			Method: request.GET,
 			Path:   "/directories/{directoryGUID}",
@@ -262,7 +259,7 @@ func (c *AccountsV1) DeleteDirectory(ctx context.Context,
 func (c *AccountsV1) deleteDirectoryRequest(ctx context.Context,
 	input *DeleteDirectoryInput) (*request.Request, *DeleteDirectoryOutput) {
 	op := &request.Operation{
-		Name: directories,
+		Name: "Delete Account Directory",
 		Http: request.HTTP{
 			Method: request.DELETE,
 			Path:   "/directories/{directoryGUID}",
@@ -309,7 +306,7 @@ func (c *AccountsV1) UpdateDirectory(ctx context.Context,
 func (c *AccountsV1) updateDirectoryRequest(ctx context.Context,
 	input *UpdateDirectoryInput) (*request.Request, *UpdateDirectoryOutput) {
 	op := &request.Operation{
-		Name: directories,
+		Name: "Update Account Directory",
 		Http: request.HTTP{
 			Method: request.PATCH,
 			Path:   "/directories/{directoryGUID}",
@@ -376,7 +373,7 @@ func (c *AccountsV1) AddFeatureToDirectory(ctx context.Context,
 func (c *AccountsV1) addFeatureToDirectoryRequest(ctx context.Context,
 	input *AddFeatureToDirectoryInput) (*request.Request, *AddFeatureToDirectoryOutput) {
 	op := &request.Operation{
-		Name: directories,
+		Name: "Add Feature To Account Directory",
 		Http: request.HTTP{
 			Method: request.PATCH,
 			Path:   "/directories/{directoryGUID}/changeDirectoryFeatures",
@@ -414,7 +411,7 @@ func (c *AccountsV1) GetDirectorCustomProperties(ctx context.Context,
 func (c *AccountsV1) getDirectorCustomPropertiesRequest(ctx context.Context,
 	input *GetDirectorCustomPropertiesInput) (*request.Request, *GetDirectorCustomPropertiesOutput) {
 	op := &request.Operation{
-		Name: directories,
+		Name: "Get Account Directory Custom Directory",
 		Http: request.HTTP{
 			Method: request.GET,
 			Path:   "/directories/{directoryGUID}/changeDirectoryFeatures",

@@ -6,8 +6,6 @@ import (
 	"github.com/nnicora/sap-sdk-go/service/types"
 )
 
-const subAccounts = "SubAccounts"
-
 // GET /accounts/v1/subaccounts
 // Get all subaccounts
 type GetSubAccountsInput struct {
@@ -36,7 +34,7 @@ func (c *AccountsV1) GetSubAccounts(ctx context.Context, input *GetSubAccountsIn
 }
 func (c *AccountsV1) getSubAccountsRequest(ctx context.Context, input *GetSubAccountsInput) (*request.Request, *GetSubAccountsOutput) {
 	op := &request.Operation{
-		Name: subAccounts,
+		Name: "Get Sub Accounts",
 		Http: request.HTTP{
 			Method: request.GET,
 			Path:   "/subaccounts",
@@ -119,7 +117,7 @@ func (c *AccountsV1) CreateSubAccount(ctx context.Context, input *CreateSubAccou
 }
 func (c *AccountsV1) createSubAccountRequest(ctx context.Context, input *CreateSubAccountInput) (*request.Request, *CreateSubAccountOutput) {
 	op := &request.Operation{
-		Name: subAccounts,
+		Name: "Create Sub Account",
 		Http: request.HTTP{
 			Method: request.POST,
 			Path:   "/subaccounts",
@@ -207,7 +205,7 @@ func (c *AccountsV1) CloneSubAccount(ctx context.Context, input *CloneSubAccount
 }
 func (c *AccountsV1) cloneSubAccountRequest(ctx context.Context, input *CloneSubAccountInput) (*request.Request, *CloneSubAccountOutput) {
 	op := &request.Operation{
-		Name: subAccounts,
+		Name: "Clone Sub Account",
 		Http: request.HTTP{
 			Method: request.POST,
 			Path:   "/subaccounts/clone/{sourceSubaccountGUID}",
@@ -250,7 +248,7 @@ func (c *AccountsV1) GetSubAccount(ctx context.Context, input *GetSubAccountInpu
 }
 func (c *AccountsV1) getSubAccountRequest(ctx context.Context, input *GetSubAccountInput) (*request.Request, *GetSubAccountOutput) {
 	op := &request.Operation{
-		Name: subAccounts,
+		Name: "Get Sub Account",
 		Http: request.HTTP{
 			Method: request.GET,
 			Path:   "/subaccounts/{subaccountGUID}",
@@ -286,7 +284,7 @@ func (c *AccountsV1) DeleteSubAccount(ctx context.Context, input *DeleteSubAccou
 }
 func (c *AccountsV1) deleteSubAccountRequest(ctx context.Context, input *DeleteSubAccountInput) (*request.Request, *DeleteSubAccountOutput) {
 	op := &request.Operation{
-		Name: subAccounts,
+		Name: "Delete Sub Account",
 		Http: request.HTTP{
 			Method: request.DELETE,
 			Path:   "/subaccounts/{subaccountGUID}",
@@ -341,7 +339,7 @@ func (c *AccountsV1) UpdateSubAccount(ctx context.Context, input *UpdateSubAccou
 }
 func (c *AccountsV1) updateSubAccountRequest(ctx context.Context, input *UpdateSubAccountInput) (*request.Request, *UpdateSubAccountOutput) {
 	op := &request.Operation{
-		Name: subAccounts,
+		Name: "Update Sub Account",
 		Http: request.HTTP{
 			Method: request.PATCH,
 			Path:   "/subaccounts/{subaccountGUID}",
@@ -377,7 +375,7 @@ func (c *AccountsV1) GetSubAccountCustomProperties(ctx context.Context, input *G
 }
 func (c *AccountsV1) getSubAccountCustomPropertiesRequest(ctx context.Context, input *GetCustomPropertiesInput) (*request.Request, *GetCustomPropertiesOutput) {
 	op := &request.Operation{
-		Name: subAccounts,
+		Name: "Get Sub Account Custom Properties",
 		Http: request.HTTP{
 			Method: request.GET,
 			Path:   "/subaccounts/{subaccountGUID}/customProperties",
@@ -425,7 +423,7 @@ func (c *AccountsV1) MoveManySubAccounts(ctx context.Context, input *MoveManySub
 }
 func (c *AccountsV1) moveManySubAccountsRequest(ctx context.Context, input *MoveManySubAccountsInput) (*request.Request, *MoveManySubAccountsOutput) {
 	op := &request.Operation{
-		Name: subAccounts,
+		Name: "Move Many Sub Accounts",
 		Http: request.HTTP{
 			Method: request.POST,
 			Path:   "/subaccounts/move",
@@ -466,7 +464,7 @@ func (c *AccountsV1) MoveSubAccount(ctx context.Context, input *MoveSubAccountIn
 }
 func (c *AccountsV1) moveSubAccountRequest(ctx context.Context, input *MoveSubAccountInput) (*request.Request, *MoveSubAccountOutput) {
 	op := &request.Operation{
-		Name: subAccounts,
+		Name: "Move Many Sub Accounts",
 		Http: request.HTTP{
 			Method: request.POST,
 			Path:   "/subaccounts/{subaccountGUID}/move",
@@ -523,7 +521,7 @@ func (c *AccountsV1) GetSubAccountServiceManagementBinding(ctx context.Context,
 func (c *AccountsV1) getSubAccountServiceManagementBindingRequest(ctx context.Context,
 	input *GetServiceManagementBindingInput) (*request.Request, *GetServiceManagementBindingOutput) {
 	op := &request.Operation{
-		Name: "Sub Account Service Management Bindings",
+		Name: "Get Sub Account Service Management Bindings",
 		Http: request.HTTP{
 			Method: request.GET,
 			Path:   "/subaccounts/{subaccountGUID}/serviceManagementBinding",
@@ -561,7 +559,7 @@ func (c *AccountsV1) CreateSubAccountServiceManagementBinding(ctx context.Contex
 func (c *AccountsV1) createSubAccountServiceManagementBindingRequest(ctx context.Context,
 	input *CreateServiceManagementBindingInput) (*request.Request, *CreateServiceManagementBindingOutput) {
 	op := &request.Operation{
-		Name: "Sub Account Service Management Bindings",
+		Name: "Create Sub Account Service Management Bindings",
 		Http: request.HTTP{
 			Method: request.POST,
 			Path:   "/subaccounts/{subaccountGUID}/serviceManagementBinding",
@@ -598,7 +596,7 @@ func (c *AccountsV1) DeleteSubAccountServiceManagementBinding(ctx context.Contex
 func (c *AccountsV1) deleteSubAccountServiceManagementBindingRequest(ctx context.Context,
 	input *DeleteServiceManagementBindingInput) (*request.Request, *DeleteServiceManagementBindingOutput) {
 	op := &request.Operation{
-		Name: "Sub Account Service Management Bindings",
+		Name: "Delete Sub Account Service Management Bindings",
 		Http: request.HTTP{
 			Method: request.DELETE,
 			Path:   "/subaccounts/{subaccountGUID}/serviceManagementBinding",

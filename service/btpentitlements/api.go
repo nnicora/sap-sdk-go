@@ -6,9 +6,6 @@ import (
 	"github.com/nnicora/sap-sdk-go/sap/http/request"
 )
 
-const entitlements = "Manage Assigned Entitlements"
-const regionsOfGlobalAccounts = "Regions for Global Account"
-
 // GET /entitlements/v1/globalAccountAllowedDataCenters
 // Get available data centers
 type DataCentersInput struct {
@@ -65,7 +62,7 @@ func (c *EntitlementsV1) GetDataCenters(ctx context.Context) (*DataCentersOutput
 }
 func (c *EntitlementsV1) getDataCentersRequest(ctx context.Context, input *DataCentersInput) (*request.Request, *DataCentersOutput) {
 	op := &request.Operation{
-		Name: regionsOfGlobalAccounts,
+		Name: "Regions for Global Account",
 		Http: request.HTTP{
 			Method: request.GET,
 			Path:   "/globalAccountAllowedDataCenters",
@@ -133,7 +130,7 @@ func (c *EntitlementsV1) GetGlobalAccountAssignments(ctx context.Context, input 
 }
 func (c *EntitlementsV1) getGlobalAccountAssignmentsRequest(ctx context.Context, input *GlobalAccountAssignmentsInput) (*request.Request, *GlobalAccountAssignmentsOutput) {
 	op := &request.Operation{
-		Name: entitlements,
+		Name: "Get Global Account Assignments",
 		Http: request.HTTP{
 			Method: request.GET,
 			Path:   "/globalAccountAssignments",
@@ -510,7 +507,7 @@ func (c *EntitlementsV1) GetAssignments(ctx context.Context, input *GetAssignmen
 }
 func (c *EntitlementsV1) getAssignmentsRequest(ctx context.Context, input *GetAssignmentsInput) (*request.Request, *GetAssignmentsOutput) {
 	op := &request.Operation{
-		Name: entitlements,
+		Name: "Get Entitlements",
 		Http: request.HTTP{
 			Method: request.GET,
 			Path:   "/assignments",
@@ -567,7 +564,7 @@ func (c *EntitlementsV1) UpdateSubAccountServicePlan(ctx context.Context, input 
 }
 func (c *EntitlementsV1) updateUpdateSubAccountServicePlanRequest(ctx context.Context, input *UpdateSubAccountServicePlanInput) (*request.Request, *UpdateSubAccountServicePlanOutput) {
 	op := &request.Operation{
-		Name: entitlements,
+		Name: "Update Sub Account ServicePlan",
 		Http: request.HTTP{
 			Method: request.PUT,
 			Path:   "/subaccountServicePlans",
@@ -636,7 +633,7 @@ func (c *EntitlementsV1) AssignDirectoryAssignment(ctx context.Context, input *A
 }
 func (c *EntitlementsV1) assignUpdateDirectoryAssignmentRequest(ctx context.Context, input *AssignDirectoryAssignmentInput) (*request.Request, *AssignDirectoryAssignmentOutput) {
 	op := &request.Operation{
-		Name: entitlements,
+		Name: "Assign Directory Assignment",
 		Http: request.HTTP{
 			Method: request.PUT,
 			Path:   "/directories/{directoryGUID}/assignments",
@@ -697,7 +694,7 @@ func (c *EntitlementsV1) UpdateDirectoryAssignment(ctx context.Context, input *U
 }
 func (c *EntitlementsV1) updateUpdateDirectoryAssignmentRequest(ctx context.Context, input *UpdateDirectoryAssignmentInput) (*request.Request, *UpdateDirectoryAssignmentOutput) {
 	op := &request.Operation{
-		Name: entitlements,
+		Name: "Update Directory Assignment",
 		Http: request.HTTP{
 			Method: request.PATCH,
 			Path:   "/directories/{directoryGUID}/assignments",

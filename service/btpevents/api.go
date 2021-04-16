@@ -7,8 +7,6 @@ import (
 	"time"
 )
 
-const events = "Events"
-
 // GET /cloud-management/v1/events
 // Get events
 type GetEventsInput struct {
@@ -138,12 +136,12 @@ type Event struct {
 }
 
 func (c *EventsV1) GetEvents(ctx context.Context, input *GetEventsInput) (*GetEventsOutput, error) {
-	req, out := c.getEventRequest(ctx, input)
+	req, out := c.getEventsRequest(ctx, input)
 	return out, req.Send()
 }
-func (c *EventsV1) getEventRequest(ctx context.Context, input *GetEventsInput) (*request.Request, *GetEventsOutput) {
+func (c *EventsV1) getEventsRequest(ctx context.Context, input *GetEventsInput) (*request.Request, *GetEventsOutput) {
 	op := &request.Operation{
-		Name: events,
+		Name: "Get All Events",
 		Http: request.HTTP{
 			Method: request.GET,
 			Path:   "/events",
@@ -201,7 +199,7 @@ func (c *EventsV1) GetEventsTypes(ctx context.Context) (*GetEventsTypesOutput, e
 }
 func (c *EventsV1) getEventsTypesRequest(ctx context.Context, input *GetEventsTypesInput) (*request.Request, *GetEventsTypesOutput) {
 	op := &request.Operation{
-		Name: events,
+		Name: "Get Events Types",
 		Http: request.HTTP{
 			Method: request.GET,
 			Path:   "/events/types",

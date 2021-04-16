@@ -7,8 +7,6 @@ import (
 	"github.com/nnicora/sap-sdk-go/service/types"
 )
 
-const globalAccounts = "GlobalAccounts"
-
 // GET /accounts/v1/globalAccount
 // Update a global account
 type GetGlobalAccountInput struct {
@@ -204,7 +202,7 @@ func (c *AccountsV1) GetGlobalAccount(ctx context.Context, input *GetGlobalAccou
 }
 func (c *AccountsV1) getGlobalAccountRequest(ctx context.Context, input *GetGlobalAccountInput) (*request.Request, *GlobalAccountOutput) {
 	op := &request.Operation{
-		Name: globalAccounts,
+		Name: "Get Global Account",
 		Http: request.HTTP{
 			Method: request.GET,
 			Path:   "/globalAccount",
@@ -235,7 +233,7 @@ func (c *AccountsV1) UpdateGlobalAccount(ctx context.Context, input *UpdateGloba
 }
 func (c *AccountsV1) updateGlobalAccountRequest(ctx context.Context, input *UpdateGlobalAccountInput) (*request.Request, *GlobalAccountOutput) {
 	op := &request.Operation{
-		Name: globalAccounts,
+		Name: "Update Global Account",
 		Http: request.HTTP{
 			Method: request.PATCH,
 			Path:   "/globalAccount",

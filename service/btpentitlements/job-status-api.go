@@ -5,8 +5,6 @@ import (
 	"github.com/nnicora/sap-sdk-go/sap/http/request"
 )
 
-const jobManagement = "Job Management"
-
 // GET /jobs-management/v1/jobs/{jobInstanceIdOrUniqueId}/status
 // Get available jobs
 type GetJobStatusInput struct {
@@ -33,7 +31,7 @@ func (c *EntitlementsV1) GetJobStatus(ctx context.Context, input *GetJobStatusIn
 }
 func (c *EntitlementsV1) getJobStatusRequest(ctx context.Context, input *GetJobStatusInput) (*request.Request, *GetJobStatusOutput) {
 	op := &request.Operation{
-		Name: jobManagement,
+		Name: "Get Job Status",
 		Http: request.HTTP{
 			Method:      request.GET,
 			Path:        "/jobs-management/v1/jobs/{jobInstanceIdOrUniqueId}/status",
