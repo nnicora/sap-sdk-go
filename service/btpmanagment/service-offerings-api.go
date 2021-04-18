@@ -3,6 +3,7 @@ package btpmanagment
 import (
 	"context"
 	"github.com/nnicora/sap-sdk-go/sap/http/request"
+	"github.com/nnicora/sap-sdk-go/service/types"
 )
 
 const serviceOfferings = "Service Management - Offerings"
@@ -42,6 +43,8 @@ type GetServiceOfferingsOutput struct {
 	NumItems int64 `json:"num_items"`
 	//The list of the service offerings.
 	Items []OfferingItem `json:"items"`
+
+	types.StatusAndBodyFromResponse
 }
 type OfferingItem struct {
 	//The ID of the service offering.
@@ -125,6 +128,8 @@ type GetServiceOfferingDetailsOutput struct {
 	Error
 
 	OfferingItem
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *ServiceManagementV1) GetServiceOfferingDetails(ctx context.Context,

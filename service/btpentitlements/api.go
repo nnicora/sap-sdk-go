@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/nnicora/sap-sdk-go/internal/times"
 	"github.com/nnicora/sap-sdk-go/sap/http/request"
+	"github.com/nnicora/sap-sdk-go/service/types"
 )
 
 // GET /entitlements/v1/globalAccountAllowedDataCenters
@@ -17,6 +18,8 @@ type DataCentersInput struct {
 type DataCentersOutput struct {
 	//Contains information about the available data centers for a specified global account.
 	DataCenters []DataCenter `json:"datacenters"`
+
+	types.StatusAndBodyFromResponse
 }
 type DataCenter struct {
 	//Technical name of the data center. Must be unique within the cloud deployment.
@@ -76,7 +79,8 @@ func (c *EntitlementsV1) getDataCentersRequest(ctx context.Context, input *DataC
 	output := &DataCentersOutput{}
 	return c.newRequest(ctx, op, input, output), output
 }
-func (e *EntitlementsV1) GetProvidersRegionsRestApi(ctx context.Context) (map[string][]string, error) {
+
+func (e *EntitlementsV1) GetProvidersRegions(ctx context.Context) (map[string][]string, error) {
 	dcs, err := e.GetDataCenters(ctx)
 	if err != nil {
 		return nil, err
@@ -92,8 +96,8 @@ func (e *EntitlementsV1) GetProvidersRegionsRestApi(ctx context.Context) (map[st
 	}
 	return providers, nil
 }
-func (e *EntitlementsV1) GetProviderRegionsRestApi(ctx context.Context, provider string) ([]string, error) {
-	providers, err := e.GetProvidersRegionsRestApi(ctx)
+func (e *EntitlementsV1) GetProviderRegions(ctx context.Context, provider string) ([]string, error) {
+	providers, err := e.GetProvidersRegions(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -122,6 +126,8 @@ type GlobalAccountAssignmentsOutput struct {
 
 	//Whether the External Provider Registry (XPR) is available.
 	FetchErrorFromExternalProviderRegistry bool `json:"fetchErrorFromExternalProviderRegistry"`
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *EntitlementsV1) GetGlobalAccountAssignments(ctx context.Context, input *GlobalAccountAssignmentsInput) (*GlobalAccountAssignmentsOutput, error) {
@@ -167,6 +173,8 @@ type GetAssignmentsOutput struct {
 
 	//Whether the External Provider Registry (XPR) is available.
 	FetchErrorFromExternalProviderRegistry bool `json:"fetchErrorFromExternalProviderRegistry"`
+
+	types.StatusAndBodyFromResponse
 }
 type AssignedService struct {
 	//The unique registration name of the deployed service as defined by the service provider.
@@ -283,10 +291,10 @@ type AssignedServicePlanSubAccount struct {
 
 	//example: GUID of GLOBAL_ACCOUNT or SUBACCOUNT
 	//The unique ID of the global account or directory to which the entitlement is assigned.
-	EntityId              bool   `json:"entityId"`
-	ParentAmount          int64  `json:"parentAmount"`
+	EntityId              string `json:"entityId"`
+	ParentAmount          *int64 `json:"parentAmount"`
 	ParentId              string `json:"parentId"`
-	ParentRemainingAmount int64  `json:"parentRemainingAmount"`
+	ParentRemainingAmount *int64 `json:"parentRemainingAmount"`
 
 	//Enum:
 	//	[ SUBACCOUNT, GLOBAL_ACCOUNT, DIRECTORY ]
@@ -370,11 +378,11 @@ type ServicePlan struct {
 	ProvisioningMethod string `json:"provisioningMethod"`
 
 	//The assigned quota for maximum allowed consumption of the plan. Relevant for services that have a numeric quota assignment.
-	Amount int64 `json:"amount"`
+	Amount *int64 `json:"amount"`
 
 	//The remaining amount of the plan that can still be assigned. For plans that don't have a numeric quota,
 	//the remaining amount is always the maximum allowed quota.
-	RemainingAmount int64 `json:"remainingAmount"`
+	RemainingAmount *int64 `json:"remainingAmount"`
 
 	//[DEPRECATED] The source that added the service. Possible values:
 	//
@@ -451,9 +459,6 @@ type ServicePlan struct {
 
 	//Used to service plan external resources
 	Resources []Resource `json:"resources"`
-}
-type ApplicationCoordinate struct {
-	Description string `json:"description"`
 }
 type SourceEntitlement struct {
 	//The technical name of the product.
@@ -556,6 +561,7 @@ type AssignmentInfo struct {
 	Resources []Resource `json:"resources"`
 }
 type UpdateSubAccountServicePlanOutput struct {
+	types.StatusAndBodyFromResponse
 }
 
 func (c *EntitlementsV1) UpdateSubAccountServicePlan(ctx context.Context, input *UpdateSubAccountServicePlanInput) (*UpdateSubAccountServicePlanOutput, error) {
@@ -625,6 +631,7 @@ type AssignDirectoryAssignment struct {
 	AutoDistributeAmount int32 `json:"autoDistributeAmount"`
 }
 type AssignDirectoryAssignmentOutput struct {
+	types.StatusAndBodyFromResponse
 }
 
 func (c *EntitlementsV1) AssignDirectoryAssignment(ctx context.Context, input *AssignDirectoryAssignmentInput) (*AssignDirectoryAssignmentOutput, error) {
@@ -686,6 +693,7 @@ type UpdateDirectoryAssignment struct {
 	AutoDistributeAmount int32 `json:"autoDistributeAmount"`
 }
 type UpdateDirectoryAssignmentOutput struct {
+	types.StatusAndBodyFromResponse
 }
 
 func (c *EntitlementsV1) UpdateDirectoryAssignment(ctx context.Context, input *UpdateDirectoryAssignmentInput) (*UpdateDirectoryAssignmentOutput, error) {

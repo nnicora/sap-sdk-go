@@ -3,6 +3,7 @@ package btpsaasprovisioning
 import (
 	"context"
 	"github.com/nnicora/sap-sdk-go/sap/http/request"
+	"github.com/nnicora/sap-sdk-go/service/types"
 )
 
 const jobManagement = "Job Management"
@@ -25,6 +26,8 @@ type GetJobStatusOutput struct {
 	//Enum:
 	//	[ IN_PROGRESS, COMPLETED, FAILED ]
 	Status string `json:"status"`
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *SaaSProvisioningV1) GetJobStatus(ctx context.Context, input *GetJobStatusInput) (*GetJobStatusOutput, error) {
@@ -33,7 +36,7 @@ func (c *SaaSProvisioningV1) GetJobStatus(ctx context.Context, input *GetJobStat
 }
 func (c *SaaSProvisioningV1) getJobStatusRequest(ctx context.Context, input *GetJobStatusInput) (*request.Request, *GetJobStatusOutput) {
 	op := &request.Operation{
-		Name: jobManagement,
+		Name: "Job Status Management",
 		Http: request.HTTP{
 			Method:      request.GET,
 			Path:        "/jobs-management/v1/jobs/{jobInstanceIdOrUniqueId}/status",
@@ -71,6 +74,8 @@ type GetErrorJobStatusOutput struct {
 	//	[ CREATED, STARTED, SUCCEEDED, FAILED, RETRY ]
 	State string   `json:"state"`
 	Error ErrorJob `json:"error"`
+
+	types.StatusAndBodyFromResponse
 }
 type ErrorJob struct {
 	//Description of the error.

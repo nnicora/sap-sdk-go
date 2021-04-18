@@ -3,6 +3,7 @@ package btpentitlements
 import (
 	"context"
 	"github.com/nnicora/sap-sdk-go/sap/http/request"
+	"github.com/nnicora/sap-sdk-go/service/types"
 )
 
 // GET /jobs-management/v1/jobs/{jobInstanceIdOrUniqueId}/status
@@ -23,6 +24,8 @@ type GetJobStatusOutput struct {
 	//Enum:
 	//	[ IN_PROGRESS, COMPLETED, FAILED ]
 	Status string `json:"status"`
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *EntitlementsV1) GetJobStatus(ctx context.Context, input *GetJobStatusInput) (*GetJobStatusOutput, error) {

@@ -3,6 +3,7 @@ package btpmanagment
 import (
 	"context"
 	"github.com/nnicora/sap-sdk-go/sap/http/request"
+	"github.com/nnicora/sap-sdk-go/service/types"
 )
 
 const platforms = "Service Management - Platforms"
@@ -47,6 +48,8 @@ type GetPlatformsOutput struct {
 
 	//The list of response objects that contains details about the platforms.
 	Items []PlatformItem `json:"items"`
+
+	types.StatusAndBodyFromResponse
 }
 type PlatformItem struct {
 	//The ID of the platform.
@@ -163,6 +166,8 @@ type RegisterPlatformOutput struct {
 
 	//Additional data associated with the resource entity.
 	Labels map[string][]string `json:"labels"`
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *ServiceManagementV1) RegisterPlatform(ctx context.Context,
@@ -230,6 +235,8 @@ type GetPlatformDetailsOutput struct {
 
 	//Additional data associated with the resource entity.
 	Labels map[string][]string `json:"labels"`
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *ServiceManagementV1) GetPlatformDetails(ctx context.Context,
@@ -266,6 +273,8 @@ type UnregisterPlatformInput struct {
 }
 type UnregisterPlatformOutput struct {
 	Error
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *ServiceManagementV1) UnregisterPlatform(ctx context.Context,
@@ -367,6 +376,8 @@ type UpdatePlatformOutput struct {
 
 	//The list of labels to update for the resource.
 	Labels map[string][]string `json:"labels"`
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *ServiceManagementV1) UpdatePlatform(ctx context.Context,

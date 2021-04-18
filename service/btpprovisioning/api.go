@@ -3,6 +3,7 @@ package btpprovisioning
 import (
 	"context"
 	"github.com/nnicora/sap-sdk-go/sap/http/request"
+	"github.com/nnicora/sap-sdk-go/service/types"
 )
 
 const quotaAssignments = "Quota Assignments"
@@ -14,6 +15,8 @@ type GetServicePlanAssignmentsInput struct {
 }
 type GetServicePlanAssignmentsOutput struct {
 	Quotas []ServicePlanQuotaAssignment `json:"quotas"`
+
+	types.StatusAndBodyFromResponse
 }
 type ServicePlanQuotaAssignment struct {
 	//The quantity of consumed quota. The service owner can provide a value for the consumed quota if it is different
@@ -91,6 +94,8 @@ type GetAvailableEnvironmentsInput struct {
 }
 type GetAvailableEnvironmentsOutput struct {
 	Environments []AvailableEnvironment `json:"availableEnvironments"`
+
+	types.StatusAndBodyFromResponse
 }
 type AvailableEnvironment struct {
 	//The availability level of the environment broker.
@@ -152,6 +157,8 @@ type GetEnvironmentInstancesInput struct {
 type GetEnvironmentInstancesOutput struct {
 	//The list of all the environment instances to delete
 	Environments []EnvironmentInstance `json:"environmentInstances"`
+
+	types.StatusAndBodyFromResponse
 }
 type EnvironmentInstance struct {
 	//The ID of the associated environment broker.
@@ -276,6 +283,8 @@ type CreateEnvironmentInstancesInput struct {
 type CreateEnvironmentInstancesOutput struct {
 	//ID of the created environment instance
 	Id string `json:"id"`
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *ProvisioningV1) CreateEnvironmentInstances(ctx context.Context) (*CreateEnvironmentInstancesOutput, error) {
@@ -306,6 +315,8 @@ type DeleteEnvironmentInstancesInput struct {
 type DeleteEnvironmentInstancesOutput struct {
 	//The list of all the environment instances to delete
 	Environments []EnvironmentInstance `json:"environmentInstances"`
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *ProvisioningV1) DeleteEnvironmentInstances(ctx context.Context) (*DeleteEnvironmentInstancesOutput, error) {
@@ -337,6 +348,8 @@ type GetEnvironmentInstanceInput struct {
 }
 type GetEnvironmentInstanceOutput struct {
 	EnvironmentInstance
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *ProvisioningV1) GetEnvironmentInstance(ctx context.Context, input *GetEnvironmentInstanceInput) (*GetEnvironmentInstanceOutput, error) {
@@ -368,6 +381,8 @@ type DeleteEnvironmentInstanceInput struct {
 }
 type DeleteEnvironmentInstanceOutput struct {
 	EnvironmentInstance
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *ProvisioningV1) DeleteEnvironmentInstance(ctx context.Context, input *DeleteEnvironmentInstanceInput) (*DeleteEnvironmentInstanceOutput, error) {
@@ -410,6 +425,8 @@ type UpdateEnvironmentInstanceInput struct {
 }
 type UpdateEnvironmentInstanceOutput struct {
 	EnvironmentInstance
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *ProvisioningV1) UpdateEnvironmentInstance(ctx context.Context, input *UpdateEnvironmentInstanceInput) (*UpdateEnvironmentInstanceOutput, error) {

@@ -3,6 +3,7 @@ package btpprovisioning
 import (
 	"context"
 	"github.com/nnicora/sap-sdk-go/sap/http/request"
+	"github.com/nnicora/sap-sdk-go/service/types"
 )
 
 const jobManagement = "Job Management"
@@ -25,6 +26,8 @@ type GetJobStatusOutput struct {
 	//Enum:
 	//	[ IN_PROGRESS, COMPLETED, FAILED ]
 	Status string `json:"status"`
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *ProvisioningV1) GetJobStatus(ctx context.Context, input *GetJobStatusInput) (*GetJobStatusOutput, error) {

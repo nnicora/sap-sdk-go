@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/nnicora/sap-sdk-go/internal/times"
 	"github.com/nnicora/sap-sdk-go/sap/http/request"
+	"github.com/nnicora/sap-sdk-go/service/types"
 	"time"
 )
 
@@ -91,6 +92,8 @@ type GetEventsOutput struct {
 
 	//Total numbers of pages.
 	TotalPages int64 `json:"totalPages"`
+
+	types.StatusAndBodyFromResponse
 }
 type Event struct {
 	//The ID of the event.
@@ -191,6 +194,8 @@ type GetEventsTypesOutput struct {
 	//	SubaccountTenant_Update, SubaccountTenant_Deletion, EnvironmentInstance_Creation, EnvironmentInstance_Deletion,
 	//	EnvironmentInstances_Deletion
 	Type string `json:"type"`
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *EventsV1) GetEventsTypes(ctx context.Context) (*GetEventsTypesOutput, error) {

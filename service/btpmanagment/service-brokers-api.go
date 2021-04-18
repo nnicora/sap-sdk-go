@@ -3,6 +3,7 @@ package btpmanagment
 import (
 	"context"
 	"github.com/nnicora/sap-sdk-go/sap/http/request"
+	"github.com/nnicora/sap-sdk-go/service/types"
 )
 
 const serviceBrokers = "Service Management - Brokers"
@@ -47,6 +48,8 @@ type GetServiceBrokersOutput struct {
 
 	//The list of response objects that contains details about the service brokers.
 	Items []BrokerItem `json:"items"`
+
+	types.StatusAndBodyFromResponse
 }
 type BrokerItem struct {
 	//The ID of the service broker.
@@ -107,6 +110,8 @@ type GetServiceBrokerDetailsOutput struct {
 
 	BrokerItem
 	LastOperation Operation `json:"last_operation"`
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *ServiceManagementV1) GetServiceBrokerDetails(ctx context.Context,

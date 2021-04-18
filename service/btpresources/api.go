@@ -3,6 +3,7 @@ package btpresources
 import (
 	"context"
 	"github.com/nnicora/sap-sdk-go/sap/http/request"
+	"github.com/nnicora/sap-sdk-go/service/types"
 )
 
 const resourceConsumption = "Resource Consumption"
@@ -23,6 +24,8 @@ type GetCloudCreditsDetailsOutput struct {
 	GlobalAccountId string `json:"globalAccountId"`
 	//The display name of the global account.
 	GlobalAccountName string `json:"globalAccountName"`
+
+	types.StatusAndBodyFromResponse
 }
 type Contract struct {
 	//The date that the contract finishes. Date is in the format YYYY-MM-DD
@@ -91,6 +94,8 @@ type GetMonthlySubAccountsCostInput struct {
 }
 type GetMonthlySubAccountsCostOutput struct {
 	Content []MonthlySubAccountsCost `json:"content"`
+
+	types.StatusAndBodyFromResponse
 }
 type MonthlySubAccountsCost struct {
 	//The subaccount usage cost for a specified month.
@@ -180,6 +185,8 @@ type GetMonthlyUsageInput struct {
 }
 type GetMonthlyUsageOutput struct {
 	Content []MonthlyUsage `json:"content"`
+
+	types.StatusAndBodyFromResponse
 }
 type MonthlyUsage struct {
 	// The technical name of the landscape, (as identified by core services for SAP BTP),
@@ -291,6 +298,8 @@ type GetSubAccountUsageInput struct {
 }
 type GetSubAccountUsageOutput struct {
 	Content []SubAccountUsage `json:"content"`
+
+	types.StatusAndBodyFromResponse
 }
 type SubAccountUsage struct {
 	//The unique ID of the product category.

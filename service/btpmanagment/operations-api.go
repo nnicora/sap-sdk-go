@@ -3,6 +3,7 @@ package btpmanagment
 import (
 	"context"
 	"github.com/nnicora/sap-sdk-go/sap/http/request"
+	"github.com/nnicora/sap-sdk-go/service/types"
 )
 
 const operations = "Service Management - Operations"
@@ -22,6 +23,8 @@ type GetOperationStatusOutput struct {
 	Error
 
 	Operation
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *ServiceManagementV1) GetOperationStatus(ctx context.Context,

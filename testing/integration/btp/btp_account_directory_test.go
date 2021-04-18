@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/nnicora/sap-sdk-go/service/btpaccounts"
+	"github.com/nnicora/sap-sdk-go/service/btpentitlements"
 	"testing"
 )
 
@@ -19,6 +20,39 @@ func TestCreateAccountDirectory(t *testing.T) {
 		DirectoryFeatures: features,
 	}
 	if out, err := svc.CreateDirectory(context.Background(), dirInput); err != nil {
+		t.Error(err)
+	} else {
+		if data, err := json.Marshal(out); err != nil {
+			t.Error(err)
+		} else {
+			t.Logf("\nSuccess StatusAndBodyFromResponse: %s\n", string(data))
+		}
+	}
+}
+
+func TestEntitlementsGlobalAccount(t *testing.T) {
+	svc := btpentitlements.New(sess)
+	if out, err := svc.GetGlobalAccountAssignments(context.Background(), &btpentitlements.GlobalAccountAssignmentsInput{
+		AcceptLanguage:          "en",
+		SubAccountGuid:          "24d360fd-8e28-48a3-ab69-f574f388761b",
+		IncludeAutoManagedPlans: true,
+	}); err != nil {
+		t.Error(err)
+	} else {
+		if data, err := json.Marshal(out); err != nil {
+			t.Error(err)
+		} else {
+			t.Logf("\nSuccess StatusAndBodyFromResponse: %s\n", string(data))
+		}
+	}
+}
+
+func TestEntitlements(t *testing.T) {
+	svc := btpentitlements.New(sess)
+	if out, err := svc.GetAssignments(context.Background(), &btpentitlements.GetAssignmentsInput{
+		SubAccountGuid:          "24d360fd-8e28-48a3-ab69-f574f388761b",
+		IncludeAutoManagedPlans: true,
+	}); err != nil {
 		t.Error(err)
 	} else {
 		if data, err := json.Marshal(out); err != nil {

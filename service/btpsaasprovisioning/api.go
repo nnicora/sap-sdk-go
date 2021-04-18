@@ -3,6 +3,7 @@ package btpsaasprovisioning
 import (
 	"context"
 	"github.com/nnicora/sap-sdk-go/sap/http/request"
+	"github.com/nnicora/sap-sdk-go/service/types"
 )
 
 const applicationOperations = "Application Operations for App Providers"
@@ -49,6 +50,8 @@ type GetApplicationRegistrationOutput struct {
 	GlobalAccountId string `json:"globalAccountId"`
 	//Name of the formations solution associated with the multitenant application.
 	FormationSolutionName string `json:"formationSolutionName"`
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *SaaSProvisioningV1) GetApplicationRegistration(ctx context.Context,
@@ -122,6 +125,8 @@ type GetApplicationSubscriptionsOutput struct {
 	Subdomain string `json:"subdomain"`
 	//Application URL
 	Url string `json:"url"`
+
+	types.StatusAndBodyFromResponse
 }
 type Dependency struct {
 	//The unique registration name of the linked dependency application.
@@ -165,6 +170,8 @@ type SubscribeTenantInput struct {
 }
 type SubscribeTenantOutput struct {
 	Location string `src:"header" src-name:"Location"`
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *SaaSProvisioningV1) SubscribeTenant(ctx context.Context,
@@ -198,6 +205,8 @@ type UnSubscribeTenantInput struct {
 }
 type UnSubscribeTenantOutput struct {
 	Location string `src:"header" src-name:"Location"`
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *SaaSProvisioningV1) UnSubscribeTenant(ctx context.Context,
@@ -243,6 +252,8 @@ type UpdateSubscriptionDependenciesInput struct {
 }
 type UpdateSubscriptionDependenciesOutput struct {
 	Location string `src:"header" src-name:"Location"`
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *SaaSProvisioningV1) UpdateSubscriptionDependencies(ctx context.Context,
@@ -276,6 +287,8 @@ type GetEntitledApplicationsInput struct {
 type GetEntitledApplicationsOutput struct {
 	//The response list of all the multitenant applications to which a specified subaccount is entitled to subscribe.
 	Applications []Application `json:"applications"`
+
+	types.StatusAndBodyFromResponse
 }
 type Application struct {
 	//The ID returned by XSUAA after the app provider has performed a bind of the multitenant application
@@ -386,6 +399,8 @@ type GetDetailsApplicationsInput struct {
 }
 type GetDetailsApplicationsOutput struct {
 	Application
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *SaaSProvisioningV1) GetDetailsApplications(ctx context.Context,
@@ -421,6 +436,7 @@ type SubscribeToApplicationInput struct {
 	PlanName string `json:"planName"`
 }
 type SubscribeToApplicationOutput struct {
+	types.StatusAndBodyFromResponse
 }
 
 func (c *SaaSProvisioningV1) SubscribeToApplication(ctx context.Context,
@@ -453,6 +469,7 @@ type UnSubscribeFromApplicationInput struct {
 	AppName string `dest:"uri" dest-name:"appName"`
 }
 type UnSubscribeFromApplicationOutput struct {
+	types.StatusAndBodyFromResponse
 }
 
 func (c *SaaSProvisioningV1) UnSubscribeFromApplication(ctx context.Context,
@@ -495,7 +512,7 @@ type SubscribeSubAccountTenantToApplicationInput struct {
 	SubscriptionUrl string `json:"subscriptionUrl"`
 }
 type SubscribeSubAccountTenantToApplicationOutput struct {
-	Body string `src:"body" src-name:""`
+	types.StatusAndBodyFromResponse
 }
 
 func (c *SaaSProvisioningV1) SubscribeSubAccountTenantToApplication(ctx context.Context,

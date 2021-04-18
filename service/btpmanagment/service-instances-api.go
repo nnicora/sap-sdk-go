@@ -3,6 +3,7 @@ package btpmanagment
 import (
 	"context"
 	"github.com/nnicora/sap-sdk-go/sap/http/request"
+	"github.com/nnicora/sap-sdk-go/service/types"
 )
 
 const serviceInstances = "Service Management - Instances"
@@ -42,6 +43,8 @@ type GetServiceInstancesOutput struct {
 	NumItems int64 `json:"num_items"`
 	//The list of response objects that contains details about the service instances.
 	Items []InstanceItem `json:"items"`
+
+	types.StatusAndBodyFromResponse
 }
 type InstanceItem struct {
 	//The ID of the service instance.
@@ -120,6 +123,8 @@ type CreateServiceInstanceOutput struct {
 	Error
 
 	InstanceItem
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *ServiceManagementV1) CreateServiceInstance(ctx context.Context,
@@ -156,6 +161,8 @@ type GetServiceInstanceDetailsOutput struct {
 
 	InstanceItem
 	LastOperation Operation `json:"last_operation"`
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *ServiceManagementV1) GetServiceInstanceDetails(ctx context.Context,
@@ -192,6 +199,8 @@ type DeleteServiceInstanceInput struct {
 }
 type DeleteServiceInstanceOutput struct {
 	Error
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *ServiceManagementV1) DeleteServiceInstance(ctx context.Context,
@@ -240,6 +249,8 @@ type UpdateServiceInstanceInput struct {
 }
 type UpdateServiceInstanceOutput struct {
 	Error
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *ServiceManagementV1) UpdateServiceInstance(ctx context.Context,
@@ -275,6 +286,8 @@ type GetServiceInstanceParametersOutput struct {
 	Error
 
 	Parameters map[string]string `json:"-"`
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *ServiceManagementV1) GetServiceInstanceParameters(ctx context.Context,

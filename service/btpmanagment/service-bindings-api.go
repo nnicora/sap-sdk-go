@@ -3,6 +3,7 @@ package btpmanagment
 import (
 	"context"
 	"github.com/nnicora/sap-sdk-go/sap/http/request"
+	"github.com/nnicora/sap-sdk-go/service/types"
 )
 
 const serviceBindings = "Service Management - Bindings"
@@ -42,6 +43,8 @@ type GetServiceBindingsOutput struct {
 	NumItems int64 `json:"num_items"`
 	//The list of the response objects that contains details about the service bindings.
 	Items []BindingItem `json:"items"`
+
+	types.StatusAndBodyFromResponse
 }
 type BindingItem struct {
 	//The ID of the service binding.
@@ -124,6 +127,8 @@ type CreateServiceBindingOutput struct {
 	Error
 
 	BindingItem
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *ServiceManagementV1) CreateServiceBinding(ctx context.Context,
@@ -160,6 +165,8 @@ type GetServiceBindingDetailsOutput struct {
 
 	BindingItem
 	LastOperation Operation `json:"last_operation"`
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *ServiceManagementV1) GetServiceBindingDetails(ctx context.Context,
@@ -195,6 +202,8 @@ type DeleteServiceBindingInput struct {
 }
 type DeleteServiceBindingOutput struct {
 	Error
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *ServiceManagementV1) DeleteServiceBinding(ctx context.Context,
@@ -267,6 +276,8 @@ type GetServiceBindingParametersOutput struct {
 	Error
 
 	Parameters map[string]string `json:"-"`
+
+	types.StatusAndBodyFromResponse
 }
 
 func (c *ServiceManagementV1) GetServiceBindingParameters(ctx context.Context,
