@@ -41,13 +41,13 @@ type GetPlatformsOutput struct {
 	//defined maximum number of platforms to be returned after a single API call (max_items).
 	//If the field is not present, either all the platforms were included in the first response, or you have
 	//reached the end of the list.
-	Token string `json:"token"`
+	Token string `json:"token,omitempty"`
 
 	//The number of platforms associated with the subaccount.
-	NumItems int64 `json:"num_items"`
+	NumItems int64 `json:"num_items,omitempty"`
 
 	//The list of response objects that contains details about the platforms.
-	Items []PlatformItem `json:"items"`
+	Items []PlatformItem `json:"items,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }
@@ -55,34 +55,34 @@ type PlatformItem struct {
 	//The ID of the platform.
 	//You can use this ID to get details about the platform, to update or to delete it.
 	//See the GET, PATCH, or DELETE APIs for the Platforms group.
-	Id string `json:"id"`
+	Id string `json:"id,omitempty"`
 
 	//Whether the platform is ready for consumption.
-	Ready bool `json:"ready"`
+	Ready bool `json:"ready,omitempty"`
 
 	//The type of the platform.
 	//Possible values:
 	//Enum:
 	//	[ kubernetes, cloud foundry ]
-	Type string `json:"type"`
+	Type string `json:"type,omitempty"`
 
 	//The name of the platform.
-	Name string `json:"name"`
+	Name string `json:"name,omitempty"`
 
 	//The description of the platform.
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 
 	//The time the platform was created.
 	//In ISO 8601 format:
 	//	YYYY-MM-DDThh:mm:ssTZD
-	CreatedAt string `json:"created_at"`
+	CreatedAt string `json:"created_at,omitempty"`
 
 	//The last time the platform was updated.
 	//In ISO 8601 format.
-	UpdatedAt string `json:"updated_at"`
+	UpdatedAt string `json:"updated_at,omitempty"`
 
 	//Additional data associated with the resource entity.
-	Labels map[string][]string `json:"labels"`
+	Labels map[string][]string `json:"labels,omitempty"`
 }
 
 func (c *ServiceManagementV1) GetPlatforms(ctx context.Context, input *GetPlatformsInput) (*GetPlatformsOutput, error) {
@@ -115,19 +115,19 @@ type RegisterPlatformInput struct {
 	//It can't contain white spaces.
 	//The name must not exceed 255 characters, but it is recommended to keep it much shorter, for the convenience
 	//of using short names in CLI commands.
-	Name string `json:"name"`
+	Name string `json:"name,omitempty"`
 
 	//The type of the platform.
 	//Possible values:
 	//Enum:
 	//	[ kubernetes ]
-	Type string `json:"type"`
+	Type string `json:"type,omitempty"`
 
 	//The description of the platform for customer-facing UIs.
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 
 	//Additional data associated with the resource entity.
-	Labels map[string][]string `json:"labels"`
+	Labels map[string][]string `json:"labels,omitempty"`
 }
 type RegisterPlatformOutput struct {
 	Error
@@ -135,37 +135,37 @@ type RegisterPlatformOutput struct {
 	// The ID of the platform.
 	//You can use this ID to get details about the platform, to update, or to delete the platform.
 	//See the GET, PATCH, and DELETE APIs for the Platforms group.
-	Id string `json:"id"`
+	Id string `json:"id,omitempty"`
 
 	//Whether the platform is ready for consumption.
-	Ready bool `json:"ready"`
+	Ready bool `json:"ready,omitempty"`
 
 	//The type of the platform.
 	//Possible values:
 	//Enum:
 	//	[ kubernetes ]
-	Type string `json:"type"`
+	Type string `json:"type,omitempty"`
 
 	//The technical name of the platform.
-	Name string `json:"name"`
+	Name string `json:"name,omitempty"`
 
 	//The description of the platform.
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 
 	//Credentials to authenticate with the SAP Cloud Service Management service.
-	Credentials Credentials `json:"credentials"`
+	Credentials Credentials `json:"credentials,omitempty"`
 
 	//The time the platform was created.
 	//In ISO 8601 format:
 	//	YYYY-MM-DDThh:mm:ssTZD
-	CreatedAt string `json:"created_at"`
+	CreatedAt string `json:"created_at,omitempty"`
 
 	//The last time the platform was updated.
 	//In ISO 8601 format.
-	UpdatedAt string `json:"updated_at"`
+	UpdatedAt string `json:"updated_at,omitempty"`
 
 	//Additional data associated with the resource entity.
-	Labels map[string][]string `json:"labels"`
+	Labels map[string][]string `json:"labels,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }
@@ -205,36 +205,36 @@ type GetPlatformDetailsOutput struct {
 	//The ID of the platform.
 	//You can use this ID to update or to delete the platform.
 	//See the PATCH and DELETE calls for the Platforms group.
-	Id string `json:"id"`
+	Id string `json:"id,omitempty"`
 
 	//Whether the platform is ready for consumption.
-	Ready bool `json:"ready"`
+	Ready bool `json:"ready,omitempty"`
 
-	LastOperation Operation `json:"last_operation"`
+	LastOperation Operation `json:"last_operation,omitempty"`
 
 	//The type of the platform.
 	//Possible values:
 	//Enum:
 	//	[ kubernetes, cloud foundry ]
-	Type string `json:"type"`
+	Type string `json:"type,omitempty"`
 
 	//The name of the platform.
-	Name string `json:"name"`
+	Name string `json:"name,omitempty"`
 
 	//The description of the platform.
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 
 	//The time the platform was created.
 	//In ISO 8601 format:
 	//	YYYY-MM-DDThh:mm:ssTZD
-	CreatedAt string `json:"created_at"`
+	CreatedAt string `json:"created_at,omitempty"`
 
 	//The last time the platform was updated.
 	//In ISO 8601 format.
-	UpdatedAt string `json:"updated_at"`
+	UpdatedAt string `json:"updated_at,omitempty"`
 
 	//Additional data associated with the resource entity.
-	Labels map[string][]string `json:"labels"`
+	Labels map[string][]string `json:"labels,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }
@@ -309,38 +309,38 @@ type UpdatePlatformInput struct {
 	//The ID of the platform to update.
 	//Platform ID is a globally unique identifier (GUID).
 	//GUID must be longer than 50 characters and only contains uppercase and lowercase letters, decimal digits, hyphens, periods, and underscores.
-	Id string `json:"id"`
+	Id string `json:"id,omitempty"`
 
 	//The CLI-friendly name of the platform to update.
 	//A CLI-friendly name is a short string that only contains alphanumeric characters, periods, and hyphens.
 	//It can't contain white spaces.
 	//The name must not exceed 255 characters, but it is recommended to keep it much shorter, for the convenience of using short names in CLI commands.
-	Name string `json:"name"`
+	Name string `json:"name,omitempty"`
 
 	//The type of the platform.
 	//Possible values:
 	//Enum:
 	//	[ kubernetes ]
-	Type string `json:"type"`
+	Type string `json:"type,omitempty"`
 
 	//The description of the platform for customer-facing UIs.
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 
 	//The list of labels to update for the resource.
-	Labels []Label `json:"labels"`
+	Labels []Label `json:"labels,omitempty"`
 }
 type Label struct {
 	//The operation to perform on a label.
 	//Possible values:
 	//Enum:
 	//	[ add, remove ]
-	Op string `json:"op"`
+	Op string `json:"op,omitempty"`
 
 	//The name of the label.
-	Key string `json:"key"`
+	Key string `json:"key,omitempty"`
 
 	//The list of values for the label
-	Values []string `json:"values"`
+	Values []string `json:"values,omitempty"`
 }
 type UpdatePlatformOutput struct {
 	Error
@@ -348,34 +348,34 @@ type UpdatePlatformOutput struct {
 	//The ID of the platform to update.
 	//Platform ID is a globally unique identifier (GUID).
 	//GUID must be longer than 50 characters and only contains uppercase and lowercase letters, decimal digits, hyphens, periods, and underscores.
-	Id string `json:"id"`
+	Id string `json:"id,omitempty"`
 
 	//Whether the resource is ready for consumption.
-	Ready string `json:"ready"`
+	Ready string `json:"ready,omitempty"`
 
 	//The type of the platform.
 	//Possible values:
 	//Enum:
 	//	[ kubernetes ]
-	Type string `json:"type"`
+	Type string `json:"type,omitempty"`
 
 	//The technical name of the platform.
-	Name string `json:"name"`
+	Name string `json:"name,omitempty"`
 
 	//The description of the platform for customer-facing UIs.
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 
 	//The time the platform was created.
 	//In ISO 8601 format:
 	//	YYYY-MM-DDThh:mm:ssTZD
-	CreatedAt string `json:"created_at"`
+	CreatedAt string `json:"created_at,omitempty"`
 
 	//The last time the platform was updated.
 	//In ISO 8601 format.
-	UpdatedAt string `json:"updated_at"`
+	UpdatedAt string `json:"updated_at,omitempty"`
 
 	//The list of labels to update for the resource.
-	Labels map[string][]string `json:"labels"`
+	Labels map[string][]string `json:"labels,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }

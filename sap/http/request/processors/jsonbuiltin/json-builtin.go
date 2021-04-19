@@ -23,6 +23,11 @@ var UnmarshalResponseJSONBodyProcessor = processors.DefaultProcessor{
 	Handler: UnmarshalJSONResponseBody,
 }
 
+var UnmarshalErrorResponseJSONBodyProcessor = processors.DefaultProcessor{
+	Name:    "sap.json.builtin.UnmarshalErrorJSONResponseBody",
+	Handler: UnmarshalJSONResponseBody,
+}
+
 var UnmarshalMetaProcessor = processors.DefaultProcessor{
 	Name:    "sap.json.builtin.UnmarshalMeta",
 	Handler: UnmarshalMeta,

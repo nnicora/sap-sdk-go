@@ -9,7 +9,7 @@ import (
 
 type Directory struct {
 	// The response object containing information about the directories.
-	Children []map[string]interface{} `json:"children"`
+	Children []map[string]interface{} `json:"children,omitempty"`
 
 	// The status of the customer contract and its associated root global account.
 	//
@@ -25,19 +25,19 @@ type Directory struct {
 	//	has not yet extended the trial period.
 	//Enum:
 	//	[ ACTIVE, PENDING_TERMINATION, SUSPENDED ]
-	ContractStatus string `json:"contractStatus"`
+	ContractStatus string `json:"contractStatus,omitempty"`
 
 	// Details of the user that created the directory.
-	CreatedBy string `json:"createdBy"`
+	CreatedBy string `json:"createdBy,omitempty"`
 
 	// The date the directory was created. Dates and times are in UTC format.
-	CreatedDate times.JavaTime `json:"createdDate"`
+	CreatedDate times.JavaTime `json:"createdDate,omitempty"`
 
 	// Custom properties assigned to the directory as key-value pairs.
-	CustomProperties []CustomProperties `json:"customProperties"`
+	CustomProperties []CustomProperties `json:"customProperties,omitempty"`
 
 	// A description of the directory.
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 
 	// The features that are enabled for the directory. Valid values:
 	//
@@ -58,10 +58,10 @@ type Directory struct {
 	//	[DEFAULT,ENTITLEMENTS,AUTHORIZATIONS]
 	//Enum:
 	//	[ DEFAULT, ENTITLEMENTS, AUTHORIZATIONS ]
-	DirectoryFeatures []string `json:"directoryFeatures"`
+	DirectoryFeatures []string `json:"directoryFeatures,omitempty"`
 
 	// The display name of the directory.
-	DisplayName string `json:"displayName"`
+	DisplayName string `json:"displayName,omitempty"`
 
 	// The current state of the directory.
 	//
@@ -84,42 +84,42 @@ type Directory struct {
 	//	[ STARTED, CREATING, UPDATING, MOVING, PROCESSING, DELETING, OK, PENDING_REVIEW, CANCELED, CREATION_FAILED,
 	//	UPDATE_FAILED, UPDATE_ACCOUNT_TYPE_FAILED, UPDATE_DIRECTORY_TYPE_FAILED, PROCESSING_FAILED, DELETION_FAILED,
 	//	MOVE_FAILED, MIGRATING, MIGRATION_FAILED, ROLLBACK_MIGRATION_PROCESSING, MIGRATED ]
-	EntityState string `json:"entityState"`
+	EntityState string `json:"entityState,omitempty"`
 
 	// The unique ID of the directory.
-	Guid       string     `json:"guid"`
-	LegalLinks LegalLinks `json:"legalLinks"`
+	Guid       string     `json:"guid,omitempty"`
+	LegalLinks LegalLinks `json:"legalLinks,omitempty"`
 
 	// The date the directory was last modified. Dates and times are in UTC format.
-	ModifiedDate times.JavaTime `json:"modifiedDate"`
+	ModifiedDate times.JavaTime `json:"modifiedDate,omitempty"`
 
 	// The GUID of the directory's parent entity. Typically this is the global account.
-	ParentGuid string `json:"parentGuid"`
+	ParentGuid string `json:"parentGuid,omitempty"`
 
 	// Information about the state.
-	StateMessage string `json:"stateMessage"`
+	StateMessage string `json:"stateMessage,omitempty"`
 
 	// The subaccounts contained in the directory.
-	SubAccounts []SubAccount `json:"subaccounts"`
+	SubAccounts []SubAccount `json:"subaccounts,omitempty"`
 
 	// Relevant only for directories that are enabled to manage their authorizations. The subdomain that becomes part
 	// of the path used to access the authorization tenant of the directory. Unique within the defined region.
-	Subdomain string `json:"subdomain"`
+	Subdomain string `json:"subdomain,omitempty"`
 }
 
 // POST /accounts/v1/directories
 // Create a directory
 type CreateDirectoryInput struct {
 	// Additional properties of the directory.
-	CustomProperties []CustomProperties `json:"customProperties"`
+	CustomProperties []CustomProperties `json:"customProperties,omitempty"`
 
 	// A description of the directory.
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 
 	// Additional admins of the directory. Do not add yourself as you are assigned as a directory admin by default.
 	// Use only with directories that are configured to manage their authorizations.
 	//Example: ["admin1@example.com", "admin2@example.com"]
-	DirectoryAdmins []string `json:"directoryAdmins"`
+	DirectoryAdmins []string `json:"directoryAdmins,omitempty"`
 
 	// The features to enable for the directory.
 	//
@@ -141,16 +141,16 @@ type CreateDirectoryInput struct {
 	//	[DEFAULT,ENTITLEMENTS,AUTHORIZATIONS]
 	//Enum:
 	//	[ DEFAULT, ENTITLEMENTS, AUTHORIZATIONS ]
-	DirectoryFeatures []string `json:"directoryFeatures"`
+	DirectoryFeatures []string `json:"directoryFeatures,omitempty"`
 
 	// The display name of the directory.
-	DisplayName string `json:"displayName"`
+	DisplayName string `json:"displayName,omitempty"`
 
 	//Relevant only for directories that are enabled to manage their authorizations. The subdomain that becomes part
 	//of the path used to access the authorization tenant of the directory. Must be unique in the defined region.
 	//Use only letters (a-z), digits (0-9), and hyphens (not at start or end). Maximum length is 63 characters.
 	//Cannot be changed after the directory has been created.
-	Subdomain string `json:"subdomain"`
+	Subdomain string `json:"subdomain,omitempty"`
 }
 type CreateDirectoryOutput struct {
 	Directory
@@ -281,13 +281,13 @@ type UpdateDirectoryInput struct {
 	DirectoryGuid string `dest:"uri" dest-name:"directoryGUID"`
 
 	//Additional Properties of the directory.
-	CustomProperties []CustomProperties `json:"customProperties"`
+	CustomProperties []CustomProperties `json:"customProperties,omitempty"`
 
 	//The description of the directory for the customer-facing UIs.
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 
 	//The new descriptive name of the directory.
-	DisplayName string `json:"displayName"`
+	DisplayName string `json:"displayName,omitempty"`
 }
 type UpdateDirectoryOutput struct {
 	Directory
@@ -330,7 +330,7 @@ type AddFeatureToDirectoryInput struct {
 	//Additional admins of the directory. Do not add yourself as you are assigned as a directory admin by default.
 	//Use only with directories that are configured to manage their authorizations.
 	//Example: ["admin1@example.com", "admin2@example.com"]
-	DirectoryAdmins []string `json:"directoryAdmins"`
+	DirectoryAdmins []string `json:"directoryAdmins,omitempty"`
 
 	//The features to enable for the directory.
 	//
@@ -348,13 +348,13 @@ type AddFeatureToDirectoryInput struct {
 	//	[DEFAULT,ENTITLEMENTS,AUTHORIZATIONS]
 	//Enum:
 	//	[ ENTITLEMENTS, AUTHORIZATIONS ]
-	DirectoryFeatures []string `json:"directoryFeatures"`
+	DirectoryFeatures []string `json:"directoryFeatures,omitempty"`
 
 	//Relevant only for directories that are enabled to manage their authorizations. The subdomain that becomes
 	//part of the path used to access the authorization tenant of the directory. Must be unique within the defined region.
 	//Use only letters (a-z), digits (0-9), and hyphens (not at start or end). Maximum length is 63 characters.
 	//Cannot be changed after the directory has been created.
-	Subdomain string `json:"subdomain"`
+	Subdomain string `json:"subdomain,omitempty"`
 }
 type AddFeatureToDirectoryOutput struct {
 	Directory
@@ -395,7 +395,7 @@ type GetDirectorCustomPropertiesInput struct {
 	DirectoryGuid string `dest:"uri" dest-name:"directoryGUID"`
 }
 type GetDirectorCustomPropertiesOutput struct {
-	Value []CustomProperties `json:"value"`
+	Value []CustomProperties `json:"value,omitempty"`
 
 	//A unique ID to track this event.
 	XCorrelationId string `src:"header" src-name:"x-correlationid"`

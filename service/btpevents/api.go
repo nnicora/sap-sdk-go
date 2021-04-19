@@ -79,45 +79,45 @@ type GetEventsInput struct {
 }
 type GetEventsOutput struct {
 	//Lists of the events associated with the API call and used scopes.
-	Events []Event `json:"events"`
+	Events []Event `json:"events,omitempty"`
 
 	//Whether there are more pages.
-	MorePages bool `json:"morePages"`
+	MorePages bool `json:"morePages,omitempty"`
 
 	//The current page number.
-	PageNum int32 `json:"pageNum"`
+	PageNum int32 `json:"pageNum,omitempty"`
 
 	//Total numbers of results.
-	Total int64 `json:"total"`
+	Total int64 `json:"total,omitempty"`
 
 	//Total numbers of pages.
-	TotalPages int64 `json:"totalPages"`
+	TotalPages int64 `json:"totalPages,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }
 type Event struct {
 	//The ID of the event.
-	Id int64 `json:"id"`
+	Id int64 `json:"id,omitempty"`
 
 	//The time the action triggered the event.
 	//The format is Unix epoch time in milliseconds.
-	ActionTime times.JavaTime `json:"actionTime"`
+	ActionTime times.JavaTime `json:"actionTime,omitempty"`
 
 	//The time when the event record was created.
 	//The format is Unix epoch time in milliseconds.
-	CreationTime times.JavaTime `json:"creationTime"`
+	CreationTime times.JavaTime `json:"creationTime,omitempty"`
 
 	//JSON object that contains description and details about the requested events.
-	Details map[string]interface{} `json:"details"`
+	Details map[string]interface{} `json:"details,omitempty"`
 
 	//The ID of the entity associated with the event.
-	EntityId string `json:"entityId"`
+	EntityId string `json:"entityId,omitempty"`
 
 	//The type of entity associated with the event.
-	EntityType string `json:"entityType"`
+	EntityType string `json:"entityType,omitempty"`
 
 	//The service that reported the event.
-	EventOrigin string `json:"eventOrigin"`
+	EventOrigin string `json:"eventOrigin,omitempty"`
 
 	//The type of the event that was triggered.
 	//There are two groups of event types: Local Events and Central Events group.
@@ -132,10 +132,10 @@ type Event struct {
 	//Local Events group: SubaccountAppSubscription_Creation, SubaccountAppSubscription_Deletion, SubaccountAppSubscription_Update,
 	//	AppRegistration_Creation, AppRegistration_Deletion, AppRegistration_Update, SubaccountTenant_Creation, SubaccountTenant_Update,
 	//	SubaccountTenant_Deletion, EnvironmentInstance_Creation, EnvironmentInstance_Deletion, EnvironmentInstances_Deletion
-	EventType string `json:"eventType"`
+	EventType string `json:"eventType,omitempty"`
 
 	//The unique ID of the global account associated with the event.
-	GlobalAccountGuid string `json:"globalAccountGUID"`
+	GlobalAccountGuid string `json:"globalAccountGUID,omitempty"`
 }
 
 func (c *EventsV1) GetEvents(ctx context.Context, input *GetEventsInput) (*GetEventsOutput, error) {
@@ -170,13 +170,13 @@ type GetEventsTypesOutput struct {
 	//CENTRAL: The event is associated with the central region within a multi-region universe.
 	//Enum:
 	//	[ LOCAL, CENTRAL ]
-	Category string `json:"category"`
+	Category string `json:"category,omitempty"`
 
 	//The description of the event type.
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 
 	//List of all the search parameters for the event type.
-	SearchParams []string `json:"searchParams"`
+	SearchParams []string `json:"searchParams,omitempty"`
 
 	//The type of the event that was triggered.
 	//There are two groups of event types: Local Events and Central Events group.
@@ -193,7 +193,7 @@ type GetEventsTypesOutput struct {
 	//	AppRegistration_Creation, AppRegistration_Deletion, AppRegistration_Update, SubaccountTenant_Creation,
 	//	SubaccountTenant_Update, SubaccountTenant_Deletion, EnvironmentInstance_Creation, EnvironmentInstance_Deletion,
 	//	EnvironmentInstances_Deletion
-	Type string `json:"type"`
+	Type string `json:"type,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }

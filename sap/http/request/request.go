@@ -27,9 +27,10 @@ type Request struct {
 	LastSignedAt time.Time
 	AttemptTime  time.Time
 
-	HTTPResponse *http.Response
-	ResponseBody []byte
-	OutputData   interface{}
+	HTTPResponse        *http.Response
+	ResponseBody        []byte
+	ResponseBodyHandler func(int, []byte) ([]byte, error)
+	OutputData          interface{}
 
 	HTTPRequest   *http.Request
 	requestBody   io.ReadSeeker

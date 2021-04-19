@@ -16,7 +16,7 @@ type GetJobStatusInput struct {
 }
 type GetJobStatusOutput struct {
 	//A description of the exit status of a job when it ends.
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 
 	//The current state of the job.
 	//
@@ -25,7 +25,7 @@ type GetJobStatusOutput struct {
 	//FAILED: The job failed and did not complete. The job can be restarted.
 	//Enum:
 	//	[ IN_PROGRESS, COMPLETED, FAILED ]
-	Status string `json:"status"`
+	Status string `json:"status,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }
@@ -60,9 +60,9 @@ type GetErrorJobStatusInput struct {
 }
 type GetErrorJobStatusOutput struct {
 	//The service instance ID of the SAP SaaS Provisioning service (saas-registry) that the application is using.
-	CreatedBy string `json:"description"`
+	CreatedBy string `json:"description,omitempty"`
 	//ID of the corresponding job.
-	Id string `json:"id"`
+	Id string `json:"id,omitempty"`
 
 	//The current state of the corresponding job. Possible values:
 	//CREATED: Job processing has created.
@@ -72,35 +72,35 @@ type GetErrorJobStatusOutput struct {
 	//RETRY: Subscription has timed out and job processing is pending a retry.
 	//Enum:
 	//	[ CREATED, STARTED, SUCCEEDED, FAILED, RETRY ]
-	State string   `json:"state"`
-	Error ErrorJob `json:"error"`
+	State string   `json:"state,omitempty"`
+	Error ErrorJob `json:"error,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }
 type ErrorJob struct {
 	//Description of the error.
-	Description string `json:"error"`
+	Description string `json:"error,omitempty"`
 	//The runtime exception for the error.
-	Exception string `json:"exception"`
+	Exception string `json:"exception,omitempty"`
 	//The message associated with the current error.
-	Message string `json:"message"`
+	Message string `json:"message,omitempty"`
 	//Path of the exception received from the server.
-	Paths string `json:"paths"`
+	Paths string `json:"paths,omitempty"`
 	//Error status code.
-	Status    int32     `json:"status"`
-	Timestamp Timestamp `json:"timestamp"`
+	Status    int32     `json:"status,omitempty"`
+	Timestamp Timestamp `json:"timestamp,omitempty"`
 }
 type Timestamp struct {
-	Date           int32 `json:"date"`
-	Day            int32 `json:"day"`
-	Hours          int32 `json:"hours"`
-	Minutes        int32 `json:"minutes"`
-	Month          int32 `json:"month"`
-	Nanos          int32 `json:"nanos"`
-	Seconds        int32 `json:"seconds"`
-	Time           int64 `json:"time"`
-	TimezoneOffset int32 `json:"timezoneOffset"`
-	Year           int32 `json:"year"`
+	Date           int32 `json:"date,omitempty"`
+	Day            int32 `json:"day,omitempty"`
+	Hours          int32 `json:"hours,omitempty"`
+	Minutes        int32 `json:"minutes,omitempty"`
+	Month          int32 `json:"month,omitempty"`
+	Nanos          int32 `json:"nanos,omitempty"`
+	Seconds        int32 `json:"seconds,omitempty"`
+	Time           int64 `json:"time,omitempty"`
+	TimezoneOffset int32 `json:"timezoneOffset,omitempty"`
+	Year           int32 `json:"year,omitempty"`
 }
 
 func (c *SaaSProvisioningV1) GetErrorJobStatus(ctx context.Context, input *GetErrorJobStatusInput) (*GetErrorJobStatusOutput, error) {

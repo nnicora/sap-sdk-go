@@ -16,7 +16,7 @@ type GetJobStatusInput struct {
 }
 type GetJobStatusOutput struct {
 	//A description of the exit status of a job when it ends.
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 
 	//The current state of the job.
 	//
@@ -25,7 +25,7 @@ type GetJobStatusOutput struct {
 	//FAILED: The job failed and did not complete. The job can be restarted.
 	//Enum:
 	//	[ IN_PROGRESS, COMPLETED, FAILED ]
-	Status string `json:"status"`
+	Status string `json:"status,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }

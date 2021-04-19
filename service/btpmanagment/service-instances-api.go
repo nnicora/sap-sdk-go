@@ -38,42 +38,42 @@ type GetServiceInstancesOutput struct {
 	//than the defined maximum number of service instances to be returned after a single API call (max_items).
 	//If the field is not present, either all the instances were included in the first response, or you have reached the
 	//end of the list.
-	Token string `json:"token"`
+	Token string `json:"token,omitempty"`
 	//The number of service instances associated with the subaccount.
-	NumItems int64 `json:"num_items"`
+	NumItems int64 `json:"num_items,omitempty"`
 	//The list of response objects that contains details about the service instances.
-	Items []InstanceItem `json:"items"`
+	Items []InstanceItem `json:"items,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }
 type InstanceItem struct {
 	//The ID of the service instance.
-	Id string `json:"id"`
+	Id string `json:"id,omitempty"`
 	//Whether the service instance is ready.
-	Ready bool `json:"ready"`
+	Ready bool `json:"ready,omitempty"`
 	//The name of the service instance.
-	Name string `json:"name"`
+	Name string `json:"name,omitempty"`
 	//The ID of the service plan associated with the service instance.
-	ServicePlanId string `json:"service_plan_id"`
+	ServicePlanId string `json:"service_plan_id,omitempty"`
 	//The ID of the platform to which the service instance belongs.
-	PlatformId string `json:"platform_id"`
+	PlatformId string `json:"platform_id,omitempty"`
 	//The URL of the web-based management UI for the service instance.
-	DashboardUrl string `json:"dashboard_url"`
+	DashboardUrl string `json:"dashboard_url,omitempty"`
 	//Contextual data for the resource.
-	Context map[string]string `json:"context"`
+	Context map[string]string `json:"context,omitempty"`
 	//The maintenance information associated with the service instance.
-	MaintenanceInfo map[string]string `json:"maintenance_info"`
+	MaintenanceInfo map[string]string `json:"maintenance_info,omitempty"`
 	//Whether the service instance can be used.
-	Usable bool `json:"usable"`
+	Usable bool `json:"usable,omitempty"`
 	//The time the service instance was created.
 	//In ISO 8601 format:
 	//	YYYY-MM-DDThh:mm:ssTZD
-	CreatedAt string `json:"created_at"`
+	CreatedAt string `json:"created_at,omitempty"`
 	//The last time the service instance was updated.
 	//In ISO 8601 format.
-	UpdatedAt string `json:"updated_at"`
+	UpdatedAt string `json:"updated_at,omitempty"`
 	//Additional data associated with the resource entity.
-	Labels map[string][]string `json:"labels"`
+	Labels map[string][]string `json:"labels,omitempty"`
 }
 
 func (c *ServiceManagementV1) GetServiceInstances(ctx context.Context,
@@ -107,17 +107,17 @@ type CreateServiceInstanceInput struct {
 
 	//The name of the new service instance.
 	//Can't be an empty object.
-	Name string `json:"name"`
+	Name string `json:"name,omitempty"`
 	//The ID of the service plan to use for the service instance.
-	ServicePlanId string `json:"service_plan_id"`
+	ServicePlanId string `json:"service_plan_id,omitempty"`
 	//Some services support providing of additional configuration parameters during instance creation.
 	//Pass these parameters as key-value pairs.
 	//For the list of supported configuration parameters, see the documentation of a particular service offering.
 	//You can also use the GET /v1/service_instances/{serviceInstanceID}/parameters API later to view the parameters
 	//defined during this step.
-	Parameters map[string]string `json:"parameters"`
+	Parameters map[string]string `json:"parameters,omitempty"`
 	//Additional data associated with the resource entity.
-	Labels map[string][]string `json:"labels"`
+	Labels map[string][]string `json:"labels,omitempty"`
 }
 type CreateServiceInstanceOutput struct {
 	Error
@@ -160,7 +160,7 @@ type GetServiceInstanceDetailsOutput struct {
 	Error
 
 	InstanceItem
-	LastOperation Operation `json:"last_operation"`
+	LastOperation Operation `json:"last_operation,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }
@@ -235,17 +235,17 @@ type UpdateServiceInstanceInput struct {
 	Async string `dest:"querystring" dest-name:"async"`
 
 	//The name of the service instance to update.
-	Name string `json:"name"`
+	Name string `json:"name,omitempty"`
 	//The ID of the service plan for the service instance to update.
-	ServicePlanId string `json:"service_plan_id"`
+	ServicePlanId string `json:"service_plan_id,omitempty"`
 	//Some services support providing of additional configuration parameters during instance creation.
 	//You can update these parameters.
 	//For the list of supported configuration parameters, see the documentation of a particular service offering.
 	//You can also use the GET /v1/service_instances/{serviceInstanceID}/parameters API later to view the parameters
 	//defined during this step
-	Parameters map[string]string `json:"parameters"`
+	Parameters map[string]string `json:"parameters,omitempty"`
 	//The list of labels to update for the resource.
-	Labels map[string][]string `json:"labels"`
+	Labels map[string][]string `json:"labels,omitempty"`
 }
 type UpdateServiceInstanceOutput struct {
 	Error
@@ -285,7 +285,7 @@ type GetServiceInstanceParametersInput struct {
 type GetServiceInstanceParametersOutput struct {
 	Error
 
-	Parameters map[string]string `json:"-"`
+	Parameters map[string]string `json:"-,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }

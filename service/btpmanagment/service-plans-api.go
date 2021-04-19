@@ -38,51 +38,51 @@ type GetServicePlansOutput struct {
 	//the defined maximum number of ervice plans to be returned after a single API call (max_items).
 	//If the field is not present, either all the service plans were included in the first response, or you have reached
 	//the end of the list.
-	Token string `json:"token"`
+	Token string `json:"token,omitempty"`
 	//The number of service plans associated with the subaccount.
-	NumItems int64 `json:"num_items"`
+	NumItems int64 `json:"num_items,omitempty"`
 	//The list of the response objects that contain details about the service plans.
-	Items []PlanItem `json:"items"`
+	Items []PlanItem `json:"items,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }
 type PlanItem struct {
 	//The ID of the service plan.
-	Id string `json:"id"`
+	Id string `json:"id,omitempty"`
 	//Whether the service plan is ready.
-	Ready bool `json:"ready"`
+	Ready bool `json:"ready,omitempty"`
 	//The name of the service plan.
-	Name string `json:"name"`
+	Name string `json:"name,omitempty"`
 	//The description of the service plan.
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 	//The ID of the service plan in the service broker catalog.
-	CatalogId string `json:"catalog_id"`
+	CatalogId string `json:"catalog_id,omitempty"`
 	//The name of the associated service broker catalog.
-	CatalogName string `json:"catalog_name"`
+	CatalogName string `json:"catalog_name,omitempty"`
 	//Whether the service plan is free.
-	Free bool `json:"free"`
+	Free bool `json:"free,omitempty"`
 	//Whether the service plan is bindable.
-	Bindable bool         `json:"bindable"`
-	Metadata PlanMetadata `json:"metadata"`
+	Bindable bool         `json:"bindable,omitempty"`
+	Metadata PlanMetadata `json:"metadata,omitempty"`
 	//The ID of the service offering.
-	ServiceOfferingId string `json:"service_offering_id"`
+	ServiceOfferingId string `json:"service_offering_id,omitempty"`
 	//The time the service plan was created.
 	//In ISO 8601 format:
 	//	YYYY-MM-DDThh:mm:ssTZD
-	CreatedAt string `json:"created_at"`
+	CreatedAt string `json:"created_at,omitempty"`
 	//The last time the service plan was updated.
 	//In ISO 8601 format.
-	UpdatedAt string `json:"updated_at"`
+	UpdatedAt string `json:"updated_at,omitempty"`
 }
 type PlanMetadata struct {
 	//Platforms supported by the service plan.
 	//Enum:
 	//	[ kubernetes, cloudfoundry ]
-	SupportedPlatforms []string `json:"supportedPlatforms"`
+	SupportedPlatforms []string `json:"supportedPlatforms,omitempty"`
 	//The earliest supported OSB version.
-	SupportedMinOSBVersion string `json:"supportedMinOSBVersion"`
+	SupportedMinOSBVersion string `json:"supportedMinOSBVersion,omitempty"`
 	//The latest supported OSB version.
-	SupportedMaxOSBVersion string `json:"supportedMaxOSBVersion"`
+	SupportedMaxOSBVersion string `json:"supportedMaxOSBVersion,omitempty"`
 }
 
 func (c *ServiceManagementV1) GetServicePlans(ctx context.Context,

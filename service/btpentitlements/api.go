@@ -2,6 +2,7 @@ package btpentitlements
 
 import (
 	"context"
+	"fmt"
 	"github.com/nnicora/sap-sdk-go/internal/times"
 	"github.com/nnicora/sap-sdk-go/sap/http/request"
 	"github.com/nnicora/sap-sdk-go/service/types"
@@ -17,22 +18,22 @@ type DataCentersInput struct {
 }
 type DataCentersOutput struct {
 	//Contains information about the available data centers for a specified global account.
-	DataCenters []DataCenter `json:"datacenters"`
+	DataCenters []DataCenter `json:"datacenters,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }
 type DataCenter struct {
 	//Technical name of the data center. Must be unique within the cloud deployment.
-	Name string `json:"name"`
+	Name string `json:"name,omitempty"`
 
 	//Descriptive name of the data center for customer-facing UIs.
-	DisplayName string `json:"displayName"`
+	DisplayName string `json:"displayName,omitempty"`
 
 	//The region in which the data center is located.
-	Region string `json:"region"`
+	Region string `json:"region,omitempty"`
 
 	//The environment that the data center supports. For example: Kubernetes, Cloud Foundry.
-	Environment string `json:"environment"`
+	Environment string `json:"environment,omitempty"`
 
 	//The infrastructure provider for the data center. Valid values:
 	//
@@ -44,19 +45,19 @@ type DataCenter struct {
 	//IBM: IBM Cloud.
 	//Enum:
 	//	[ AWS, GCP, AZURE, SAP, ALI, IBM ]
-	IaasProvider string `json:"iaasProvider"`
+	IaasProvider string `json:"iaasProvider,omitempty"`
 
 	//Whether the specified datacenter supports trial accounts.
-	SupportsTrial bool `json:"supportsTrial"`
+	SupportsTrial bool `json:"supportsTrial,omitempty"`
 
 	//Provisioning service URL.
-	ProvisioningServiceUrl string `json:"provisioningServiceUrl"`
+	ProvisioningServiceUrl string `json:"provisioningServiceUrl,omitempty"`
 
 	//Saas-Registry service URL.
-	SaasRegistryServiceUrl string `json:"saasRegistryServiceUrl"`
+	SaasRegistryServiceUrl string `json:"saasRegistryServiceUrl,omitempty"`
 
 	//The domain of the data center
-	Domain string `json:"domain"`
+	Domain string `json:"domain,omitempty"`
 }
 
 func (c *EntitlementsV1) GetDataCenters(ctx context.Context) (*DataCentersOutput, error) {
@@ -119,13 +120,13 @@ type GlobalAccountAssignmentsInput struct {
 }
 type GlobalAccountAssignmentsOutput struct {
 	//Services entitled to global account, its directories and subaccounts.
-	EntitledServices []EntitledService `json:"entitledServices"`
+	EntitledServices []EntitledService `json:"entitledServices,omitempty"`
 
 	//The list of services that are assigned to subaccounts located under a global account.
-	AssignedServices []AssignedService `json:"assignedServices"`
+	AssignedServices []AssignedService `json:"assignedServices,omitempty"`
 
 	//Whether the External Provider Registry (XPR) is available.
-	FetchErrorFromExternalProviderRegistry bool `json:"fetchErrorFromExternalProviderRegistry"`
+	FetchErrorFromExternalProviderRegistry bool `json:"fetchErrorFromExternalProviderRegistry,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }
@@ -166,44 +167,44 @@ type GetAssignmentsInput struct {
 }
 type GetAssignmentsOutput struct {
 	//Services entitled to global account, its directories and subaccounts.
-	EntitledServices []EntitledService `json:"entitledServices"`
+	EntitledServices []EntitledService `json:"entitledServices,omitempty"`
 
 	//The list of services that are assigned to subaccounts located under a global account.
-	AssignedServices []AssignedService `json:"assignedServices"`
+	AssignedServices []AssignedService `json:"assignedServices,omitempty"`
 
 	//Whether the External Provider Registry (XPR) is available.
-	FetchErrorFromExternalProviderRegistry bool `json:"fetchErrorFromExternalProviderRegistry"`
+	FetchErrorFromExternalProviderRegistry bool `json:"fetchErrorFromExternalProviderRegistry,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }
 type AssignedService struct {
 	//The unique registration name of the deployed service as defined by the service provider.
-	Name string `json:"name"`
+	Name string `json:"name,omitempty"`
 
 	//Display name of the service for customer-facing UIs.
-	DisplayName string `json:"displayName"`
+	DisplayName string `json:"displayName,omitempty"`
 
-	BusinessCategory BusinessCategory `json:"businessCategory"`
+	BusinessCategory BusinessCategory `json:"businessCategory,omitempty"`
 
 	//List of service plans associated with the assigned service.
-	ServicePlans []AssignedServicePlan `json:"servicePlans"`
+	ServicePlans []AssignedServicePlan `json:"servicePlans,omitempty"`
 
 	//The icon of the service in Base64 format.
-	IconBase64 string `json:"iconBase64"`
+	IconBase64 string `json:"iconBase64,omitempty"`
 
 	//The application coordinates provided in metadata.
-	ApplicationCoordinates interface{} `json:"applicationCoordinates"`
+	ApplicationCoordinates interface{} `json:"applicationCoordinates,omitempty"`
 }
 type EntitledService struct {
 	//The unique registration name of the deployed service as defined by the service provider.
-	Name string `json:"name"`
+	Name string `json:"name,omitempty"`
 
 	//Display name of the service for customer-facing UIs.
-	DisplayName string `json:"displayName"`
+	DisplayName string `json:"displayName,omitempty"`
 
 	//Description of the service for customer-facing UIs.
-	Description      string           `json:"description"`
-	BusinessCategory BusinessCategory `json:"businessCategory"`
+	Description      string           `json:"description,omitempty"`
+	BusinessCategory BusinessCategory `json:"businessCategory,omitempty"`
 
 	//The owner type of the service. Possible values:
 	//
@@ -212,33 +213,33 @@ type EntitledService struct {
 	//PARTNER: The owner is an SAP partner that added the service to the product catalog, and it is available only to their customers for consumption.
 	//Enum:
 	//	[ VENDOR, CUSTOMER, PARTNER ]
-	OwnerType string `json:"ownerType"`
+	OwnerType string `json:"ownerType,omitempty"`
 
 	//List of service plans associated with the entitled service.
-	ServicePlans []ServicePlan `json:"servicePlans"`
+	ServicePlans []ServicePlan `json:"servicePlans,omitempty"`
 
 	//The icon of the service in Base64 format.
-	IconBase64 string `json:"iconBase64"`
+	IconBase64 string `json:"iconBase64,omitempty"`
 
 	//The application coordinates provided in metadata.
-	ApplicationCoordinates interface{} `json:"applicationCoordinates"`
+	ApplicationCoordinates interface{} `json:"applicationCoordinates,omitempty"`
 }
 type BusinessCategory struct {
 	//Unique ID of the business category.
-	Id string `json:"id"`
+	Id string `json:"id,omitempty"`
 
 	//Display name of the business category for customer-facing UIs.
-	DisplayName string `json:"displayName"`
+	DisplayName string `json:"displayName,omitempty"`
 }
 type AssignedServicePlan struct {
 	//The unique registration name of the service plan.
-	Name string `json:"name"`
+	Name string `json:"name,omitempty"`
 
 	//The name of the service plan for customer-facing UIs.
-	DisplayName string `json:"displayName"`
+	DisplayName string `json:"displayName,omitempty"`
 
 	//A unique identifier for service plans that can distinguish between the same service plans with different pricing plans.
-	UniqueIdentifier string `json:"uniqueIdentifier"`
+	UniqueIdentifier string `json:"uniqueIdentifier,omitempty"`
 
 	//The type of service offering. Possible values:
 	//
@@ -263,10 +264,10 @@ type AssignedServicePlan struct {
 	//ENVIRONMENT: An environment service; for example, Cloud Foundry.
 	//Enum:
 	//	[ PLATFORM, SERVICE, ELASTIC_SERVICE, ELASTIC_LIMITED, APPLICATION, QUOTA_BASED_APPLICATION, ENVIRONMENT ]
-	Category string `json:"category"`
+	Category string `json:"category,omitempty"`
 
 	//Whether the service plan is a beta feature.
-	Beta bool `json:"beta"`
+	Beta bool `json:"beta,omitempty"`
 
 	//The maximum allowed usage quota per subaccount for multitenant applications and environments that are defined as
 	//"quota-based". This quota limits the usage of the application and/or environment per subaccount per a given
@@ -276,29 +277,29 @@ type AssignedServicePlan struct {
 	//	(1) limit the number of subscriptions to a quota-based multitenant application within a global account according
 	//		to the purchased quota, or
 	//	(2) restrict the enablement of a single instance of an environment per subaccount.
-	MaxAllowedSubAccountQuota int32 `json:"maxAllowedSubaccountQuota"`
+	MaxAllowedSubAccountQuota int32 `json:"maxAllowedSubaccountQuota,omitempty"`
 
 	//Is the quota of this service plan entitled to the global account with unlimited usage.
-	Unlimited bool `json:"unlimited"`
+	Unlimited bool `json:"unlimited,omitempty"`
 
 	//Assignment detailed information
-	AssignmentInfo []AssignedServicePlanSubAccount `json:"assignmentInfo"`
+	AssignmentInfo []AssignedServicePlanSubAccount `json:"assignmentInfo,omitempty"`
 }
 type AssignedServicePlanSubAccount struct {
 	//Specifies if the plan was automatically assigned regardless of any action by an admin. This applies to entitlements
 	//that are always available to subaccounts and cannot be removed.
-	AutoAssigned bool `json:"autoAssigned"`
+	AutoAssigned bool `json:"autoAssigned,omitempty"`
 
 	//example: GUID of GLOBAL_ACCOUNT or SUBACCOUNT
 	//The unique ID of the global account or directory to which the entitlement is assigned.
-	EntityId              string      `json:"entityId"`
-	ParentAmount          int64       `json:"parentAmount"`
-	ParentId              string      `json:"parentId"`
-	ParentRemainingAmount interface{} `json:"parentRemainingAmount"`
+	EntityId              string  `json:"entityId,omitempty"`
+	ParentAmount          float32 `json:"parentAmount,omitempty"`
+	ParentId              string  `json:"parentId,omitempty"`
+	ParentRemainingAmount float32 `json:"parentRemainingAmount,omitempty"`
 
 	//Enum:
 	//	[ SUBACCOUNT, GLOBAL_ACCOUNT, DIRECTORY ]
-	ParentType string `json:"parentType"`
+	ParentType string `json:"parentType,omitempty"`
 
 	//example: GLOBAL_ACCOUNT or SUBACCOUNT
 	//The type of entity to which the entitlement is assigned.
@@ -308,13 +309,13 @@ type AssignedServicePlanSubAccount struct {
 	//DIRECTORY: The entitlement is assigned to a directory.
 	//Enum:
 	//	[ SUBACCOUNT, GLOBAL_ACCOUNT, DIRECTORY ]
-	EntityType string `json:"entityType"`
+	EntityType string `json:"entityType,omitempty"`
 
 	//The quantity of the entitlement that is assigned to the root global account or directory.
-	Amount int64 `json:"amount"`
+	Amount float32 `json:"amount,omitempty"`
 
 	//The requested amount when it is different from the actual amount because the request state is still in process or failed.
-	RequestedAmount int64 `json:"requestedAmount"`
+	RequestedAmount float32 `json:"requestedAmount,omitempty"`
 
 	//The current state of the service plan assignment.
 	//
@@ -324,47 +325,47 @@ type AssignedServicePlanSubAccount struct {
 	//OK: The CRUD operation or series of operations completed successfully.
 	//Enum:
 	//	[ STARTED, PROCESSING, PROCESSING_FAILED, OK ]
-	EntityState string `json:"entityState"`
+	EntityState string `json:"entityState,omitempty"`
 
 	//Information about the current state.
-	StateMessage string `json:"stateMessage"`
+	StateMessage string `json:"stateMessage,omitempty"`
 
 	//Whether the plan is automatically distributed to the subaccounts that are located in the directory.
-	AutoAssign bool `json:"autoAssign"`
+	AutoAssign bool `json:"autoAssign,omitempty"`
 
 	//The amount of the entitlement to automatically assign to subaccounts that are added in the future to the
 	//entitlement's assigned directory.
 	//Requires that autoAssign is set to TRUE, and there is remaining quota for the entitlement. To automatically
 	//distribute to subaccounts that are added in the future to the directory, distribute must be set to TRUE.
-	AutoDistributeAmount int32 `json:"autoDistributeAmount"`
+	AutoDistributeAmount int32 `json:"autoDistributeAmount,omitempty"`
 
 	//Date the subaccount has been created. Dates and times are in UTC format.
-	CreatedDate times.JavaTime `json:"createdDate"`
+	CreatedDate times.JavaTime `json:"createdDate,omitempty"`
 
 	//Date the subaccount has been modified. Dates and times are in UTC format.
-	ModifiedDate times.JavaTime `json:"modifiedDate"`
+	ModifiedDate times.JavaTime `json:"modifiedDate,omitempty"`
 
 	//Global account resource details
-	Resources []Resource `json:"resources"`
+	Resources []Resource `json:"resources,omitempty"`
 
 	//True, if an unlimited quota of this service plan assigned to the directory or subaccount in the global account.
 	//False, if the service plan is assigned to the directory or subaccount with a limited numeric quota, even if the
 	//	service plan has an unlimited usage entitled on the level of the global account.
-	UnlimitedAmountAssigned bool `json:"unlimitedAmountAssigned"`
+	UnlimitedAmountAssigned bool `json:"unlimitedAmountAssigned,omitempty"`
 }
 type ServicePlan struct {
 	//The unique registration name of the service plan.
-	Name      string `json:"name"`
-	Unlimited bool   `json:"unlimited"`
+	Name      string `json:"name,omitempty"`
+	Unlimited bool   `json:"unlimited,omitempty"`
 
 	//Display name of the service plan for customer-facing UIs.
-	DisplayName string `json:"displayName"`
+	DisplayName string `json:"displayName,omitempty"`
 
 	//Description of the service plan for customer-facing UIs.
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 
 	//A unique identifier for service plans that can distinguish between the same service plans with different pricing plans.
-	UniqueIdentifier string `json:"uniqueIdentifier"`
+	UniqueIdentifier string `json:"uniqueIdentifier,omitempty"`
 
 	//The method used to provision the service plan.
 	//
@@ -375,14 +376,14 @@ type ServicePlan struct {
 	//GLOBAL_QUOTA_DOMAIN_DB: Provisioning is done by setting amount at Domain DB, this is relevant for non-ui quotas only.
 	//Enum:
 	//	[ SERVICE_BROKER, NONE_REQUIRED, COMMERCIAL_SOLUTION_SCRIPT, GLOBAL_COMMERCIAL_SOLUTION_SCRIPT, GLOBAL_QUOTA_DOMAIN_DB ]
-	ProvisioningMethod string `json:"provisioningMethod"`
+	ProvisioningMethod string `json:"provisioningMethod,omitempty"`
 
 	//The assigned quota for maximum allowed consumption of the plan. Relevant for services that have a numeric quota assignment.
-	Amount interface{} `json:"amount"`
+	Amount float32 `json:"amount,omitempty"`
 
 	//The remaining amount of the plan that can still be assigned. For plans that don't have a numeric quota,
 	//the remaining amount is always the maximum allowed quota.
-	RemainingAmount interface{} `json:"remainingAmount"`
+	RemainingAmount float32 `json:"remainingAmount,omitempty"`
 
 	//[DEPRECATED] The source that added the service. Possible values:
 	//
@@ -393,27 +394,27 @@ type ServicePlan struct {
 	//
 	//Enum:
 	//	[ VENDOR, GLOBAL_ACCOUNT_OWNER, PARTNER ]
-	ProvidedBy string `json:"providedBy"`
+	ProvidedBy string `json:"providedBy,omitempty"`
 
 	//Whether the service plan is a beta feature.
-	Beta bool `json:"beta"`
+	Beta bool `json:"beta,omitempty"`
 
 	//Whether the service plan is available internally to SAP users.
-	AvailableForInternal bool `json:"availableForInternal"`
+	AvailableForInternal bool `json:"availableForInternal,omitempty"`
 
 	//The quota limit that is allowed for this service plan for SAP internal users.
 	//If null, the default quota limit is set to 200.
 	//Applies only when the availableForInternal property is set to TRUE.
-	InternalQuotaLimit int32 `json:"internalQuotaLimit"`
+	InternalQuotaLimit int32 `json:"internalQuotaLimit,omitempty"`
 
 	//Whether to automatically assign a quota of the entitlement to a subaccount when the subaccount is
 	//created in the entitlement's assigned directory.
-	AutoAssign bool `json:"autoAssign"`
+	AutoAssign bool `json:"autoAssign,omitempty"`
 
 	//The amount of the entitlement to automatically assign to a subaccount when the subaccount is created in the
 	//entitlement's assigned directory.
 	//Requires that autoAssign is set to TRUE, and there is remaining quota for the entitlement.
-	AutoDistributeAmount int32 `json:"autoDistributeAmount"`
+	AutoDistributeAmount int32 `json:"autoDistributeAmount,omitempty"`
 
 	//The maximum allowed usage quota per subaccount for multitenant applications and environments that are defined as
 	//"quota-based". This quota limits the usage of the application and/or environment per subaccount per a given usage
@@ -423,7 +424,7 @@ type ServicePlan struct {
 	//	(1) limit the number of subscriptions to a quota-based multitenant application within a global account according
 	//		to the purchased quota, or
 	//	(2) restrict the enablement of a single instance of an environment per subaccount.
-	MaxAllowedSubAccountQuota int32 `json:"maxAllowedSubaccountQuota"`
+	MaxAllowedSubAccountQuota int32 `json:"maxAllowedSubaccountQuota,omitempty"`
 
 	//The type of service offering. Possible values:
 	//
@@ -449,61 +450,61 @@ type ServicePlan struct {
 	//ENVIRONMENT: An environment service; for example, Cloud Foundry.
 	//Enum:
 	//	[ PLATFORM, SERVICE, ELASTIC_SERVICE, ELASTIC_LIMITED, APPLICATION, QUOTA_BASED_APPLICATION, ENVIRONMENT ]
-	Category string `json:"category"`
+	Category string `json:"category,omitempty"`
 
 	//Relevant entitlements for the source that added the product.
-	SourceEntitlements []SourceEntitlement `json:"sourceEntitlements"`
+	SourceEntitlements []SourceEntitlement `json:"sourceEntitlements,omitempty"`
 
 	//Contains information about the data centers and regions in the cloud landscape
-	DataCenters []DataCenter `json:"dataCenters"`
+	DataCenters []DataCenter `json:"dataCenters,omitempty"`
 
 	//Used to service plan external resources
-	Resources []Resource `json:"resources"`
+	Resources []Resource `json:"resources,omitempty"`
 }
 type SourceEntitlement struct {
 	//The technical name of the product.
-	EntitlementName string `json:"entitlementName"`
+	EntitlementName string `json:"entitlementName,omitempty"`
 
 	//The quantity of the entitlement that is assigned to the root global account or directory.
-	Amount int64 `json:"amount"`
+	Amount float32 `json:"amount,omitempty"`
 
 	//The product ID of the assigned entitlement.
-	ProductId       string          `json:"productId"`
-	CommercialModel CommercialModel `json:"commercialModel"`
+	ProductId       string          `json:"productId,omitempty"`
+	CommercialModel CommercialModel `json:"commercialModel,omitempty"`
 
 	//Specifies if a plan associated with this entitlement will be automatically assigned by the system to any new
 	//subaccount. For example, free plans that are available to all subaccounts.
-	AutoAssign bool `json:"autoAssign"`
+	AutoAssign bool `json:"autoAssign,omitempty"`
 }
 type CommercialModel struct {
 	//Whether a customer pays only for services that they actually use (consumption-based) or pays for subscribed
 	//services at a fixed cost irrespective of consumption (subscription-based).
 	//True: Consumption-based commercial model.False: Subscription-based commercial model.
-	ConsumptionBased bool `json:"consumptionBased"`
+	ConsumptionBased bool `json:"consumptionBased,omitempty"`
 
 	//Directly contained commercial models.
-	ContainedCommercialModels []CommercialModel `json:"containedCommercialModels"`
+	ContainedCommercialModels []CommercialModel `json:"containedCommercialModels,omitempty"`
 
 	//A description of the commercial model
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 
 	//A descriptive name of the commercial model for customer-facing UIs.
-	DisplayName string `json:"displayName"`
+	DisplayName string `json:"displayName,omitempty"`
 
 	//Technical name of the commercial model.
-	Name string `json:"name"`
+	Name string `json:"name,omitempty"`
 }
 type Resource struct {
 	//The name of the resource.
-	Name string `json:"resourceName"`
+	Name string `json:"resourceName,omitempty"`
 	//The name of the provider.
-	Provider string `json:"resourceProvider"`
+	Provider string `json:"resourceProvider,omitempty"`
 	//The unique name of the resource.
-	TechnicalName string `json:"resourceTechnicalName"`
+	TechnicalName string `json:"resourceTechnicalName,omitempty"`
 	//The type of the provider. For example infrastructure-as-a-service (IaaS).
-	Type string `json:"resourceType"`
+	Type string `json:"resourceType,omitempty"`
 	//Any additional data to include.
-	Data interface{} `json:"resourceData"`
+	Data interface{} `json:"resourceData,omitempty"`
 }
 
 func (c *EntitlementsV1) GetAssignments(ctx context.Context, input *GetAssignmentsInput) (*GetAssignmentsOutput, error) {
@@ -533,34 +534,38 @@ type UpdateSubAccountServicePlanInput struct {
 	//The details of entitlement's name, plan, amount and subaccount GUIDs to assign to a subaccount. The entitlement
 	//can be a service, multitenant application, or environment. Note that some environments, such as Cloud Foundry,
 	//are available by default to all subaccounts, and therefore are not displayed as entitlements.
-	SubAccountServicePlans []SubAccountServicePlan `json:"subaccountServicePlans"`
+	SubAccountServicePlans []SubAccountServicePlan `json:"subaccountServicePlans,omitempty"`
 }
 type SubAccountServicePlan struct {
 	//The technical name of the entitlement to assign to a subaccount.
-	ServiceName string `json:"serviceName"`
+	ServiceName string `json:"serviceName,omitempty"`
 
 	//The technical name of the entitlement's plan.
-	ServicePlanName string `json:"servicePlanName"`
+	ServicePlanName string `json:"servicePlanName,omitempty"`
 
 	//List of assigned entitlements and their specifications.
-	AssignmentInfo []AssignmentInfo `json:"assignmentInfo"`
+	AssignmentInfo []AssignmentInfo `json:"assignmentInfo,omitempty"`
 }
 type AssignmentInfo struct {
 	//The quantity of the plan that is assigned to the specified subaccount. Relevant and mandatory only for plans that
 	//have a numeric quota. Do not set if enable=TRUE is specified.
-	Amount int64 `json:"amount"`
+	Amount float32 `json:"amount,omitempty"`
 
 	//Whether to enable the service plan assignment to the specified subaccount without quantity restrictions.
 	//Relevant and mandatory only for plans that do not have a numeric quota. Do not set if amount is specified.
-	Enable bool `json:"enable"`
+	Enable *bool `json:"enable,omitempty"`
 
 	//The unique ID of the subaccount to which to assign a service plan.
-	SubAccountGuid string `json:"subaccountGUID"`
+	SubAccountGuid string `json:"subaccountGUID,omitempty"`
 
 	//External resources to assign to subaccount
-	Resources []Resource `json:"resources"`
+	Resources []Resource `json:"resources,omitempty"`
 }
 type UpdateSubAccountServicePlanOutput struct {
+	Error types.Error `json:"error,omitempty"`
+
+	JobStatusId string `json:"jobStatusId,omitempty"`
+
 	types.StatusAndBodyFromResponse
 }
 
@@ -582,7 +587,19 @@ func (c *EntitlementsV1) updateUpdateSubAccountServicePlanRequest(ctx context.Co
 	}
 
 	output := &UpdateSubAccountServicePlanOutput{}
-	return c.newRequest(ctx, op, input, output), output
+
+	request := c.newRequest(ctx, op, input, output)
+
+	// TODO: This is a hack should not be use on good designed API
+	wrapperBody := "{ \"jobStatusId\": \"%v\" }"
+	request.ResponseBodyHandler = func(statusCode int, body []byte) ([]byte, error) {
+		if statusCode == 202 {
+			return []byte(fmt.Sprintf(wrapperBody, string(body))), nil
+		}
+		return body, nil
+	}
+
+	return request, output
 }
 
 // PUT /entitlements/v1/directories/{directoryGUID}/assignments
@@ -594,28 +611,28 @@ type AssignDirectoryAssignmentInput struct {
 	//JSON object that contains the specifications of assignment, such as the name of the assigned plan, the quantity
 	//to distribute, and whether to distribute the quota and how much to subaccounts that currently exist in the
 	//directory and to subaccounts that will added to the directory in the future.
-	DirectoryAssignments []AssignDirectoryAssignment `json:"entitlements"`
+	DirectoryAssignments []AssignDirectoryAssignment `json:"entitlements,omitempty"`
 }
 type AssignDirectoryAssignment struct {
 	//The quantity of the plan to assign to the specified directory. Relevant and mandatory only for plans that have a
 	//numeric quota. Do not set if enable=TRUE is specified.
-	Amount int64 `json:"amount"`
+	Amount int64 `json:"amount,omitempty"`
 
 	//The technical name of the entitlement to assign to the directory.
-	Plan string `json:"plan"`
+	Plan string `json:"plan,omitempty"`
 
 	//Whether to allocate the plan to the to the specified directory without quantity restrictions.
 	//Relevant and mandatory only for plans that don't have a numeric quota. Do not use if amount is specified.
-	Enable bool `json:"enable"`
+	Enable bool `json:"enable,omitempty"`
 
 	//The technical name of the entitlement (service, application, environment) to assign.
-	Service string `json:"service"`
+	Service string `json:"service,omitempty"`
 
 	//Whether to assign the plan with the quota specified in autoDistributeAmount to subaccounts currently located in
 	//the specified directory. For entitlements without a numeric quota, such as multitenant apps, the plan is assigned
 	//to the subaccounts currently located in the directory (autoDistributeAmount is not relevant in this case).
 	//In both cases, autoAssign must be set to TRUE.
-	Distribute bool `json:"distribute"`
+	Distribute bool `json:"distribute,omitempty"`
 
 	//Whether to automatically allocate the plans of entitlements that have a numeric quota with the amount specified
 	//in auto-distribute-amount to any new subaccount that is added to the directory in the future. For entitlements
@@ -623,12 +640,12 @@ type AssignDirectoryAssignment struct {
 	//with the condition that enable=TRUE is set (autoDistributeAmount is not relevant in this case). If distribute=TRUE,
 	//the same assignment is also made to all subaccounts currently in the directory. Entitlements are subject to
 	//available quota in the directory.
-	AutoAssign bool `json:"autoAssign"`
+	AutoAssign bool `json:"autoAssign,omitempty"`
 
 	//The quota of the specified plan to automatically allocate to any new subaccount that is created in the future in the directory.
 	//When applying this option, you must set autoAssign=TRUE and/or distribute=TRUE. Applies only to entitlements
 	//that have a numeric quota. Entitlements are subject to available quota in the directory.
-	AutoDistributeAmount int32 `json:"autoDistributeAmount"`
+	AutoDistributeAmount int32 `json:"autoDistributeAmount,omitempty"`
 }
 type AssignDirectoryAssignmentOutput struct {
 	types.StatusAndBodyFromResponse
@@ -664,20 +681,20 @@ type UpdateDirectoryAssignmentInput struct {
 	//JSON object that contains the specifications of an assignment, such as the name of the assigned plan and whether
 	//to distribute the quota and how much to subaccounts that currently exist in the directory and to subaccounts that
 	//will be added to the directory in the future.
-	UpdateDirectoryAssignments []UpdateDirectoryAssignment `json:"entitlementUpdates"`
+	UpdateDirectoryAssignments []UpdateDirectoryAssignment `json:"entitlementUpdates,omitempty"`
 }
 type UpdateDirectoryAssignment struct {
 	//The technical name of the entitlement to assign to the directory.
-	Plan string `json:"plan"`
+	Plan string `json:"plan,omitempty"`
 
 	//The technical name of the entitlement (service, application, environment) to assign.
-	Service string `json:"service"`
+	Service string `json:"service,omitempty"`
 
 	//Whether to assign the plan with the quota specified in autoDistributeAmount to subaccounts currently located in
 	//the specified directory. For entitlements without a numeric quota, such as multitenant apps, the plan is assigned
 	//to the subaccounts currently located in the directory (autoDistributeAmount is not relevant in this case).
 	//In both cases, autoAssign must be set to TRUE.
-	Distribute bool `json:"distribute"`
+	Distribute bool `json:"distribute,omitempty"`
 
 	//Whether to automatically allocate the plans of entitlements that have a numeric quota with the amount specified in
 	//auto-distribute-amount to any new subaccount that is added to the directory in the future.
@@ -685,12 +702,12 @@ type UpdateDirectoryAssignment struct {
 	//in the future with the condition that enable=TRUE is set (autoDistributeAmount is not relevant in this case).
 	//If distribute=TRUE, the same assignment is also made to all subaccounts currently in the directory.
 	//Entitlements are subject to available quota in the directory.
-	AutoAssign bool `json:"autoAssign"`
+	AutoAssign bool `json:"autoAssign,omitempty"`
 
 	//The quota of the specified plan to automatically allocate to any new subaccount that is created in the future in the directory.
 	//When applying this option, you must set autoAssign=TRUE and/or distribute=TRUE.
 	//Applies only to entitlements that have a numeric quota. Entitlements are subject to available quota in the directory.
-	AutoDistributeAmount int32 `json:"autoDistributeAmount"`
+	AutoDistributeAmount int32 `json:"autoDistributeAmount,omitempty"`
 }
 type UpdateDirectoryAssignmentOutput struct {
 	types.StatusAndBodyFromResponse

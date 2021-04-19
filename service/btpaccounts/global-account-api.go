@@ -24,17 +24,17 @@ type GetGlobalAccountInput struct {
 }
 type GlobalAccountOutput struct {
 	//The list of directories associated with the specified global account.
-	Children []Directory `json:"children"`
+	Children []Directory `json:"children,omitempty"`
 
 	//The type of the commercial contract that was signed.
-	CommercialModel string `json:"commercialModel"`
+	CommercialModel string `json:"commercialModel,omitempty"`
 
 	//Whether the customer of the global account pays only for services that they actually use (consumption-based)
 	//or pay for subscribed services at a fixed cost irrespective of consumption (subscription-based).
 	//
 	//TRUE: Consumption-based commercial model.
 	//FALSE: Subscription-based commercial model.
-	ConsumptionBased bool `json:"consumptionBased"`
+	ConsumptionBased bool `json:"consumptionBased,omitempty"`
 
 	//The status of the customer contract and its associated root global account.
 	//
@@ -49,30 +49,30 @@ type GlobalAccountOutput struct {
 	//	is suspended, and the account owner has not yet extended the trial period.
 	//Enum:
 	//	[ ACTIVE, PENDING_TERMINATION, SUSPENDED ]
-	ContractStatus string `json:"contractStatus"`
+	ContractStatus string `json:"contractStatus,omitempty"`
 
 	//For internal accounts, the cost center that is associated with the global account owner.
 	//A cost center represents a set of users belonging to the same business unit and is charged for
 	//the creation and usage of the global account.
-	CostCenter string `json:"costCenter"`
+	CostCenter string `json:"costCenter,omitempty"`
 
 	//The date the global account was created. Dates and times are in UTC format.
-	CreatedDate times.JavaTime `json:"createdDate"`
+	CreatedDate times.JavaTime `json:"createdDate,omitempty"`
 
 	//The ID of the customer as registered in the CRM system.
-	CrmCustomerId string `json:"crmCustomerId"`
+	CrmCustomerId string `json:"crmCustomerId,omitempty"`
 
 	//The ID of the customer tenant as registered in the CRM system.
-	CrmTenantId string `json:"crmTenantId"`
+	CrmTenantId string `json:"crmTenantId,omitempty"`
 
 	//Contains information about the additional properties related to a specified global account.
-	CustomProperties []CustomProperties `json:"customProperties"`
+	CustomProperties []CustomProperties `json:"customProperties,omitempty"`
 
 	//A description of the global account.
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 
 	//The display name of the global account.
-	DisplayName string `json:"displayName"`
+	DisplayName string `json:"displayName,omitempty"`
 
 	//The current state of the global account.
 	//
@@ -95,13 +95,13 @@ type GlobalAccountOutput struct {
 	//	[ STARTED, CREATING, UPDATING, MOVING, PROCESSING, DELETING, OK, PENDING_REVIEW, CANCELED, CREATION_FAILED,
 	//	UPDATE_FAILED, UPDATE_ACCOUNT_TYPE_FAILED, UPDATE_DIRECTORY_TYPE_FAILED, PROCESSING_FAILED, DELETION_FAILED,
 	//	MOVE_FAILED, MIGRATING, MIGRATION_FAILED, ROLLBACK_MIGRATION_PROCESSING, MIGRATED ]
-	EntityState string `json:"entityState"`
+	EntityState string `json:"entityState,omitempty"`
 
 	//The planned date that the global account expires. This is the same date as the Contract End Date,
 	//unless a manual adjustment has been made to the actual expiration date of the global account.
 	//Typically, this property is automatically populated only when a formal termination order is received from the CRM system.
 	//From a customer perspective, this date marks the start of the grace period, which is typically 30 days before the actual deletion of the account.
-	ExpiryDate times.JavaTime `json:"expiryDate"`
+	ExpiryDate times.JavaTime `json:"expiryDate,omitempty"`
 
 	//The geographic locations from where the global account can be accessed.
 	//
@@ -109,13 +109,13 @@ type GlobalAccountOutput struct {
 	//EU_ACCESS: The global account can be accessed only within locations in the EU.
 	//Enum:
 	//	[ STANDARD, EU_ACCESS ]
-	GeoAccess string `json:"geoAccess"`
+	GeoAccess string `json:"geoAccess,omitempty"`
 
 	//The unique ID of the global account.
-	Guid string `json:"guid"`
+	Guid string `json:"guid,omitempty"`
 
 	// Legal Description
-	LegalLinks LegalLinks `json:"legalLinks"`
+	LegalLinks LegalLinks `json:"legalLinks,omitempty"`
 
 	//The type of license for the global account. The license type affects the scope of functions of the account.
 	//
@@ -127,10 +127,10 @@ type GlobalAccountOutput struct {
 	//TRIAL: For customer trial accounts.
 	//Enum:
 	//	[ DEVELOPER, CUSTOMER, PARTNER, INTERNAL_DEV, INTERNAL_PROD, SYSTEM, TRIAL, SAPDEV, SAPPROD ]
-	LicenseType string `json:"licenseType"`
+	LicenseType string `json:"licenseType,omitempty"`
 
 	//The date the global account was last modified. Dates and times are in UTC format.
-	ModifiedDate times.JavaTime `json:"modifiedDate"`
+	ModifiedDate times.JavaTime `json:"modifiedDate,omitempty"`
 
 	//The origin of the account.
 	//
@@ -139,32 +139,32 @@ type GlobalAccountOutput struct {
 	//REGION_SETUP: Created automatically as part of the region setup.
 	//Enum:
 	//	[ ORDER, OPERATOR, REGION_SETUP, MIGRATED_TO_CP_FOUNDATION_V2 ]
-	Origin string `json:"origin"`
+	Origin string `json:"origin,omitempty"`
 
 	//The GUID of the global account's parent entity. Typically this is the global account.
-	ParentGuid string `json:"parentGuid"`
+	ParentGuid string `json:"parentGuid,omitempty"`
 
 	//The Type of the global account's parent entity.
 	//
 	//Enum:
 	//	[ ROOT, GLOBAL_ACCOUNT, PROJECT, GROUP, FOLDER ]
-	ParentType string `json:"parentType"`
+	ParentType string `json:"parentType,omitempty"`
 
 	// The date that an expired contract was renewed. Dates and times are in UTC format.
-	RenewalDate times.JavaTime `json:"renewalDate"`
+	RenewalDate times.JavaTime `json:"renewalDate,omitempty"`
 
 	// For internal accounts, the service for which the global account was created.
-	ServiceId string `json:"serviceId"`
+	ServiceId string `json:"serviceId,omitempty"`
 
 	//Information about the state.
-	StateMessage string `json:"stateMessage"`
+	StateMessage string `json:"stateMessage,omitempty"`
 
 	//The subaccounts contained in the global account.
-	Subaccounts []SubAccount `json:"subaccounts"`
+	Subaccounts []SubAccount `json:"subaccounts,omitempty"`
 
 	//Relevant only for entities that require authorization (e.g. global account). The subdomain that becomes part of
 	//the path used to access the authorization tenant of the global account. Unique within the defined region.
-	Subdomain string `json:"subdomain"`
+	Subdomain string `json:"subdomain,omitempty"`
 
 	//Specifies the current stage of the termination notifications sequence.
 	//
@@ -177,7 +177,7 @@ type GlobalAccountOutput struct {
 	//
 	//Enum:
 	//	[ PENDING_FIRST_NOTIFICATION, FIRST_NOTIFICATION_PROCESSED, SECOND_NOTIFICATION_PROCESSED ]
-	TerminationNotificationStatus string `json:"terminationNotificationStatus"`
+	TerminationNotificationStatus string `json:"terminationNotificationStatus,omitempty"`
 
 	//For internal accounts, the intended purpose of the global account. Possible purposes:
 	//
@@ -185,7 +185,7 @@ type GlobalAccountOutput struct {
 	//Testing: For testing development.
 	//Demo: For creating demos.
 	//Production: For delivering a service in a production landscape.
-	UseFor string `json:"useFor"`
+	UseFor string `json:"useFor,omitempty"`
 
 	//A unique ID to track this event.
 	XCorrelationId string `src:"header" src-name:"x-correlationid"`
@@ -193,7 +193,7 @@ type GlobalAccountOutput struct {
 	types.StatusAndBodyFromResponse
 }
 type LegalLinks struct {
-	Privacy string `json:"privacy"`
+	Privacy string `json:"privacy,omitempty"`
 }
 
 func (c *AccountsV1) GetGlobalAccount(ctx context.Context, input *GetGlobalAccountInput) (*GlobalAccountOutput, error) {
@@ -221,10 +221,10 @@ func (c *AccountsV1) getGlobalAccountRequest(ctx context.Context, input *GetGlob
 // Update a global account
 type UpdateGlobalAccountInput struct {
 	//A new display of the global account.
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 
 	//The new descriptive name of the global account.
-	DisplayName string `json:"displayName"`
+	DisplayName string `json:"displayName,omitempty"`
 }
 
 func (c *AccountsV1) UpdateGlobalAccount(ctx context.Context, input *UpdateGlobalAccountInput) (*GlobalAccountOutput, error) {

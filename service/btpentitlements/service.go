@@ -54,6 +54,9 @@ func newRequester(cfg *sap.RuntimeConfig, p *processors.Processors, endpoint *en
 	p.Using(request.Unmarshal).
 		PushBack(&jsonbuiltin.UnmarshalResponseJSONBodyProcessor)
 
+	p.Using(request.UnmarshalError).
+		PushBack(&jsonbuiltin.UnmarshalErrorResponseJSONBodyProcessor)
+
 	p.Using(request.UnmarshalMeta).
 		PushBack(&jsonbuiltin.UnmarshalMetaProcessor)
 

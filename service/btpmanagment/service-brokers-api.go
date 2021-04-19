@@ -41,39 +41,39 @@ type GetServiceBrokersOutput struct {
 	//the defined maximum number of service brokers to be returned after a single API call (max_items).
 	//If the field is not present, either all the service brokers were included in the first response, or you have
 	//reached the end of the list.
-	Token string `json:"token"`
+	Token string `json:"token,omitempty"`
 
 	//The number of the service brokers associated with the subaccount.
-	NumItems int64 `json:"num_items"`
+	NumItems int64 `json:"num_items,omitempty"`
 
 	//The list of response objects that contains details about the service brokers.
-	Items []BrokerItem `json:"items"`
+	Items []BrokerItem `json:"items,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }
 type BrokerItem struct {
 	//The ID of the service broker.
-	Id string `json:"id"`
+	Id string `json:"id,omitempty"`
 	//Whether the service broker is ready.
-	Ready bool `json:"ready"`
+	Ready bool `json:"ready,omitempty"`
 	//The name of the service broker.
-	Name string `json:"name"`
+	Name string `json:"name,omitempty"`
 	//The description of the service broker.
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 	//The URL of the service broker.
-	BrokerUrl string `json:"broker_url"`
+	BrokerUrl string `json:"broker_url,omitempty"`
 
 	//The time the service broker was created.
 	//In ISO 8601 format:
 	//	YYYY-MM-DDThh:mm:ssTZD
-	CreatedAt string `json:"created_at"`
+	CreatedAt string `json:"created_at,omitempty"`
 
 	//The last time the service broker was updated.
 	//In ISO 8601 format.
-	UpdatedAt string `json:"updated_at"`
+	UpdatedAt string `json:"updated_at,omitempty"`
 
 	//Additional data associated with the resource entity.
-	Labels map[string][]string `json:"labels"`
+	Labels map[string][]string `json:"labels,omitempty"`
 }
 
 func (c *ServiceManagementV1) GetServiceBrokers(ctx context.Context,
@@ -109,7 +109,7 @@ type GetServiceBrokerDetailsOutput struct {
 	Error
 
 	BrokerItem
-	LastOperation Operation `json:"last_operation"`
+	LastOperation Operation `json:"last_operation,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }

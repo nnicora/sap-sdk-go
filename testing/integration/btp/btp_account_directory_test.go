@@ -47,12 +47,39 @@ func TestEntitlementsGlobalAccount(t *testing.T) {
 	}
 }
 
-func TestEntitlements(t *testing.T) {
+func TestGetEntitlements(t *testing.T) {
 	svc := btpentitlements.New(sess)
 	if out, err := svc.GetAssignments(context.Background(), &btpentitlements.GetAssignmentsInput{
 		SubAccountGuid:          "6cd6350e-d589-48ca-94f0-8d68c8559c01",
 		IncludeAutoManagedPlans: true,
 	}); err != nil {
+		t.Error(err)
+	} else {
+		if data, err := json.Marshal(out); err != nil {
+			t.Error(err)
+		} else {
+			t.Logf("\nSuccess StatusAndBodyFromResponse: %s\n", string(data))
+		}
+	}
+}
+
+func TestUpdateEntitlements(t *testing.T) {
+	svc := btpentitlements.New(sess)
+
+	assignmentInfo := btpentitlements.AssignmentInfo{
+		Amount:         1.0,
+		SubAccountGuid: "a1754d1f-a9da-4e6b-8989-356359b84d5b",
+	}
+	plan := btpentitlements.SubAccountServicePlan{
+		ServiceName:     "enterprise-messaging",
+		ServicePlanName: "default",
+		AssignmentInfo:  []btpentitlements.AssignmentInfo{assignmentInfo},
+	}
+
+	input := &btpentitlements.UpdateSubAccountServicePlanInput{
+		SubAccountServicePlans: []btpentitlements.SubAccountServicePlan{plan},
+	}
+	if out, err := svc.UpdateSubAccountServicePlan(context.Background(), input); err != nil {
 		t.Error(err)
 	} else {
 		if data, err := json.Marshal(out); err != nil {

@@ -38,38 +38,38 @@ type GetServiceBindingsOutput struct {
 	//than the defined maximum number of service bindings to be returned after a single API call (max_items).
 	//If the field is not present, either all the service bindings were included in the first response, or you have
 	//reached the end of the list.
-	Token string `json:"token"`
+	Token string `json:"token,omitempty"`
 	//The number of the service bindings associated with the subaccount.
-	NumItems int64 `json:"num_items"`
+	NumItems int64 `json:"num_items,omitempty"`
 	//The list of the response objects that contains details about the service bindings.
-	Items []BindingItem `json:"items"`
+	Items []BindingItem `json:"items,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }
 type BindingItem struct {
 	//The ID of the service binding.
-	Id string `json:"id"`
+	Id string `json:"id,omitempty"`
 	//Whether the service binding is ready.
-	Ready bool `json:"ready"`
+	Ready bool `json:"ready,omitempty"`
 	//The name of the service binding.
-	Name string `json:"name"`
+	Name string `json:"name,omitempty"`
 	//The ID of the service instance associated with the binding.
-	ServiceInstanceId string `json:"service_instance_id"`
+	ServiceInstanceId string `json:"service_instance_id,omitempty"`
 	//Contextual data for the resource.
-	Context map[string]string `json:"context"`
+	Context map[string]string `json:"context,omitempty"`
 	//Contains the resources associated with the binding.
-	BindResource map[string]string `json:"bind_resource"`
+	BindResource map[string]string `json:"bind_resource,omitempty"`
 	//Credentials to access the binding.
-	Credentials Credentials `json:"credentials"`
+	Credentials Credentials `json:"credentials,omitempty"`
 	//The time the binding was created.
 	//In ISO 8601 format:
 	//	YYYY-MM-DDThh:mm:ssTZD
-	CreatedAt string `json:"created_at"`
+	CreatedAt string `json:"created_at,omitempty"`
 	//The last time the binding was updated.
 	//In ISO 8601 format.
-	UpdatedAt string `json:"updated_at"`
+	UpdatedAt string `json:"updated_at,omitempty"`
 	//Additional data associated with the resource entity.
-	Labels map[string][]string `json:"labels"`
+	Labels map[string][]string `json:"labels,omitempty"`
 }
 
 func (c *ServiceManagementV1) GetServiceBindings(ctx context.Context,
@@ -102,15 +102,15 @@ type CreateServiceBindingInput struct {
 	Async bool `dest:"querystring" dest-name:"async"`
 
 	//The name of the service binding.
-	Name string `json:"name"`
+	Name string `json:"name,omitempty"`
 	//The id of the service instance associated with the binding.
-	ServiceInstanceId string `json:"service_instance_id"`
+	ServiceInstanceId string `json:"service_instance_id,omitempty"`
 	//Some services support providing of additional configuration parameters during binding creation.
 	//Pass these parameters as key-value pairs.
 	//For the list of supported configuration parameters, see the documentation of a particular service offering.
 	//You can also use the GET /v1/service_bindings/{serviceBindingID}/parameters API later to view the parameters
 	//defined during this step.
-	Parameters map[string]string `json:"parameters"`
+	Parameters map[string]string `json:"parameters,omitempty"`
 	//The bind_resource object contains platform-specific information related to the context in which the service is used.
 	//The examples of some common fields to use:
 	//app_guid - A string GUID of an application associated with the binding. For credentials bindings.
@@ -119,9 +119,9 @@ type CreateServiceBindingInput struct {
 	//For example, in Kubernetes it can map to a namespace.
 	//The scope of what the platform maps the app_guid to is platform-specific and can vary across binding requests.
 	//route - URL of the intermediate application. For route services bindings.
-	BindResource map[string]string `json:"bind_resource"`
+	BindResource map[string]string `json:"bind_resource,omitempty"`
 	//Additional data associated with the resource entity.
-	Labels map[string][]string `json:"labels"`
+	Labels map[string][]string `json:"labels,omitempty"`
 }
 type CreateServiceBindingOutput struct {
 	Error
@@ -164,7 +164,7 @@ type GetServiceBindingDetailsOutput struct {
 	Error
 
 	BindingItem
-	LastOperation Operation `json:"last_operation"`
+	LastOperation Operation `json:"last_operation,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }
@@ -234,10 +234,10 @@ func (c *ServiceManagementV1) deleteServiceBindingRequest(ctx context.Context,
 /*type UpdateServiceBindingInput struct {
 	ServiceBindingID string `dest:"uri" dest-name:"serviceBindingID"`
 
-	Label          string              `json:"name"`
-	ServicePlanId string              `json:"service_plan_id"`
-	Parameters    map[string]string   `json:"parameters"`
-	Labels        map[string][]string `json:"labels"`
+	Label          string              `json:"name,omitempty"`
+	ServicePlanId string              `json:"service_plan_id,omitempty"`
+	Parameters    map[string]string   `json:"parameters,omitempty"`
+	Labels        map[string][]string `json:"labels,omitempty"`
 }
 type UpdateServiceBindingOutput struct {
 	Error
@@ -275,7 +275,7 @@ type GetServiceBindingParametersInput struct {
 type GetServiceBindingParametersOutput struct {
 	Error
 
-	Parameters map[string]string `json:"-"`
+	Parameters map[string]string `json:"-,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }

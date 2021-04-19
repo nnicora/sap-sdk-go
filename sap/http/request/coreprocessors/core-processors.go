@@ -99,6 +99,11 @@ var SendProcessor = processors.DefaultProcessor{
 			handleSendError(r, err)
 		} else {
 			r.ResponseBody, _ = ioutil.ReadAll(r.HTTPResponse.Body)
+			if r.ResponseBodyHandler != nil {
+				if wrappedBody, err := r.ResponseBodyHandler(r.HTTPResponse.StatusCode, r.ResponseBody); err == nil && wrappedBody != nil {
+					r.ResponseBody = wrappedBody
+				}
+			}
 		}
 	},
 }

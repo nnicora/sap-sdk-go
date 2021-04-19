@@ -20,7 +20,7 @@ type GetSubAccountsInput struct {
 	DirectoryGuid string `dest:"querystring" dest-name:"directoryGUID"`
 }
 type GetSubAccountsOutput struct {
-	Value []SubAccount `json:"value"`
+	Value []SubAccount `json:"value,omitempty"`
 
 	//A unique ID to track this event.
 	XCorrelationId string `src:"header" src-name:"x-correlationid"`
@@ -55,16 +55,16 @@ type CreateSubAccountInput struct {
 	//Enables the subaccount to use beta services and applications. Not to be used in a production environment.
 	//Cannot be reverted once set. Any use of beta functionality is at the customer's own risk, and SAP shall not be
 	//liable for errors or damages caused by the use of beta features.
-	BetaEnabled bool `json:"betaEnabled"`
+	BetaEnabled bool `json:"betaEnabled,omitempty"`
 
 	// Additional properties of the subaccount.
-	CustomProperties []KeyValue `json:"customProperties"`
+	CustomProperties []KeyValue `json:"customProperties,omitempty"`
 
 	// A description of the subaccount for customer-facing UIs.
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 
 	// The display name of the subaccount for customer-facing UIs.
-	DisplayName string `json:"displayName"`
+	DisplayName string `json:"displayName,omitempty"`
 
 	//The origin of the subaccount creation.
 	//
@@ -72,24 +72,24 @@ type CreateSubAccountInput struct {
 	//COCKPIT: Created in the cockpit.
 	//Enum:
 	//	[ REGION_SETUP, COCKPIT, MIGRATED_TO_CP_FOUNDATION_V2, DOMAINDB_SYNC ]
-	Origin string `json:"origin"`
+	Origin string `json:"origin,omitempty"`
 
 	//The unique ID subaccount’s parent entity.
-	ParentGuid string `json:"parentGUID"`
+	ParentGuid string `json:"parentGUID,omitempty"`
 
 	//The region in which the subaccount was created.
-	Region string `json:"region"`
+	Region string `json:"region,omitempty"`
 
 	//Additional admins of the subaccount. Do not add yourself as you are assigned as a subaccount admin by default.
 	//Enter as a valid JSON array containing the list of admin e-mails (as required by your identity provider).
 	//To add admins to Neo subaccounts, use instead the SAP BTP cockpit or the APIs in the SDK for SAP BTP, Neo environment.
 	//Example: ["admin1@example.com", "admin2@example.com"]
-	SubaccountAdmins []string `json:"subaccountAdmins"`
+	SubaccountAdmins []string `json:"subaccountAdmins,omitempty"`
 
 	//The subdomain that becomes part of the path used to access the authorization tenant of the subaccount.
 	//Must be unique within the defined region. Use only letters (a-z), digits (0-9), and hyphens (not at start or end).
 	//Maximum length is 63 characters. Cannot be changed after the subaccount has been created. Does not apply to Neo subaccounts.
-	Subdomain string `json:"subdomain"`
+	Subdomain string `json:"subdomain,omitempty"`
 
 	//Whether the subaccount is used for production purposes. This flag can help your cloud operator to take appropriate
 	//action when handling incidents that are related to mission-critical accounts in production systems.
@@ -100,7 +100,7 @@ type CreateSubAccountInput struct {
 	//USED_FOR_PRODUCTION: Subaccount is used for production purposes.
 	//Enum:
 	//	[ USED_FOR_PRODUCTION, NOT_USED_FOR_PRODUCTION ]
-	UsedForProduction string `json:"usedForProduction"`
+	UsedForProduction string `json:"usedForProduction,omitempty"`
 }
 type CreateSubAccountOutput struct {
 	SubAccount
@@ -140,19 +140,19 @@ type CloneSubAccountInput struct {
 	//Enables the subaccount to use beta services and applications. Not to be used in a production environment.
 	//Cannot be reverted once set. Any use of beta functionality is at the customer's own risk, and SAP shall not be
 	//liable for errors or damages caused by the use of beta features.
-	BetaEnabled bool `json:"betaEnabled"`
+	BetaEnabled bool `json:"betaEnabled,omitempty"`
 
 	//Clone configuration of the subaccount.
-	CloneConfigurations []string `json:"cloneConfigurations"`
+	CloneConfigurations []string `json:"cloneConfigurations,omitempty"`
 
 	// Additional properties of the subaccount.
-	CustomProperties []KeyValue `json:"customProperties"`
+	CustomProperties []KeyValue `json:"customProperties,omitempty"`
 
 	// A description of the subaccount for customer-facing UIs.
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 
 	// The display name of the subaccount for customer-facing UIs.
-	DisplayName string `json:"displayName"`
+	DisplayName string `json:"displayName,omitempty"`
 
 	//The origin of the subaccount creation.
 	//
@@ -160,24 +160,24 @@ type CloneSubAccountInput struct {
 	//COCKPIT: Created in the cockpit.
 	//Enum:
 	//	[ REGION_SETUP, COCKPIT, MIGRATED_TO_CP_FOUNDATION_V2, DOMAINDB_SYNC ]
-	Origin string `json:"origin"`
+	Origin string `json:"origin,omitempty"`
 
 	//The unique ID subaccount’s parent entity.
-	ParentGuid string `json:"parentGUID"`
+	ParentGuid string `json:"parentGUID,omitempty"`
 
 	//The region in which the subaccount was created.
-	Region string `json:"region"`
+	Region string `json:"region,omitempty"`
 
 	//Additional admins of the subaccount. Do not add yourself as you are assigned as a subaccount admin by default.
 	//Enter as a valid JSON array containing the list of admin e-mails (as required by your identity provider).
 	//To add admins to Neo subaccounts, use instead the SAP BTP cockpit or the APIs in the SDK for SAP BTP, Neo environment.
 	//Example: ["admin1@example.com", "admin2@example.com"]
-	SubaccountAdmins []string `json:"subaccountAdmins"`
+	SubaccountAdmins []string `json:"subaccountAdmins,omitempty"`
 
 	//The subdomain that becomes part of the path used to access the authorization tenant of the subaccount.
 	//Must be unique within the defined region. Use only letters (a-z), digits (0-9), and hyphens (not at start or end).
 	//Maximum length is 63 characters. Cannot be changed after the subaccount has been created. Does not apply to Neo subaccounts.
-	Subdomain string `json:"subdomain"`
+	Subdomain string `json:"subdomain,omitempty"`
 
 	//Whether the subaccount is used for production purposes. This flag can help your cloud operator to take appropriate
 	//action when handling incidents that are related to mission-critical accounts in production systems.
@@ -188,7 +188,7 @@ type CloneSubAccountInput struct {
 	//USED_FOR_PRODUCTION: Subaccount is used for production purposes.
 	//Enum:
 	//	[ USED_FOR_PRODUCTION, NOT_USED_FOR_PRODUCTION ]
-	UsedForProduction string `json:"usedForProduction"`
+	UsedForProduction string `json:"usedForProduction,omitempty"`
 }
 type CloneSubAccountOutput struct {
 	SubAccount
@@ -308,13 +308,13 @@ type UpdateSubAccountInput struct {
 	//Enables the subaccount to use beta services and applications. Not to be used in a production environment.
 	//Cannot be reverted once set. Any use of beta functionality is at the customer's own risk, and SAP shall not be
 	//liable for errors or damages caused by the use of beta features.
-	BetaEnabled bool `json:"betaEnabled"`
+	BetaEnabled bool `json:"betaEnabled,omitempty"`
 
 	//Additional Properties of the subaccount.
-	CustomProperties  []UpdateSubAccountProperties `json:"customProperties"`
-	Description       string                       `json:"description"`
-	DisplayName       string                       `json:"displayName"`
-	UsedForProduction string                       `json:"usedForProduction"`
+	CustomProperties  []UpdateSubAccountProperties `json:"customProperties,omitempty"`
+	Description       string                       `json:"description,omitempty"`
+	DisplayName       string                       `json:"displayName,omitempty"`
+	UsedForProduction string                       `json:"usedForProduction,omitempty"`
 }
 
 //Custom properties as key-value pairs to assign, update, and remove from the subaccount.
@@ -322,7 +322,7 @@ type UpdateSubAccountProperties struct {
 	KeyValue
 
 	//Whether to delete a property according to the provided key.
-	Delete bool `json:"delete"`
+	Delete bool `json:"delete,omitempty"`
 }
 type UpdateSubAccountOutput struct {
 	SubAccount
@@ -361,7 +361,7 @@ type GetCustomPropertiesInput struct {
 	SubAccountGuid string `dest:"uri" dest-name:"subaccountGUID"`
 }
 type GetCustomPropertiesOutput struct {
-	Value []CustomProperties `json:"value"`
+	Value []CustomProperties `json:"value,omitempty"`
 
 	//A unique ID to track this event.
 	XCorrelationId string `src:"header" src-name:"x-correlationid"`
@@ -395,18 +395,18 @@ func (c *AccountsV1) getSubAccountCustomPropertiesRequest(ctx context.Context, i
 
 type MoveManySubAccountsInput struct {
 	//Details of which subaccounts to move and where to move them to. All subaccounts must be moved to the same location.
-	SubAccountsToMove []MoveSubAccountsRequestPayload `json:"subaccountsToMoveCollection"`
+	SubAccountsToMove []MoveSubAccountsRequestPayload `json:"subaccountsToMoveCollection,omitempty"`
 }
 type MoveSubAccountsRequestPayload struct {
 	//The GUID of the current location of the subaccounts. If empty, then GUID of root global account is used.
-	SourceGuid string `json:"sourceGuid"`
+	SourceGuid string `json:"sourceGuid,omitempty"`
 
 	//GUIDs of the subaccounts to move.
-	SubaccountGuids []string `json:"subaccountGuids"`
+	SubaccountGuids []string `json:"subaccountGuids,omitempty"`
 
 	//The GUID of the new location of the subaccounts. To move to a directory, enter the GUID of the directory.
 	//To move out of a directory to the root global account, enter the GUID of the global account.
-	TargetGuid string `json:"targetGuid"`
+	TargetGuid string `json:"targetGuid,omitempty"`
 }
 type MoveManySubAccountsOutput struct {
 	SubAccount
@@ -446,7 +446,7 @@ type MoveSubAccountInput struct {
 
 	//The GUID of the new location of the subaccount. To move to a directory, enter the GUID of the directory.
 	//To move out of a directory to the root global account, enter the GUID of the global account.
-	TargetAccountGuid string `json:"targetAccountGUID"`
+	TargetAccountGuid string `json:"targetAccountGUID,omitempty"`
 }
 
 type MoveSubAccountOutput struct {
@@ -498,19 +498,19 @@ type GetServiceManagementBindingOutput struct {
 //OAuth 2.0 Client Credentials Grant Type to obtain an access token to use the Service Management APIs in a subaccount context.
 type ServiceManagementBinding struct {
 	//A public identifier of the app.
-	ClientId string `json:"clientid"`
+	ClientId string `json:"clientid,omitempty"`
 
 	//Secret known only to the app and the authorization server.
-	ClientSecret string `json:"clientsecret"`
+	ClientSecret string `json:"clientsecret,omitempty"`
 
 	//The URL of Service Management APIs to access with the obtained token.
-	SMUrl string `json:"sm_url"`
+	SMUrl string `json:"sm_url,omitempty"`
 
 	//The URL to authentication server to get a token to authenticate with Service Management using the obtained client ID and secret.
-	Url string `json:"url"`
+	Url string `json:"url,omitempty"`
 
 	//The name of the xsapp used to get the access token.
-	XsAppName string `json:"xsappname"`
+	XsAppName string `json:"xsappname,omitempty"`
 }
 
 func (c *AccountsV1) GetSubAccountServiceManagementBinding(ctx context.Context,

@@ -14,42 +14,42 @@ type GetApplicationRegistrationInput struct {
 }
 type GetApplicationRegistrationOutput struct {
 	//The ID of the multitenant application that is registered to the SAP SaaS Provisioning service registry.
-	ServiceInstanceId string `json:"serviceInstanceId"`
+	ServiceInstanceId string `json:"serviceInstanceId,omitempty"`
 	//The unique ID of the Cloud Foundry org where the app provider has deployed and registered the
 	//multitenant application.
-	OrganizationGuid string `json:"organizationGuid"`
+	OrganizationGuid string `json:"organizationGuid,omitempty"`
 	//The unique ID of the Cloud Foundry space where the app provider has deployed and registered the
 	//multitenant application.
-	SpaceGuid string `json:"spaceGuid"`
+	SpaceGuid string `json:"spaceGuid,omitempty"`
 	//The xsappname configured in the security descriptor file used to create the xsuaa service instance for the
 	//multitenant application.
-	XSAppName string `json:"xsappname"`
+	XSAppName string `json:"xsappname,omitempty"`
 	//The ID returned by an xsuaa service instance after the app provider has connected the multitenant
 	//application to an xsuaa service instance.
-	AppId string `json:"appId"`
+	AppId string `json:"appId,omitempty"`
 	//The unique registration name of the deployed multitenant application as defined by the app developer.
-	AppName string `json:"appName"`
+	AppName string `json:"appName,omitempty"`
 	//The unique commercial registration name of the deployed multitenant application as defined by the app developer.
-	CommercialAppName string `json:"commercialAppName"`
+	CommercialAppName string `json:"commercialAppName,omitempty"`
 	//Any callback URLs that the multitenant application exposes.
-	AppUrls string `json:"appUrls"`
+	AppUrls string `json:"appUrls,omitempty"`
 	//The unique ID of the tenant that provides the multitenant application.
-	ProviderTenantId string `json:"providerTenantId"`
+	ProviderTenantId string `json:"providerTenantId,omitempty"`
 	//The plan used to register the multitenant application or reusable service.
 	//- saasApplication: Registered entity is a multitenant application.
 	//- saasService: Registered entity is a reuse service.
-	AppType string `json:"appType"`
+	AppType string `json:"appType,omitempty"`
 	//The display name of the application for customer-facing UIs.
-	DisplayName string `json:"displayName"`
+	DisplayName string `json:"displayName,omitempty"`
 	//The description of the multitenant application for customer-facing UIs.
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 	//The category to which the application is grouped in the Subscriptions page in the cockpit.
 	//If left empty, it gets assigned to the default category.
-	Category string `json:"category"`
+	Category string `json:"category,omitempty"`
 	//ID of the global account associated with the multitenant application.
-	GlobalAccountId string `json:"globalAccountId"`
+	GlobalAccountId string `json:"globalAccountId,omitempty"`
 	//Name of the formations solution associated with the multitenant application.
-	FormationSolutionName string `json:"formationSolutionName"`
+	FormationSolutionName string `json:"formationSolutionName,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }
@@ -93,50 +93,50 @@ type GetApplicationSubscriptionsInput struct {
 type GetApplicationSubscriptionsOutput struct {
 	//Specifies the ability to use the service plan of the subscribed application. The actual amount has no bearing on
 	//the maximum consumption limit of the application.
-	Amount int64 `json:"amount"`
+	Amount int64 `json:"amount,omitempty"`
 	//The unique registration name of the deployed multitenant application, as defined by the app developer.
-	AppName string `json:"appName"`
+	AppName string `json:"appName,omitempty"`
 	//The date and time the subscription was last modified. Dates and times are in UTC format.
-	ChangedOn string `json:"changedOn"`
+	ChangedOn string `json:"changedOn,omitempty"`
 	//A subscription code for the application.
-	Code string `json:"code"`
+	Code string `json:"code,omitempty"`
 	//Tenant ID of the global account or subaccount of the consumer that has subscribed to the multitenant application.
-	ConsumerTenantId string `json:"consumerTenantId"`
+	ConsumerTenantId string `json:"consumerTenantId,omitempty"`
 	//The date and time the subscription was created. Dates and times are in UTC format.
-	CreatedOn string `json:"createdOn"`
+	CreatedOn string `json:"createdOn,omitempty"`
 	//Any reuse services used or required by a subscribed application and its services.
-	Dependencies []Dependency `json:"dependencies"`
+	Dependencies []Dependency `json:"dependencies,omitempty"`
 	//Error description for the following statuses: SUBSCRIBE_FAILED, UNSUBSCRIBE_FAILED, UPDATE_FAILED.
-	Error string `json:"error"`
+	Error string `json:"error,omitempty"`
 	//ID of the associated global account.
-	GlobalAccountId string `json:"globalAccountId"`
+	GlobalAccountId string `json:"globalAccountId,omitempty"`
 	//Whether the consumer tenant is active. This field is returned only if one of the following query parameters was
 	//used during the API call: tenantId, subaccountId
-	IsConsumerTenantActive bool `json:"isConsumerTenantActive"`
+	IsConsumerTenantActive bool `json:"isConsumerTenantActive,omitempty"`
 	//The license type of the associated global account.
-	LicenseType string `json:"licenseType"`
+	LicenseType string `json:"licenseType,omitempty"`
 	//The ID of the multitenant application that is registered to the SAP SaaS Provisioning registry.
-	ServiceInstanceId string `json:"serviceInstanceId"`
+	ServiceInstanceId string `json:"serviceInstanceId,omitempty"`
 	//State of the subscriptions. Possible states: IN_PROCESS, SUBSCRIBED, SUBSCRIBE_FAILED, UPDATE_FAILED.
-	State string `json:"state"`
+	State string `json:"state,omitempty"`
 	//ID of the associated subaccount.
-	SubAccountId string `json:"subaccountId"`
+	SubAccountId string `json:"subaccountId,omitempty"`
 	//Consumer Subdomain
-	Subdomain string `json:"subdomain"`
+	Subdomain string `json:"subdomain,omitempty"`
 	//Application URL
-	Url string `json:"url"`
+	Url string `json:"url,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }
 type Dependency struct {
 	//The unique registration name of the linked dependency application.
-	AppName string `json:"appName"`
+	AppName string `json:"appName,omitempty"`
 	//The list of relevant dependencies and their descriptions.
-	Dependencies []interface{} `json:"dependencies"`
+	Dependencies []interface{} `json:"dependencies,omitempty"`
 	//In case there are errors during dependencies' assignments, the descriptions are shown here.
-	Error string `json:"error"`
+	Error string `json:"error,omitempty"`
 	//The xsappname configured in the security descriptor file used to create the XSUAA instance.
-	XSAppName string `json:"xsappname"`
+	XSAppName string `json:"xsappname,omitempty"`
 }
 
 func (c *SaaSProvisioningV1) GetApplicationSubscriptions(ctx context.Context,
@@ -286,82 +286,82 @@ type GetEntitledApplicationsInput struct {
 }
 type GetEntitledApplicationsOutput struct {
 	//The response list of all the multitenant applications to which a specified subaccount is entitled to subscribe.
-	Applications []Application `json:"applications"`
+	Applications []Application `json:"applications,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }
 type Application struct {
 	//The ID returned by XSUAA after the app provider has performed a bind of the multitenant application
 	//to a XSUAA service instance.
-	AppId string `json:"appId"`
+	AppId string `json:"appId,omitempty"`
 	//The unique registration name of the deployed multitenant application as defined by the app developer.
-	AppName string `json:"appName"`
+	AppName string `json:"appName,omitempty"`
 	//The application coordinates provided in metadata for customer-facing UIs.
-	ApplicationCoordinates map[string]interface{} `json:"applicationCoordinates"`
+	ApplicationCoordinates map[string]interface{} `json:"applicationCoordinates,omitempty"`
 	//The authentication provider of the multitenant application.
 	//XSUAA is the SAP Authorization and Trust Management service that defines scopes and permissions for users as tenants at the global account level.
 	//IAS is Identity Authentication Service that defines scopes and permissions for users in zones (common data isolation systems across systems, SaaS tenants, and services).
 	//Enum:
 	//	[ XSUAA, IAS ]
-	AuthenticationProvider string `json:"authenticationProvider"`
+	AuthenticationProvider string `json:"authenticationProvider,omitempty"`
 	//The technical name of the category defined by the app developer to which the multitenant
 	//application is grouped in customer-facing UIs.
-	Category string `json:"category"`
+	Category string `json:"category,omitempty"`
 	//The display name of the category for customer-facing UIs.
-	CategoryDisplayName string `json:"categoryDisplayName"`
+	CategoryDisplayName string `json:"categoryDisplayName,omitempty"`
 	//The commercial name of the deployed multitenant application as defined by the app developer.
-	CommercialAppName string `json:"commercialAppName"`
+	CommercialAppName string `json:"commercialAppName,omitempty"`
 	//The date the subscription was created. Dates and times are in UTC format.
-	CreatedDate string `json:"createdDate"`
+	CreatedDate string `json:"createdDate,omitempty"`
 	//Whether the application was developed by a customer. If not, then the application
 	//is developed by the cloud operator, such as SAP.
-	CustomerDeveloped bool `json:"customerDeveloped"`
+	CustomerDeveloped bool `json:"customerDeveloped,omitempty"`
 	//The description of the multitenant application for customer-facing UIs.
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 	//The display name of the application for customer-facing UIs.
-	DisplayName string `json:"displayName"`
+	DisplayName string `json:"displayName,omitempty"`
 	//Name of the formations solution associated with the multitenant application.
-	FormationSolutionName string `json:"formationSolutionName"`
+	FormationSolutionName string `json:"formationSolutionName,omitempty"`
 	//ID of the associated global account.
-	GlobalAccountId string `json:"globalAccountId"`
+	GlobalAccountId string `json:"globalAccountId,omitempty"`
 	//The icon of the multitenant application for customer-facing UIs.
-	IconBase64 string `json:"iconBase64"`
+	IconBase64 string `json:"iconBase64,omitempty"`
 	//The application's incident-tracking component provided in metadata for customer-facing UIs.
-	IncidentTrackingComponent string `json:"incidentTrackingComponent"`
+	IncidentTrackingComponent string `json:"incidentTrackingComponent,omitempty"`
 	//The date the subscription was last modified. Dates and times are in UTC format.
-	ModifiedDate string `json:"modifiedDate"`
+	ModifiedDate string `json:"modifiedDate,omitempty"`
 	//The plan name of the application to which the consumer has subscribed.
-	PlanName string `json:"planName"`
+	PlanName string `json:"planName,omitempty"`
 	//ID of the landscape-specific environment.
-	PlatformEntityId string `json:"platformEntityId"`
+	PlatformEntityId string `json:"platformEntityId,omitempty"`
 	//Total amount the subscribed subaccount is entitled to consume.
-	Quota int32 `json:"quota"`
+	Quota int32 `json:"quota,omitempty"`
 	//The short description of the multitenant application for customer-facing UIs.
-	ShortDescription string `json:"shortDescription"`
+	ShortDescription string `json:"shortDescription,omitempty"`
 	//The subscription state of the subaccount regarding the multitenant application.
 	//Enum:
 	//	[ IN_PROCESS, SUBSCRIBED, SUBSCRIBE_FAILED, UNSUBSCRIBE_FAILED, UPDATE_FAILED, NOT_SUBSCRIBED ]
-	State string `json:"state"`
+	State string `json:"state,omitempty"`
 	//The ID of the subaccount which is subscribed to the multitenant application.
-	SubscribedSubAccountId string `json:"subscribedSubaccountId"`
+	SubscribedSubAccountId string `json:"subscribedSubaccountId,omitempty"`
 	//The ID of the tenant which is subscribed to a multitenant application.
-	SubscribedTenantId string `json:"subscribedTenantId"`
+	SubscribedTenantId string `json:"subscribedTenantId,omitempty"`
 
-	SubscriptionError SubscriptionError `json:"subscriptionError"`
+	SubscriptionError SubscriptionError `json:"subscriptionError,omitempty"`
 	//Technical ID generated by XSUAA for a multitenant application when a consumer subscribes to the application.
-	SubscriptionId string `json:"subscriptionId"`
+	SubscriptionId string `json:"subscriptionId,omitempty"`
 	//URL for app users to launch the subscribed application.
-	SubscriptionUrl string `json:"subscriptionUrl"`
+	SubscriptionUrl string `json:"subscriptionUrl,omitempty"`
 	//Tenant ID of the application provider.
-	TenantId string `json:"tenantId"`
+	TenantId string `json:"tenantId,omitempty"`
 }
 type SubscriptionError struct {
 	//A response object that contains details about the error an app provider returns to the subscriber.
 	//It contains the error code, a user-friendly, customer-oriented error message,
 	//technical details about the error, and more.
-	AppError string `json:"appError"`
+	AppError string `json:"appError,omitempty"`
 	//The message that describes the error that occurred during the subscription.
-	ErrorMessage string `json:"errorMessage"`
+	ErrorMessage string `json:"errorMessage,omitempty"`
 }
 
 func (c *SaaSProvisioningV1) GetEntitledApplications(ctx context.Context,
@@ -433,7 +433,7 @@ type SubscribeToApplicationInput struct {
 	AppName string `dest:"uri" dest-name:"appName"`
 
 	//The name of the subscription plan to a multitenant application
-	PlanName string `json:"planName"`
+	PlanName string `json:"planName,omitempty"`
 }
 type SubscribeToApplicationOutput struct {
 	types.StatusAndBodyFromResponse
@@ -503,13 +503,13 @@ type SubscribeSubAccountTenantToApplicationInput struct {
 
 	//Additional details accompanying the subscription process. Relates mostly to the
 	//cases when the subscription process status is FAILED.
-	Message string `json:"message"`
+	Message string `json:"message,omitempty"`
 	//Status of the subscription job.
 	//Enum:
 	//	[ SUCCEEDED, FAILED ]
-	Status string `json:"status"`
+	Status string `json:"status,omitempty"`
 	//The URL the multitenant application is exposing for a subscription.
-	SubscriptionUrl string `json:"subscriptionUrl"`
+	SubscriptionUrl string `json:"subscriptionUrl,omitempty"`
 }
 type SubscribeSubAccountTenantToApplicationOutput struct {
 	types.StatusAndBodyFromResponse

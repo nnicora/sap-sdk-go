@@ -38,61 +38,61 @@ type GetServiceOfferingsOutput struct {
 	//than the defined maximum number of service offerings to be returned after a single API call (max_items).
 	//If the field is not present, either all the service offerings were included in the first response, or you have
 	//reached the end of the list.
-	Token string `json:"token"`
+	Token string `json:"token,omitempty"`
 	//The number of service offerings associated with the subaccount.
-	NumItems int64 `json:"num_items"`
+	NumItems int64 `json:"num_items,omitempty"`
 	//The list of the service offerings.
-	Items []OfferingItem `json:"items"`
+	Items []OfferingItem `json:"items,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }
 type OfferingItem struct {
 	//The ID of the service offering.
-	Id string `json:"id"`
+	Id string `json:"id,omitempty"`
 	//Whether the service offering is ready to be advertised.
-	Ready bool `json:"ready"`
+	Ready bool `json:"ready,omitempty"`
 	//The name of the service offering.
-	Name string `json:"name"`
+	Name string `json:"name,omitempty"`
 	//The description of the service offering.
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 	//Whether the service offering is bindable.
-	Bindable bool `json:"bindable"`
+	Bindable bool `json:"bindable,omitempty"`
 	//Whether the service instances associated with the service offering can be retrieved.
-	InstancesRetrievable bool `json:"instances_retrievable"`
+	InstancesRetrievable bool `json:"instances_retrievable,omitempty"`
 	//Whether the bindings associated with the service offering can be retrieved.
-	BindingsRetrievable bool `json:"bindings_retrievable"`
+	BindingsRetrievable bool `json:"bindings_retrievable,omitempty"`
 	//Whether the offered plan can be updated.
-	PlanUpdateable bool `json:"plan_updateable"`
+	PlanUpdateable bool `json:"plan_updateable,omitempty"`
 	//Whether the context for the service offering can be updated.
-	AllowContextUpdates bool `json:"allow_context_updates"`
+	AllowContextUpdates bool `json:"allow_context_updates,omitempty"`
 	//The list of tags for the service offering.
-	Tags     []string         `json:"tags"`
-	Metadata OfferingMetadata `json:"metadata"`
+	Tags     []string         `json:"tags,omitempty"`
+	Metadata OfferingMetadata `json:"metadata,omitempty"`
 	//The ID of the broker that provides the service plan.
-	BrokerId string `json:"broker_id"`
+	BrokerId string `json:"broker_id,omitempty"`
 	//The ID of the service offering as provided by the catalog.
-	CatalogId string `json:"catalog_id"`
+	CatalogId string `json:"catalog_id,omitempty"`
 	//The catalog name of the service offering.
-	CatalogName string `json:"catalog_name"`
+	CatalogName string `json:"catalog_name,omitempty"`
 	//The time the service offering was created.
 	//In ISO 8601 format:
 	//	YYYY-MM-DDThh:mm:ssTZD
-	CreatedAt string `json:"created_at"`
+	CreatedAt string `json:"created_at,omitempty"`
 	//The last time the service offering was updated.
 	//In ISO 8601 format.
-	UpdatedAt string `json:"updated_at"`
+	UpdatedAt string `json:"updated_at,omitempty"`
 }
 type OfferingMetadata struct {
 	//The description of the service offering.
-	LongDescription string `json:"longDescription"`
+	LongDescription string `json:"longDescription,omitempty"`
 	//The URL to the associated documentation.
-	DocumentationUrl string `json:"documentationUrl"`
+	DocumentationUrl string `json:"documentationUrl,omitempty"`
 	//The name of the service offering for customer-facing UIs.
-	DisplayName string `json:"displayName"`
+	DisplayName string `json:"displayName,omitempty"`
 	//The URL to the associated image.
-	ImageUrl string `json:"imageUrl"`
+	ImageUrl string `json:"imageUrl,omitempty"`
 	//The support URL for the service offering.
-	SupportUrl string `json:"supportUrl"`
+	SupportUrl string `json:"supportUrl,omitempty"`
 }
 
 func (c *ServiceManagementV1) GetServiceOfferings(ctx context.Context,
