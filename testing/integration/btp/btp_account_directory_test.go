@@ -3,6 +3,7 @@ package btp
 import (
 	"context"
 	"encoding/json"
+	"github.com/nnicora/sap-sdk-go/sap"
 	"github.com/nnicora/sap-sdk-go/service/btpaccounts"
 	"github.com/nnicora/sap-sdk-go/service/btpentitlements"
 	"testing"
@@ -67,7 +68,8 @@ func TestUpdateEntitlements(t *testing.T) {
 	svc := btpentitlements.New(sess)
 
 	assignmentInfo := btpentitlements.AssignmentInfo{
-		Amount:         1.0,
+		//Amount: sap.Float32(1.0),
+		Enable:         sap.Bool(true),
 		SubAccountGuid: "a1754d1f-a9da-4e6b-8989-356359b84d5b",
 	}
 	plan := btpentitlements.SubAccountServicePlan{

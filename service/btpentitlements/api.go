@@ -549,7 +549,7 @@ type SubAccountServicePlan struct {
 type AssignmentInfo struct {
 	//The quantity of the plan that is assigned to the specified subaccount. Relevant and mandatory only for plans that
 	//have a numeric quota. Do not set if enable=TRUE is specified.
-	Amount float32 `json:"amount,omitempty"`
+	Amount *float32 `json:"amount,omitempty"`
 
 	//Whether to enable the service plan assignment to the specified subaccount without quantity restrictions.
 	//Relevant and mandatory only for plans that do not have a numeric quota. Do not set if amount is specified.
@@ -564,7 +564,7 @@ type AssignmentInfo struct {
 type UpdateSubAccountServicePlanOutput struct {
 	Error types.Error `json:"error,omitempty"`
 
-	JobStatusId string `json:"jobStatusId,omitempty"`
+	JobStatusId *string `json:"jobStatusId,omitempty"`
 
 	types.StatusAndBodyFromResponse
 }
