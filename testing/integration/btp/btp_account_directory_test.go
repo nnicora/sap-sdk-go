@@ -50,7 +50,7 @@ func TestEntitlementsGlobalAccount(t *testing.T) {
 func TestEntitlements(t *testing.T) {
 	svc := btpentitlements.New(sess)
 	if out, err := svc.GetAssignments(context.Background(), &btpentitlements.GetAssignmentsInput{
-		SubAccountGuid:          "24d360fd-8e28-48a3-ab69-f574f388761b",
+		SubAccountGuid:          "6cd6350e-d589-48ca-94f0-8d68c8559c01",
 		IncludeAutoManagedPlans: true,
 	}); err != nil {
 		t.Error(err)

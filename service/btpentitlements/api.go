@@ -291,10 +291,10 @@ type AssignedServicePlanSubAccount struct {
 
 	//example: GUID of GLOBAL_ACCOUNT or SUBACCOUNT
 	//The unique ID of the global account or directory to which the entitlement is assigned.
-	EntityId              string `json:"entityId"`
-	ParentAmount          *int64 `json:"parentAmount"`
-	ParentId              string `json:"parentId"`
-	ParentRemainingAmount *int64 `json:"parentRemainingAmount"`
+	EntityId              string      `json:"entityId"`
+	ParentAmount          int64       `json:"parentAmount"`
+	ParentId              string      `json:"parentId"`
+	ParentRemainingAmount interface{} `json:"parentRemainingAmount"`
 
 	//Enum:
 	//	[ SUBACCOUNT, GLOBAL_ACCOUNT, DIRECTORY ]
@@ -378,11 +378,11 @@ type ServicePlan struct {
 	ProvisioningMethod string `json:"provisioningMethod"`
 
 	//The assigned quota for maximum allowed consumption of the plan. Relevant for services that have a numeric quota assignment.
-	Amount *int64 `json:"amount"`
+	Amount interface{} `json:"amount"`
 
 	//The remaining amount of the plan that can still be assigned. For plans that don't have a numeric quota,
 	//the remaining amount is always the maximum allowed quota.
-	RemainingAmount *int64 `json:"remainingAmount"`
+	RemainingAmount interface{} `json:"remainingAmount"`
 
 	//[DEPRECATED] The source that added the service. Possible values:
 	//
