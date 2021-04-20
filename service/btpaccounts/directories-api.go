@@ -155,9 +155,6 @@ type CreateDirectoryInput struct {
 type CreateDirectoryOutput struct {
 	Directory
 
-	//A unique ID to track this event.
-	XCorrelationId string `src:"header" src-name:"x-correlationid"`
-
 	types.StatusAndBodyFromResponse
 }
 
@@ -203,9 +200,6 @@ type GetDirectoryInput struct {
 type GetDirectoryOutput struct {
 	Directory
 
-	//A unique ID to track this event.
-	XCorrelationId string `src:"header" src-name:"x-correlationid"`
-
 	types.StatusAndBodyFromResponse
 }
 
@@ -244,9 +238,6 @@ type DeleteDirectoryInput struct {
 }
 type DeleteDirectoryOutput struct {
 	Directory
-
-	//A unique ID to track this event.
-	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
 	types.StatusAndBodyFromResponse
 }
@@ -291,9 +282,6 @@ type UpdateDirectoryInput struct {
 }
 type UpdateDirectoryOutput struct {
 	Directory
-
-	//A unique ID to track this event.
-	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
 	types.StatusAndBodyFromResponse
 }
@@ -359,9 +347,6 @@ type AddFeatureToDirectoryInput struct {
 type AddFeatureToDirectoryOutput struct {
 	Directory
 
-	//A unique ID to track this event.
-	XCorrelationId string `src:"header" src-name:"x-correlationid"`
-
 	types.StatusAndBodyFromResponse
 }
 
@@ -396,9 +381,6 @@ type GetDirectorCustomPropertiesInput struct {
 }
 type GetDirectorCustomPropertiesOutput struct {
 	Value []CustomProperties `json:"value,omitempty"`
-
-	//A unique ID to track this event.
-	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
 	types.StatusAndBodyFromResponse
 }

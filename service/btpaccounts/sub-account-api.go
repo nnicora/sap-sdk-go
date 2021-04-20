@@ -22,9 +22,6 @@ type GetSubAccountsInput struct {
 type GetSubAccountsOutput struct {
 	Value []SubAccount `json:"value,omitempty"`
 
-	//A unique ID to track this event.
-	XCorrelationId string `src:"header" src-name:"x-correlationid"`
-
 	types.StatusAndBodyFromResponse
 }
 
@@ -104,9 +101,6 @@ type CreateSubAccountInput struct {
 }
 type CreateSubAccountOutput struct {
 	SubAccount
-
-	//A unique ID to track this event.
-	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
 	types.StatusAndBodyFromResponse
 }
@@ -193,9 +187,6 @@ type CloneSubAccountInput struct {
 type CloneSubAccountOutput struct {
 	SubAccount
 
-	//A unique ID to track this event.
-	XCorrelationId string `src:"header" src-name:"x-correlationid"`
-
 	types.StatusAndBodyFromResponse
 }
 
@@ -236,9 +227,6 @@ type GetSubAccountInput struct {
 type GetSubAccountOutput struct {
 	SubAccount
 
-	//A unique ID to track this event.
-	XCorrelationId string `src:"header" src-name:"x-correlationid"`
-
 	types.StatusAndBodyFromResponse
 }
 
@@ -271,9 +259,6 @@ type DeleteSubAccountInput struct {
 }
 type DeleteSubAccountOutput struct {
 	SubAccount
-
-	//A unique ID to track this event.
-	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
 	types.StatusAndBodyFromResponse
 }
@@ -327,9 +312,6 @@ type UpdateSubAccountProperties struct {
 type UpdateSubAccountOutput struct {
 	SubAccount
 
-	//A unique ID to track this event.
-	XCorrelationId string `src:"header" src-name:"x-correlationid"`
-
 	types.StatusAndBodyFromResponse
 }
 
@@ -362,9 +344,6 @@ type GetCustomPropertiesInput struct {
 }
 type GetCustomPropertiesOutput struct {
 	Value []CustomProperties `json:"value,omitempty"`
-
-	//A unique ID to track this event.
-	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
 	types.StatusAndBodyFromResponse
 }
@@ -411,9 +390,6 @@ type MoveSubAccountsRequestPayload struct {
 type MoveManySubAccountsOutput struct {
 	SubAccount
 
-	//A unique ID to track this event.
-	XCorrelationId string `src:"header" src-name:"x-correlationid"`
-
 	types.StatusAndBodyFromResponse
 }
 
@@ -452,9 +428,6 @@ type MoveSubAccountInput struct {
 type MoveSubAccountOutput struct {
 	SubAccount
 
-	//A unique ID to track this event.
-	XCorrelationId string `src:"header" src-name:"x-correlationid"`
-
 	types.StatusAndBodyFromResponse
 }
 
@@ -488,9 +461,6 @@ type GetServiceManagementBindingInput struct {
 
 type GetServiceManagementBindingOutput struct {
 	ServiceManagementBinding
-
-	//A unique ID to track this event.
-	XCorrelationId string `src:"header" src-name:"x-correlationid"`
 
 	types.StatusAndBodyFromResponse
 }
@@ -545,9 +515,6 @@ type CreateServiceManagementBindingInput struct {
 type CreateServiceManagementBindingOutput struct {
 	ServiceManagementBinding
 
-	//A unique ID to track this event.
-	XCorrelationId string `src:"header" src-name:"x-correlationid"`
-
 	types.StatusAndBodyFromResponse
 }
 
@@ -582,9 +549,6 @@ type DeleteServiceManagementBindingInput struct {
 }
 
 type DeleteServiceManagementBindingOutput struct {
-	//A unique ID to track this event.
-	XCorrelationId string `src:"header" src-name:"x-correlationid"`
-
 	types.StatusAndBodyFromResponse
 }
 

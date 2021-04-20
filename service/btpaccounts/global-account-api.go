@@ -187,9 +187,6 @@ type GlobalAccountOutput struct {
 	//Production: For delivering a service in a production landscape.
 	UseFor string `json:"useFor,omitempty"`
 
-	//A unique ID to track this event.
-	XCorrelationId string `src:"header" src-name:"x-correlationid"`
-
 	types.StatusAndBodyFromResponse
 }
 type LegalLinks struct {

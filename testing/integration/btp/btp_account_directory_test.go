@@ -68,8 +68,8 @@ func TestUpdateEntitlements(t *testing.T) {
 	svc := btpentitlements.New(sess)
 
 	assignmentInfo := btpentitlements.AssignmentInfo{
-		//Amount: sap.Float32(1.0),
-		Enable:         sap.Bool(true),
+		Amount: sap.Float32(2),
+		//Enable:         sap.Bool(true),
 		SubAccountGuid: "a1754d1f-a9da-4e6b-8989-356359b84d5b",
 	}
 	plan := btpentitlements.SubAccountServicePlan{
@@ -89,5 +89,19 @@ func TestUpdateEntitlements(t *testing.T) {
 		} else {
 			t.Logf("\nSuccess StatusAndBodyFromResponse: %s\n", string(data))
 		}
+
+		jobInput := &btpentitlements.GetJobStatusInput{
+			JobId: sap.StringValue(out.JobStatusId),
+		}
+		if jobOut, err := svc.GetJobStatus(context.Background(), jobInput); err != nil {
+			t.Error(err)
+		} else {
+			if data, err := json.Marshal(jobOut); err != nil {
+				t.Error(err)
+			} else {
+				t.Logf("\nSuccess StatusAndBodyFromResponse: %s\n", string(data))
+			}
+		}
+
 	}
 }
