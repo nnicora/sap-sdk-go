@@ -34,8 +34,6 @@ type GetPlatformsInput struct {
 	MaxItems int64 `dest:"querystring" dest-name:"max_items"`
 }
 type GetPlatformsOutput struct {
-	Error
-
 	//Use this token when you call the API again to get more platforms associated with your subaccount.
 	//The token field indicates that the total number of platforms to view in the list (num_items) is larger than the
 	//defined maximum number of platforms to be returned after a single API call (max_items).
@@ -49,6 +47,7 @@ type GetPlatformsOutput struct {
 	//The list of response objects that contains details about the platforms.
 	Items []PlatformItem `json:"items,omitempty"`
 
+	Error
 	types.StatusAndBodyFromResponse
 }
 type PlatformItem struct {
@@ -130,8 +129,6 @@ type RegisterPlatformInput struct {
 	Labels map[string][]string `json:"labels,omitempty"`
 }
 type RegisterPlatformOutput struct {
-	Error
-
 	// The ID of the platform.
 	//You can use this ID to get details about the platform, to update, or to delete the platform.
 	//See the GET, PATCH, and DELETE APIs for the Platforms group.
@@ -167,6 +164,7 @@ type RegisterPlatformOutput struct {
 	//Additional data associated with the resource entity.
 	Labels map[string][]string `json:"labels,omitempty"`
 
+	Error
 	types.StatusAndBodyFromResponse
 }
 
@@ -200,8 +198,6 @@ type GetPlatformDetailsInput struct {
 	PlatformID string `dest:"uri" dest-name:"platformID"`
 }
 type GetPlatformDetailsOutput struct {
-	Error
-
 	//The ID of the platform.
 	//You can use this ID to update or to delete the platform.
 	//See the PATCH and DELETE calls for the Platforms group.
@@ -236,6 +232,7 @@ type GetPlatformDetailsOutput struct {
 	//Additional data associated with the resource entity.
 	Labels map[string][]string `json:"labels,omitempty"`
 
+	Error
 	types.StatusAndBodyFromResponse
 }
 
@@ -273,7 +270,6 @@ type UnregisterPlatformInput struct {
 }
 type UnregisterPlatformOutput struct {
 	Error
-
 	types.StatusAndBodyFromResponse
 }
 
@@ -343,8 +339,6 @@ type Label struct {
 	Values []string `json:"values,omitempty"`
 }
 type UpdatePlatformOutput struct {
-	Error
-
 	//The ID of the platform to update.
 	//Platform ID is a globally unique identifier (GUID).
 	//GUID must be longer than 50 characters and only contains uppercase and lowercase letters, decimal digits, hyphens, periods, and underscores.
@@ -377,6 +371,7 @@ type UpdatePlatformOutput struct {
 	//The list of labels to update for the resource.
 	Labels map[string][]string `json:"labels,omitempty"`
 
+	Error
 	types.StatusAndBodyFromResponse
 }
 

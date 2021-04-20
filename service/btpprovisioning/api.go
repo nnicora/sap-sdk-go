@@ -16,6 +16,7 @@ type GetServicePlanAssignmentsInput struct {
 type GetServicePlanAssignmentsOutput struct {
 	Quotas []ServicePlanQuotaAssignment `json:"quotas,omitempty"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 type ServicePlanQuotaAssignment struct {
@@ -95,6 +96,7 @@ type GetAvailableEnvironmentsInput struct {
 type GetAvailableEnvironmentsOutput struct {
 	Environments []AvailableEnvironment `json:"availableEnvironments,omitempty"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 type AvailableEnvironment struct {
@@ -158,6 +160,7 @@ type GetEnvironmentInstancesOutput struct {
 	//The list of all the environment instances to delete
 	Environments []EnvironmentInstance `json:"environmentInstances,omitempty"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 type EnvironmentInstance struct {
@@ -284,6 +287,7 @@ type CreateEnvironmentInstancesOutput struct {
 	//ID of the created environment instance
 	Id string `json:"id,omitempty"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -316,6 +320,7 @@ type DeleteEnvironmentInstancesOutput struct {
 	//The list of all the environment instances to delete
 	Environments []EnvironmentInstance `json:"environmentInstances,omitempty"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -349,6 +354,7 @@ type GetEnvironmentInstanceInput struct {
 type GetEnvironmentInstanceOutput struct {
 	EnvironmentInstance
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -382,6 +388,7 @@ type DeleteEnvironmentInstanceInput struct {
 type DeleteEnvironmentInstanceOutput struct {
 	EnvironmentInstance
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -426,6 +433,7 @@ type UpdateEnvironmentInstanceInput struct {
 type UpdateEnvironmentInstanceOutput struct {
 	EnvironmentInstance
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 

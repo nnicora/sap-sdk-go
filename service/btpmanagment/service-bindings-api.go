@@ -31,8 +31,6 @@ type GetServiceBindingsInput struct {
 	MaxItems int64 `dest:"querystring" dest-name:"max_items"`
 }
 type GetServiceBindingsOutput struct {
-	Error
-
 	//Use this token when you call the API again to get more service bindings associated with your subaccount.
 	//The token field indicates that the total number of service bindings to view in the list (num_items) is larger
 	//than the defined maximum number of service bindings to be returned after a single API call (max_items).
@@ -44,6 +42,7 @@ type GetServiceBindingsOutput struct {
 	//The list of the response objects that contains details about the service bindings.
 	Items []BindingItem `json:"items,omitempty"`
 
+	Error
 	types.StatusAndBodyFromResponse
 }
 type BindingItem struct {
@@ -124,10 +123,9 @@ type CreateServiceBindingInput struct {
 	Labels map[string][]string `json:"labels,omitempty"`
 }
 type CreateServiceBindingOutput struct {
-	Error
-
 	BindingItem
 
+	Error
 	types.StatusAndBodyFromResponse
 }
 
@@ -161,11 +159,10 @@ type GetServiceBindingDetailsInput struct {
 	ServiceBindingID string `dest:"uri" dest-name:"serviceBindingID"`
 }
 type GetServiceBindingDetailsOutput struct {
-	Error
-
 	BindingItem
 	LastOperation Operation `json:"last_operation,omitempty"`
 
+	Error
 	types.StatusAndBodyFromResponse
 }
 
@@ -202,7 +199,6 @@ type DeleteServiceBindingInput struct {
 }
 type DeleteServiceBindingOutput struct {
 	Error
-
 	types.StatusAndBodyFromResponse
 }
 
@@ -273,10 +269,9 @@ type GetServiceBindingParametersInput struct {
 	ServiceBindingID string `dest:"uri" dest-name:"serviceBindingID"`
 }
 type GetServiceBindingParametersOutput struct {
-	Error
-
 	Parameters map[string]string `json:"-,omitempty"`
 
+	Error
 	types.StatusAndBodyFromResponse
 }
 

@@ -25,6 +25,7 @@ type GetCloudCreditsDetailsOutput struct {
 	//The display name of the global account.
 	GlobalAccountName string `json:"globalAccountName,omitempty"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 type Contract struct {
@@ -95,6 +96,7 @@ type GetMonthlySubAccountsCostInput struct {
 type GetMonthlySubAccountsCostOutput struct {
 	Content []MonthlySubAccountsCost `json:"content,omitempty"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 type MonthlySubAccountsCost struct {
@@ -186,6 +188,7 @@ type GetMonthlyUsageInput struct {
 type GetMonthlyUsageOutput struct {
 	Content []MonthlyUsage `json:"content,omitempty"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 type MonthlyUsage struct {
@@ -299,6 +302,7 @@ type GetSubAccountUsageInput struct {
 type GetSubAccountUsageOutput struct {
 	Content []SubAccountUsage `json:"content,omitempty"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 type SubAccountUsage struct {

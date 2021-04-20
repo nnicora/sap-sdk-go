@@ -187,6 +187,7 @@ type GlobalAccountOutput struct {
 	//Production: For delivering a service in a production landscape.
 	UseFor string `json:"useFor,omitempty"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 type LegalLinks struct {

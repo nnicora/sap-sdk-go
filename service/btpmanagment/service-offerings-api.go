@@ -31,8 +31,6 @@ type GetServiceOfferingsInput struct {
 	MaxItems int64 `dest:"querystring" dest-name:"max_items"`
 }
 type GetServiceOfferingsOutput struct {
-	Error
-
 	//Use this token when you call the API again to get more service offerings associated with your subaccount.
 	//The token field indicates that the total number of service offerings to view in the list (num_items) is larger
 	//than the defined maximum number of service offerings to be returned after a single API call (max_items).
@@ -44,6 +42,7 @@ type GetServiceOfferingsOutput struct {
 	//The list of the service offerings.
 	Items []OfferingItem `json:"items,omitempty"`
 
+	Error
 	types.StatusAndBodyFromResponse
 }
 type OfferingItem struct {
@@ -125,10 +124,9 @@ type GetServiceOfferingDetailsInput struct {
 	ServiceOfferingID string `dest:"uri" dest-name:"serviceOfferingID"`
 }
 type GetServiceOfferingDetailsOutput struct {
-	Error
-
 	OfferingItem
 
+	Error
 	types.StatusAndBodyFromResponse
 }
 

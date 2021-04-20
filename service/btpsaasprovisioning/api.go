@@ -51,6 +51,7 @@ type GetApplicationRegistrationOutput struct {
 	//Name of the formations solution associated with the multitenant application.
 	FormationSolutionName string `json:"formationSolutionName,omitempty"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -126,6 +127,7 @@ type GetApplicationSubscriptionsOutput struct {
 	//Application URL
 	Url string `json:"url,omitempty"`
 
+	//Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 type Dependency struct {
@@ -171,6 +173,7 @@ type SubscribeTenantInput struct {
 type SubscribeTenantOutput struct {
 	Location string `src:"header" src-name:"Location"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -206,6 +209,7 @@ type UnSubscribeTenantInput struct {
 type UnSubscribeTenantOutput struct {
 	Location string `src:"header" src-name:"Location"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -253,6 +257,7 @@ type UpdateSubscriptionDependenciesInput struct {
 type UpdateSubscriptionDependenciesOutput struct {
 	Location string `src:"header" src-name:"Location"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -288,6 +293,7 @@ type GetEntitledApplicationsOutput struct {
 	//The response list of all the multitenant applications to which a specified subaccount is entitled to subscribe.
 	Applications []Application `json:"applications,omitempty"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 type Application struct {
@@ -400,6 +406,7 @@ type GetDetailsApplicationsInput struct {
 type GetDetailsApplicationsOutput struct {
 	Application
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -436,6 +443,7 @@ type SubscribeToApplicationInput struct {
 	PlanName string `json:"planName,omitempty"`
 }
 type SubscribeToApplicationOutput struct {
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -469,6 +477,7 @@ type UnSubscribeFromApplicationInput struct {
 	AppName string `dest:"uri" dest-name:"appName"`
 }
 type UnSubscribeFromApplicationOutput struct {
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -512,6 +521,7 @@ type SubscribeSubAccountTenantToApplicationInput struct {
 	SubscriptionUrl string `json:"subscriptionUrl,omitempty"`
 }
 type SubscribeSubAccountTenantToApplicationOutput struct {
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 

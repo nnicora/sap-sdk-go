@@ -27,6 +27,7 @@ type GetJobStatusOutput struct {
 	//	[ IN_PROGRESS, COMPLETED, FAILED ]
 	Status string `json:"status,omitempty"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -72,9 +73,11 @@ type GetErrorJobStatusOutput struct {
 	//RETRY: Subscription has timed out and job processing is pending a retry.
 	//Enum:
 	//	[ CREATED, STARTED, SUCCEEDED, FAILED, RETRY ]
-	State string   `json:"state,omitempty"`
-	Error ErrorJob `json:"error,omitempty"`
+	State string `json:"state,omitempty"`
 
+	ErrorJob *ErrorJob `json:"error,omitempty"`
+
+	//Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 type ErrorJob struct {

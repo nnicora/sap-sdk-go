@@ -155,6 +155,7 @@ type CreateDirectoryInput struct {
 type CreateDirectoryOutput struct {
 	Directory
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -200,6 +201,7 @@ type GetDirectoryInput struct {
 type GetDirectoryOutput struct {
 	Directory
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -239,6 +241,7 @@ type DeleteDirectoryInput struct {
 type DeleteDirectoryOutput struct {
 	Directory
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -283,6 +286,7 @@ type UpdateDirectoryInput struct {
 type UpdateDirectoryOutput struct {
 	Directory
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -347,6 +351,7 @@ type AddFeatureToDirectoryInput struct {
 type AddFeatureToDirectoryOutput struct {
 	Directory
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -382,6 +387,7 @@ type GetDirectorCustomPropertiesInput struct {
 type GetDirectorCustomPropertiesOutput struct {
 	Value []CustomProperties `json:"value,omitempty"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 

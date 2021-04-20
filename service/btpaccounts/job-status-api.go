@@ -25,6 +25,7 @@ type GetJobStatusOutput struct {
 	//	[ IN_PROGRESS, COMPLETED, FAILED ]
 	Status string `json:"status,omitempty"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 

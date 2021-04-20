@@ -22,6 +22,7 @@ type GetSubAccountsInput struct {
 type GetSubAccountsOutput struct {
 	Value []SubAccount `json:"value,omitempty"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -102,6 +103,7 @@ type CreateSubAccountInput struct {
 type CreateSubAccountOutput struct {
 	SubAccount
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -187,6 +189,7 @@ type CloneSubAccountInput struct {
 type CloneSubAccountOutput struct {
 	SubAccount
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -227,6 +230,7 @@ type GetSubAccountInput struct {
 type GetSubAccountOutput struct {
 	SubAccount
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -260,6 +264,7 @@ type DeleteSubAccountInput struct {
 type DeleteSubAccountOutput struct {
 	SubAccount
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -312,6 +317,7 @@ type UpdateSubAccountProperties struct {
 type UpdateSubAccountOutput struct {
 	SubAccount
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -345,6 +351,7 @@ type GetCustomPropertiesInput struct {
 type GetCustomPropertiesOutput struct {
 	Value []CustomProperties `json:"value,omitempty"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -390,6 +397,7 @@ type MoveSubAccountsRequestPayload struct {
 type MoveManySubAccountsOutput struct {
 	SubAccount
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -428,6 +436,7 @@ type MoveSubAccountInput struct {
 type MoveSubAccountOutput struct {
 	SubAccount
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -462,6 +471,7 @@ type GetServiceManagementBindingInput struct {
 type GetServiceManagementBindingOutput struct {
 	ServiceManagementBinding
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -515,6 +525,7 @@ type CreateServiceManagementBindingInput struct {
 type CreateServiceManagementBindingOutput struct {
 	ServiceManagementBinding
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -549,6 +560,7 @@ type DeleteServiceManagementBindingInput struct {
 }
 
 type DeleteServiceManagementBindingOutput struct {
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 

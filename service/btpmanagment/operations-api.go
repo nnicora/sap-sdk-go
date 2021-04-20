@@ -20,10 +20,9 @@ type GetOperationStatusInput struct {
 	OperationID string `dest:"uri" dest-name:"operationID"`
 }
 type GetOperationStatusOutput struct {
-	Error
-
 	Operation
 
+	Error
 	types.StatusAndBodyFromResponse
 }
 

@@ -31,8 +31,6 @@ type GetServicePlansInput struct {
 	MaxItems int64 `dest:"querystring" dest-name:"max_items"`
 }
 type GetServicePlansOutput struct {
-	Error
-
 	//Use this token when you call the API again to get more service plans associated with your subaccount.
 	//The token field indicates that the total number of service plans to view in the list (num_items) is larger than
 	//the defined maximum number of ervice plans to be returned after a single API call (max_items).
@@ -44,6 +42,7 @@ type GetServicePlansOutput struct {
 	//The list of the response objects that contain details about the service plans.
 	Items []PlanItem `json:"items,omitempty"`
 
+	Error
 	types.StatusAndBodyFromResponse
 }
 type PlanItem struct {
@@ -115,10 +114,9 @@ type GetServicePlanDetailsInput struct {
 	ServicePlanID string `dest:"uri" dest-name:"servicePlanID"`
 }
 type GetServicePlanDetailsOutput struct {
-	Error
-
 	PlanItem
 
+	Error
 	types.StatusAndBodyFromResponse
 }
 

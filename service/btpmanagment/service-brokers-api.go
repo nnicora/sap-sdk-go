@@ -34,8 +34,6 @@ type GetServiceBrokersInput struct {
 	MaxItems int64 `dest:"querystring" dest-name:"max_items"`
 }
 type GetServiceBrokersOutput struct {
-	Error
-
 	//Use this token when you call the API again to get more service brokers associated with your subaccount.
 	//The token field indicates that the total number of service brokers to view in the list (num_items) is larger than
 	//the defined maximum number of service brokers to be returned after a single API call (max_items).
@@ -49,6 +47,7 @@ type GetServiceBrokersOutput struct {
 	//The list of response objects that contains details about the service brokers.
 	Items []BrokerItem `json:"items,omitempty"`
 
+	Error
 	types.StatusAndBodyFromResponse
 }
 type BrokerItem struct {
@@ -106,11 +105,10 @@ type GetServiceBrokerDetailsInput struct {
 	ServiceBrokerID string `dest:"uri" dest-name:"serviceBrokerID"`
 }
 type GetServiceBrokerDetailsOutput struct {
-	Error
-
 	BrokerItem
 	LastOperation Operation `json:"last_operation,omitempty"`
 
+	Error
 	types.StatusAndBodyFromResponse
 }
 

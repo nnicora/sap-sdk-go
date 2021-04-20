@@ -31,8 +31,6 @@ type GetServiceInstancesInput struct {
 	MaxItems int64 `dest:"querystring" dest-name:"max_items"`
 }
 type GetServiceInstancesOutput struct {
-	Error
-
 	//Use this token when you call the API again to get more service instances associated with your subaccount.
 	//The token field indicates that the total number of service instances to view in the list (num_items) is larger
 	//than the defined maximum number of service instances to be returned after a single API call (max_items).
@@ -44,6 +42,7 @@ type GetServiceInstancesOutput struct {
 	//The list of response objects that contains details about the service instances.
 	Items []InstanceItem `json:"items,omitempty"`
 
+	Error
 	types.StatusAndBodyFromResponse
 }
 type InstanceItem struct {
@@ -120,10 +119,9 @@ type CreateServiceInstanceInput struct {
 	Labels map[string][]string `json:"labels,omitempty"`
 }
 type CreateServiceInstanceOutput struct {
-	Error
-
 	InstanceItem
 
+	Error
 	types.StatusAndBodyFromResponse
 }
 
@@ -157,11 +155,10 @@ type GetServiceInstanceDetailsInput struct {
 	ServiceInstanceID string `dest:"uri" dest-name:"serviceInstanceID"`
 }
 type GetServiceInstanceDetailsOutput struct {
-	Error
-
 	InstanceItem
 	LastOperation Operation `json:"last_operation,omitempty"`
 
+	Error
 	types.StatusAndBodyFromResponse
 }
 
@@ -199,7 +196,6 @@ type DeleteServiceInstanceInput struct {
 }
 type DeleteServiceInstanceOutput struct {
 	Error
-
 	types.StatusAndBodyFromResponse
 }
 
@@ -249,7 +245,6 @@ type UpdateServiceInstanceInput struct {
 }
 type UpdateServiceInstanceOutput struct {
 	Error
-
 	types.StatusAndBodyFromResponse
 }
 
@@ -283,10 +278,9 @@ type GetServiceInstanceParametersInput struct {
 	ServiceInstanceID string `dest:"uri" dest-name:"serviceInstanceID"`
 }
 type GetServiceInstanceParametersOutput struct {
-	Error
-
 	Parameters map[string]string `json:"-,omitempty"`
 
+	Error
 	types.StatusAndBodyFromResponse
 }
 

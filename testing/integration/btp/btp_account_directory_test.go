@@ -16,8 +16,8 @@ func TestCreateAccountDirectory(t *testing.T) {
 	features[0] = "DEFAULT"
 	features[1] = "ENTITLEMENTS"
 	dirInput := &btpaccounts.CreateDirectoryInput{
-		DisplayName:       "data_terraform",
-		Subdomain:         "terraform",
+		DisplayName: "data_terraform",
+		//Subdomain:         "terraform",
 		DirectoryFeatures: features,
 	}
 	if out, err := svc.CreateDirectory(context.Background(), dirInput); err != nil {

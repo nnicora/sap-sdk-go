@@ -93,6 +93,7 @@ type GetEventsOutput struct {
 	//Total numbers of pages.
 	TotalPages int64 `json:"totalPages,omitempty"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 type Event struct {
@@ -195,6 +196,7 @@ type GetEventsTypesOutput struct {
 	//	EnvironmentInstances_Deletion
 	Type string `json:"type,omitempty"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 

@@ -20,6 +20,7 @@ type DataCentersOutput struct {
 	//Contains information about the available data centers for a specified global account.
 	DataCenters []DataCenter `json:"datacenters,omitempty"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 type DataCenter struct {
@@ -128,6 +129,7 @@ type GlobalAccountAssignmentsOutput struct {
 	//Whether the External Provider Registry (XPR) is available.
 	FetchErrorFromExternalProviderRegistry bool `json:"fetchErrorFromExternalProviderRegistry,omitempty"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -175,6 +177,7 @@ type GetAssignmentsOutput struct {
 	//Whether the External Provider Registry (XPR) is available.
 	FetchErrorFromExternalProviderRegistry bool `json:"fetchErrorFromExternalProviderRegistry,omitempty"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 type AssignedService struct {
@@ -562,10 +565,9 @@ type AssignmentInfo struct {
 	Resources []Resource `json:"resources,omitempty"`
 }
 type UpdateSubAccountServicePlanOutput struct {
-	Error types.Error `json:"error,omitempty"`
-
 	JobStatusId *string `json:"jobStatusId,omitempty"`
 
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -648,6 +650,7 @@ type AssignDirectoryAssignment struct {
 	AutoDistributeAmount int32 `json:"autoDistributeAmount,omitempty"`
 }
 type AssignDirectoryAssignmentOutput struct {
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -710,6 +713,7 @@ type UpdateDirectoryAssignment struct {
 	AutoDistributeAmount int32 `json:"autoDistributeAmount,omitempty"`
 }
 type UpdateDirectoryAssignmentOutput struct {
+	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
