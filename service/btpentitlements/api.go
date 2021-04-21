@@ -552,7 +552,7 @@ type SubAccountServicePlan struct {
 type AssignmentInfo struct {
 	//The quantity of the plan that is assigned to the specified subaccount. Relevant and mandatory only for plans that
 	//have a numeric quota. Do not set if enable=TRUE is specified.
-	Amount *float32 `json:"amount,omitempty"`
+	Amount *uint `json:"amount,omitempty"`
 
 	//Whether to enable the service plan assignment to the specified subaccount without quantity restrictions.
 	//Relevant and mandatory only for plans that do not have a numeric quota. Do not set if amount is specified.
@@ -618,7 +618,7 @@ type UpdateDirectoryEntitlementsInput struct {
 type DirectoryEntitlement struct {
 	//The quantity of the plan to assign to the specified directory. Relevant and mandatory only for plans that have a
 	//numeric quota. Do not set if enable=TRUE is specified.
-	Amount *int64 `json:"amount,omitempty"`
+	Amount *uint `json:"amount,omitempty"`
 
 	//The technical name of the entitlement to assign to the directory.
 	Plan string `json:"plan,omitempty"`
@@ -647,7 +647,7 @@ type DirectoryEntitlement struct {
 	//The quota of the specified plan to automatically allocate to any new subaccount that is created in the future in the directory.
 	//When applying this option, you must set autoAssign=TRUE and/or distribute=TRUE. Applies only to entitlements
 	//that have a numeric quota. Entitlements are subject to available quota in the directory.
-	AutoDistributeAmount int32 `json:"autoDistributeAmount,omitempty"`
+	AutoDistributeAmount *uint `json:"autoDistributeAmount,omitempty"`
 }
 type UpdateDirectoryEntitlementsOutput struct {
 	Error *types.Error `json:"error,omitempty"`
