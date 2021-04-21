@@ -650,6 +650,8 @@ type DirectoryEntitlement struct {
 	AutoDistributeAmount *uint `json:"autoDistributeAmount,omitempty"`
 }
 type UpdateDirectoryEntitlementsOutput struct {
+	JobStatusId *string `json:"jobStatusId,omitempty"`
+
 	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
@@ -672,7 +674,17 @@ func (c *EntitlementsV1) updateDirectoryEntitlementsRequest(ctx context.Context,
 	}
 
 	output := &UpdateDirectoryEntitlementsOutput{}
-	return c.newRequest(ctx, op, input, output), output
+	request := c.newRequest(ctx, op, input, output)
+
+	// TODO: This is a hack should not be use on good designed API
+	wrapperBody := "{ \"jobStatusId\": \"%v\" }"
+	request.ResponseBodyHandler = func(statusCode int, body []byte) ([]byte, error) {
+		if statusCode == 200 {
+			return []byte(fmt.Sprintf(wrapperBody, string(body))), nil
+		}
+		return body, nil
+	}
+	return request, output
 }
 
 // PATCH /entitlements/v1/directories/{directoryGUID}/assignments
