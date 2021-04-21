@@ -12,9 +12,13 @@ import (
 func TestCreateAccountDirectory(t *testing.T) {
 	svc := btpaccounts.New(sess)
 
+	//{"directoryFeatures":["CRM","AUTHORIZATIONS","ENTITLEMENTS","DEFAULT"],"displayName":"resource from terraform"}
+
 	features := make([]string, 2)
 	features[0] = "DEFAULT"
 	features[1] = "ENTITLEMENTS"
+	//features[2] = "AUTHORIZATIONS"
+	//features[3] = "CRM"
 	dirInput := &btpaccounts.CreateDirectoryInput{
 		DisplayName: "data_terraform",
 		//Subdomain:         "terraform",

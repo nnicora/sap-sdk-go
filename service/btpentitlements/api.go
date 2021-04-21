@@ -606,26 +606,26 @@ func (c *EntitlementsV1) updateUpdateSubAccountServicePlanRequest(ctx context.Co
 
 // PUT /entitlements/v1/directories/{directoryGUID}/assignments
 // Assign or update an entitlement in a directory
-type AssignDirectoryAssignmentInput struct {
+type UpdateDirectoryEntitlementsInput struct {
 	//The unique ID of the directory to which the entitlement is assigned.
 	DirectoryGuid string `dest:"uri" dest-name:"directoryGUID"`
 
 	//JSON object that contains the specifications of assignment, such as the name of the assigned plan, the quantity
 	//to distribute, and whether to distribute the quota and how much to subaccounts that currently exist in the
 	//directory and to subaccounts that will added to the directory in the future.
-	DirectoryAssignments []AssignDirectoryAssignment `json:"entitlements,omitempty"`
+	DirectoryEntitlements []DirectoryEntitlement `json:"entitlements,omitempty"`
 }
-type AssignDirectoryAssignment struct {
+type DirectoryEntitlement struct {
 	//The quantity of the plan to assign to the specified directory. Relevant and mandatory only for plans that have a
 	//numeric quota. Do not set if enable=TRUE is specified.
-	Amount int64 `json:"amount,omitempty"`
+	Amount *int64 `json:"amount,omitempty"`
 
 	//The technical name of the entitlement to assign to the directory.
 	Plan string `json:"plan,omitempty"`
 
 	//Whether to allocate the plan to the to the specified directory without quantity restrictions.
 	//Relevant and mandatory only for plans that don't have a numeric quota. Do not use if amount is specified.
-	Enable bool `json:"enable,omitempty"`
+	Enable *bool `json:"enable,omitempty"`
 
 	//The technical name of the entitlement (service, application, environment) to assign.
 	Service string `json:"service,omitempty"`
@@ -649,18 +649,18 @@ type AssignDirectoryAssignment struct {
 	//that have a numeric quota. Entitlements are subject to available quota in the directory.
 	AutoDistributeAmount int32 `json:"autoDistributeAmount,omitempty"`
 }
-type AssignDirectoryAssignmentOutput struct {
+type UpdateDirectoryEntitlementsOutput struct {
 	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
-func (c *EntitlementsV1) AssignDirectoryAssignment(ctx context.Context, input *AssignDirectoryAssignmentInput) (*AssignDirectoryAssignmentOutput, error) {
-	req, out := c.assignUpdateDirectoryAssignmentRequest(ctx, input)
+func (c *EntitlementsV1) UpdateDirectoryEntitlements(ctx context.Context, input *UpdateDirectoryEntitlementsInput) (*UpdateDirectoryEntitlementsOutput, error) {
+	req, out := c.updateDirectoryEntitlementsRequest(ctx, input)
 	return out, req.Send()
 }
-func (c *EntitlementsV1) assignUpdateDirectoryAssignmentRequest(ctx context.Context, input *AssignDirectoryAssignmentInput) (*request.Request, *AssignDirectoryAssignmentOutput) {
+func (c *EntitlementsV1) updateDirectoryEntitlementsRequest(ctx context.Context, input *UpdateDirectoryEntitlementsInput) (*request.Request, *UpdateDirectoryEntitlementsOutput) {
 	op := &request.Operation{
-		Name: "Assign Directory Assignment",
+		Name: "Update Directory Entitlements",
 		Http: request.HTTP{
 			Method: request.PUT,
 			Path:   "/directories/{directoryGUID}/assignments",
@@ -668,16 +668,16 @@ func (c *EntitlementsV1) assignUpdateDirectoryAssignmentRequest(ctx context.Cont
 	}
 
 	if input == nil {
-		input = &AssignDirectoryAssignmentInput{}
+		input = &UpdateDirectoryEntitlementsInput{}
 	}
 
-	output := &AssignDirectoryAssignmentOutput{}
+	output := &UpdateDirectoryEntitlementsOutput{}
 	return c.newRequest(ctx, op, input, output), output
 }
 
 // PATCH /entitlements/v1/directories/{directoryGUID}/assignments
 // Update an existing entitlement in a directory
-type UpdateDirectoryAssignmentInput struct {
+/*type PatchDirectoryEntitlementInput struct {
 	//The unique ID of the directory to which the entitlement is assigned.
 	DirectoryGuid string `dest:"uri" dest-name:"directoryGUID"`
 
@@ -717,11 +717,11 @@ type UpdateDirectoryAssignmentOutput struct {
 	types.StatusAndBodyFromResponse
 }
 
-func (c *EntitlementsV1) UpdateDirectoryAssignment(ctx context.Context, input *UpdateDirectoryAssignmentInput) (*UpdateDirectoryAssignmentOutput, error) {
+func (c *EntitlementsV1) UpdateDirectoryAssignment(ctx context.Context, input *PatchDirectoryEntitlementInput) (*UpdateDirectoryAssignmentOutput, error) {
 	req, out := c.updateUpdateDirectoryAssignmentRequest(ctx, input)
 	return out, req.Send()
 }
-func (c *EntitlementsV1) updateUpdateDirectoryAssignmentRequest(ctx context.Context, input *UpdateDirectoryAssignmentInput) (*request.Request, *UpdateDirectoryAssignmentOutput) {
+func (c *EntitlementsV1) updateUpdateDirectoryAssignmentRequest(ctx context.Context, input *PatchDirectoryEntitlementInput) (*request.Request, *UpdateDirectoryAssignmentOutput) {
 	op := &request.Operation{
 		Name: "Update Directory Assignment",
 		Http: request.HTTP{
@@ -730,8 +730,8 @@ func (c *EntitlementsV1) updateUpdateDirectoryAssignmentRequest(ctx context.Cont
 		},
 	}
 	if input == nil {
-		input = &UpdateDirectoryAssignmentInput{}
+		input = &PatchDirectoryEntitlementInput{}
 	}
 	output := &UpdateDirectoryAssignmentOutput{}
 	return c.newRequest(ctx, op, input, output), output
-}
+}*/
