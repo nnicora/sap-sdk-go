@@ -72,7 +72,7 @@ func TestUpdateEntitlements(t *testing.T) {
 	svc := btpentitlements.New(sess)
 
 	assignmentInfo := btpentitlements.AssignmentInfo{
-		Amount: sap.Float32(2),
+		Amount: sap.Uint(2),
 		//Enable:         sap.Bool(true),
 		SubAccountGuid: "a1754d1f-a9da-4e6b-8989-356359b84d5b",
 	}

@@ -315,7 +315,7 @@ func (c *AccountsV1) updateDirectoryRequest(ctx context.Context,
 
 // PATCH /accounts/v1/directories/{directoryGUID}/changeDirectoryFeatures
 // Add features to a directory
-type AddFeatureToDirectoryInput struct {
+type UpdateDirectoryFeaturesInput struct {
 	//The GUID of the directory to update.
 	DirectoryGuid string `dest:"uri" dest-name:"directoryGUID"`
 
@@ -348,20 +348,20 @@ type AddFeatureToDirectoryInput struct {
 	//Cannot be changed after the directory has been created.
 	Subdomain string `json:"subdomain,omitempty"`
 }
-type AddFeatureToDirectoryOutput struct {
+type UpdateDirectoryFeaturesOutput struct {
 	Directory
 
 	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
-func (c *AccountsV1) AddFeatureToDirectory(ctx context.Context,
-	input *AddFeatureToDirectoryInput) (*AddFeatureToDirectoryOutput, error) {
-	req, out := c.addFeatureToDirectoryRequest(ctx, input)
+func (c *AccountsV1) UpdateDirectoryFeatures(ctx context.Context,
+	input *UpdateDirectoryFeaturesInput) (*UpdateDirectoryFeaturesOutput, error) {
+	req, out := c.updateDirectoryFeaturesRequest(ctx, input)
 	return out, req.Send()
 }
-func (c *AccountsV1) addFeatureToDirectoryRequest(ctx context.Context,
-	input *AddFeatureToDirectoryInput) (*request.Request, *AddFeatureToDirectoryOutput) {
+func (c *AccountsV1) updateDirectoryFeaturesRequest(ctx context.Context,
+	input *UpdateDirectoryFeaturesInput) (*request.Request, *UpdateDirectoryFeaturesOutput) {
 	op := &request.Operation{
 		Name: "Add Feature To Account Directory",
 		Http: request.HTTP{
@@ -371,20 +371,20 @@ func (c *AccountsV1) addFeatureToDirectoryRequest(ctx context.Context,
 	}
 
 	if input == nil {
-		input = &AddFeatureToDirectoryInput{}
+		input = &UpdateDirectoryFeaturesInput{}
 	}
 
-	output := &AddFeatureToDirectoryOutput{}
+	output := &UpdateDirectoryFeaturesOutput{}
 	return c.newRequest(ctx, op, input, output), output
 }
 
 // GET /accounts/v1/directories/{directoryGUID}/customProperties
 // Get directory custom properties
-type GetDirectorCustomPropertiesInput struct {
+type GetDirectoryCustomPropertiesInput struct {
 	//The GUID of the directory to update.
 	DirectoryGuid string `dest:"uri" dest-name:"directoryGUID"`
 }
-type GetDirectorCustomPropertiesOutput struct {
+type GetDirectoryCustomPropertiesOutput struct {
 	Value []CustomProperties `json:"value,omitempty"`
 
 	Error *types.Error `json:"error,omitempty"`
@@ -392,12 +392,12 @@ type GetDirectorCustomPropertiesOutput struct {
 }
 
 func (c *AccountsV1) GetDirectorCustomProperties(ctx context.Context,
-	input *GetDirectorCustomPropertiesInput) (*GetDirectorCustomPropertiesOutput, error) {
+	input *GetDirectoryCustomPropertiesInput) (*GetDirectoryCustomPropertiesOutput, error) {
 	req, out := c.getDirectorCustomPropertiesRequest(ctx, input)
 	return out, req.Send()
 }
 func (c *AccountsV1) getDirectorCustomPropertiesRequest(ctx context.Context,
-	input *GetDirectorCustomPropertiesInput) (*request.Request, *GetDirectorCustomPropertiesOutput) {
+	input *GetDirectoryCustomPropertiesInput) (*request.Request, *GetDirectoryCustomPropertiesOutput) {
 	op := &request.Operation{
 		Name: "Get Account Directory Custom Directory",
 		Http: request.HTTP{
@@ -407,9 +407,9 @@ func (c *AccountsV1) getDirectorCustomPropertiesRequest(ctx context.Context,
 	}
 
 	if input == nil {
-		input = &GetDirectorCustomPropertiesInput{}
+		input = &GetDirectoryCustomPropertiesInput{}
 	}
 
-	output := &GetDirectorCustomPropertiesOutput{}
+	output := &GetDirectoryCustomPropertiesOutput{}
 	return c.newRequest(ctx, op, input, output), output
 }
