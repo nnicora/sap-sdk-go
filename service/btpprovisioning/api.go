@@ -112,6 +112,8 @@ type AvailableEnvironment struct {
 	LandscapeLabel string `json:"landscapeLabel,omitempty"`
 	//Name of the service plan for the available environment.
 	PlanName string `json:"planName,omitempty"`
+	//Specifies if the consumer can change the plan of an existing instance of the environment.
+	PlanUpdatable bool `json:"planUpdatable,omitempty"`
 	//The description of the service.
 	ServiceDescription string `json:"serviceDescription,omitempty"`
 	//The display name of the service.
@@ -120,12 +122,16 @@ type AvailableEnvironment struct {
 	ServiceDocumentationUrl string `json:"serviceDocumentationUrl,omitempty"`
 	//The URL of the image for the service.
 	ServiceImageUrl string `json:"serviceImageUrl,omitempty"`
+	//The long description of the service.
+	ServiceLongDescription string `json:"serviceLongDescription,omitempty"`
 	//Name of the service offered in the catalog of the corresponding environment broker (for example, cloudfoundry).
 	ServiceName string `json:"serviceName,omitempty"`
 	//The URL of the support link for the service.
 	ServiceSupportUrl string `json:"serviceSupportUrl,omitempty"`
 	//Technical key of the corresponding environment broker.
 	TechnicalKey string `json:"technicalKey,omitempty"`
+	//The update schema of the environment broker.
+	UpdateSchema string `json:"updateSchema,omitempty"`
 }
 
 func (c *ProvisioningV1) GetAvailableEnvironments(ctx context.Context) (*GetAvailableEnvironmentsOutput, error) {
