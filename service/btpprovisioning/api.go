@@ -245,8 +245,8 @@ func (c *ProvisioningV1) getEnvironmentInstancesRequest(ctx context.Context, inp
 }
 
 // POST /provisioning/v1/environments
-// Get environment instances
-type CreateEnvironmentInstancesInput struct {
+// Create environment instance
+type CreateEnvironmentInstanceInput struct {
 	//The description of the environment instance.
 	Description string `json:"description,omitempty"`
 	//Type of the environment instance that is used. Must match the type of the environment instance broker
@@ -291,11 +291,13 @@ type CreateEnvironmentInstancesOutput struct {
 	types.StatusAndBodyFromResponse
 }
 
-func (c *ProvisioningV1) CreateEnvironmentInstances(ctx context.Context) (*CreateEnvironmentInstancesOutput, error) {
-	req, out := c.createEnvironmentInstancesRequest(ctx, nil)
+func (c *ProvisioningV1) CreateEnvironmentInstance(ctx context.Context,
+	input *CreateEnvironmentInstanceInput) (*CreateEnvironmentInstancesOutput, error) {
+	req, out := c.createEnvironmentInstanceRequest(ctx, input)
 	return out, req.Send()
 }
-func (c *ProvisioningV1) createEnvironmentInstancesRequest(ctx context.Context, input *CreateEnvironmentInstancesInput) (*request.Request, *CreateEnvironmentInstancesOutput) {
+func (c *ProvisioningV1) createEnvironmentInstanceRequest(ctx context.Context,
+	input *CreateEnvironmentInstanceInput) (*request.Request, *CreateEnvironmentInstancesOutput) {
 	op := &request.Operation{
 		Name: environments,
 		Http: request.HTTP{
@@ -305,7 +307,7 @@ func (c *ProvisioningV1) createEnvironmentInstancesRequest(ctx context.Context, 
 	}
 
 	if input == nil {
-		input = &CreateEnvironmentInstancesInput{}
+		input = &CreateEnvironmentInstanceInput{}
 	}
 
 	output := &CreateEnvironmentInstancesOutput{}
@@ -324,11 +326,13 @@ type DeleteEnvironmentInstancesOutput struct {
 	types.StatusAndBodyFromResponse
 }
 
-func (c *ProvisioningV1) DeleteEnvironmentInstances(ctx context.Context) (*DeleteEnvironmentInstancesOutput, error) {
-	req, out := c.deleteEnvironmentInstancesRequest(ctx, nil)
+func (c *ProvisioningV1) DeleteEnvironmentInstances(ctx context.Context,
+	input *DeleteEnvironmentInstancesInput) (*DeleteEnvironmentInstancesOutput, error) {
+	req, out := c.deleteEnvironmentInstancesRequest(ctx, input)
 	return out, req.Send()
 }
-func (c *ProvisioningV1) deleteEnvironmentInstancesRequest(ctx context.Context, input *DeleteEnvironmentInstancesInput) (*request.Request, *DeleteEnvironmentInstancesOutput) {
+func (c *ProvisioningV1) deleteEnvironmentInstancesRequest(ctx context.Context,
+	input *DeleteEnvironmentInstancesInput) (*request.Request, *DeleteEnvironmentInstancesOutput) {
 	op := &request.Operation{
 		Name: environments,
 		Http: request.HTTP{
@@ -358,11 +362,13 @@ type GetEnvironmentInstanceOutput struct {
 	types.StatusAndBodyFromResponse
 }
 
-func (c *ProvisioningV1) GetEnvironmentInstance(ctx context.Context, input *GetEnvironmentInstanceInput) (*GetEnvironmentInstanceOutput, error) {
+func (c *ProvisioningV1) GetEnvironmentInstance(ctx context.Context,
+	input *GetEnvironmentInstanceInput) (*GetEnvironmentInstanceOutput, error) {
 	req, out := c.getEnvironmentInstanceRequest(ctx, input)
 	return out, req.Send()
 }
-func (c *ProvisioningV1) getEnvironmentInstanceRequest(ctx context.Context, input *GetEnvironmentInstanceInput) (*request.Request, *GetEnvironmentInstanceOutput) {
+func (c *ProvisioningV1) getEnvironmentInstanceRequest(ctx context.Context,
+	input *GetEnvironmentInstanceInput) (*request.Request, *GetEnvironmentInstanceOutput) {
 	op := &request.Operation{
 		Name: environments,
 		Http: request.HTTP{
@@ -392,11 +398,13 @@ type DeleteEnvironmentInstanceOutput struct {
 	types.StatusAndBodyFromResponse
 }
 
-func (c *ProvisioningV1) DeleteEnvironmentInstance(ctx context.Context, input *DeleteEnvironmentInstanceInput) (*DeleteEnvironmentInstanceOutput, error) {
+func (c *ProvisioningV1) DeleteEnvironmentInstance(ctx context.Context,
+	input *DeleteEnvironmentInstanceInput) (*DeleteEnvironmentInstanceOutput, error) {
 	req, out := c.deleteEnvironmentInstanceRequest(ctx, input)
 	return out, req.Send()
 }
-func (c *ProvisioningV1) deleteEnvironmentInstanceRequest(ctx context.Context, input *DeleteEnvironmentInstanceInput) (*request.Request, *DeleteEnvironmentInstanceOutput) {
+func (c *ProvisioningV1) deleteEnvironmentInstanceRequest(ctx context.Context,
+	input *DeleteEnvironmentInstanceInput) (*request.Request, *DeleteEnvironmentInstanceOutput) {
 	op := &request.Operation{
 		Name: environments,
 		Http: request.HTTP{
@@ -437,11 +445,13 @@ type UpdateEnvironmentInstanceOutput struct {
 	types.StatusAndBodyFromResponse
 }
 
-func (c *ProvisioningV1) UpdateEnvironmentInstance(ctx context.Context, input *UpdateEnvironmentInstanceInput) (*UpdateEnvironmentInstanceOutput, error) {
+func (c *ProvisioningV1) UpdateEnvironmentInstance(ctx context.Context,
+	input *UpdateEnvironmentInstanceInput) (*UpdateEnvironmentInstanceOutput, error) {
 	req, out := c.updateEnvironmentInstanceRequest(ctx, input)
 	return out, req.Send()
 }
-func (c *ProvisioningV1) updateEnvironmentInstanceRequest(ctx context.Context, input *UpdateEnvironmentInstanceInput) (*request.Request, *UpdateEnvironmentInstanceOutput) {
+func (c *ProvisioningV1) updateEnvironmentInstanceRequest(ctx context.Context,
+	input *UpdateEnvironmentInstanceInput) (*request.Request, *UpdateEnvironmentInstanceOutput) {
 	op := &request.Operation{
 		Name: environments,
 		Http: request.HTTP{
