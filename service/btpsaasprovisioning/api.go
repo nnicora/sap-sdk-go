@@ -64,7 +64,7 @@ func (c *SaaSProvisioningV1) GetApplicationRegistration(ctx context.Context,
 func (c *SaaSProvisioningV1) getApplicationRegistrationRequest(ctx context.Context,
 	input *GetApplicationRegistrationInput) (*request.Request, *GetApplicationRegistrationOutput) {
 	op := &request.Operation{
-		Name: applicationOperations,
+		Name: "Get Application Registration",
 		Http: request.HTTP{
 			Method: request.GET,
 			Path:   "/application",
@@ -150,7 +150,7 @@ func (c *SaaSProvisioningV1) GetApplicationSubscriptions(ctx context.Context,
 func (c *SaaSProvisioningV1) getApplicationSubscriptionsRequest(ctx context.Context,
 	input *GetApplicationRegistrationInput) (*request.Request, *GetApplicationRegistrationOutput) {
 	op := &request.Operation{
-		Name: applicationOperations,
+		Name: "Get Application Subscriptions",
 		Http: request.HTTP{
 			Method: request.GET,
 			Path:   "/application/subscriptions",
@@ -167,11 +167,11 @@ func (c *SaaSProvisioningV1) getApplicationSubscriptionsRequest(ctx context.Cont
 
 // POST /saas-manager/v1/application/tenants/{tenantId}/subscriptions
 // Subscribe tenant to an application
-type SubscribeTenantInput struct {
+type SubscribeTenantToApplicationInput struct {
 	//The ID of the tenant to subscribe.
 	TenantId string `dest:"uri" dest-name:"tenantId"`
 }
-type SubscribeTenantOutput struct {
+type SubscribeTenantToApplicationOutput struct {
 	Location string `src:"header" src-name:"Location"`
 
 	JobStatusId string `json:"jobStatusId"`
@@ -180,15 +180,15 @@ type SubscribeTenantOutput struct {
 	types.StatusAndBodyFromResponse
 }
 
-func (c *SaaSProvisioningV1) SubscribeTenant(ctx context.Context,
-	input *SubscribeTenantInput) (*SubscribeTenantOutput, error) {
-	req, out := c.subscribeTenantRequest(ctx, input)
+func (c *SaaSProvisioningV1) SubscribeTenantToApplication(ctx context.Context,
+	input *SubscribeTenantToApplicationInput) (*SubscribeTenantToApplicationOutput, error) {
+	req, out := c.subscribeTenantToApplicationRequest(ctx, input)
 	return out, req.Send()
 }
-func (c *SaaSProvisioningV1) subscribeTenantRequest(ctx context.Context,
-	input *SubscribeTenantInput) (*request.Request, *SubscribeTenantOutput) {
+func (c *SaaSProvisioningV1) subscribeTenantToApplicationRequest(ctx context.Context,
+	input *SubscribeTenantToApplicationInput) (*request.Request, *SubscribeTenantToApplicationOutput) {
 	op := &request.Operation{
-		Name: applicationOperations,
+		Name: "Subscribe Tenant To Application",
 		Http: request.HTTP{
 			Method: request.POST,
 			Path:   "/application/tenants/{tenantId}/subscriptions",
@@ -196,10 +196,10 @@ func (c *SaaSProvisioningV1) subscribeTenantRequest(ctx context.Context,
 	}
 
 	if input == nil {
-		input = &SubscribeTenantInput{}
+		input = &SubscribeTenantToApplicationInput{}
 	}
 
-	output := &SubscribeTenantOutput{}
+	output := &SubscribeTenantToApplicationOutput{}
 	request := c.newRequest(ctx, op, input, output)
 
 	// TODO: This is a hack should not be use on good designed API
@@ -216,11 +216,11 @@ func (c *SaaSProvisioningV1) subscribeTenantRequest(ctx context.Context,
 
 // DELETE /saas-manager/v1/application/tenants/{tenantId}/subscriptions
 // Unsubscribe tenant from an application
-type UnSubscribeTenantInput struct {
+type UnSubscribeTenantFromApplicationInput struct {
 	//The ID of the tenant to unsubscribe
 	TenantId string `dest:"uri" dest-name:"tenantId"`
 }
-type UnSubscribeTenantOutput struct {
+type UnSubscribeTenantFromApplicationOutput struct {
 	Location string `src:"header" src-name:"Location"`
 
 	JobStatusId string `json:"jobStatusId"`
@@ -229,15 +229,15 @@ type UnSubscribeTenantOutput struct {
 	types.StatusAndBodyFromResponse
 }
 
-func (c *SaaSProvisioningV1) UnSubscribeTenant(ctx context.Context,
-	input *UnSubscribeTenantInput) (*UnSubscribeTenantOutput, error) {
-	req, out := c.unsubscribeTenantRequest(ctx, input)
+func (c *SaaSProvisioningV1) UnSubscribeTenantFromApplication(ctx context.Context,
+	input *UnSubscribeTenantFromApplicationInput) (*UnSubscribeTenantFromApplicationOutput, error) {
+	req, out := c.unsubscribeTenantFromApplicationRequest(ctx, input)
 	return out, req.Send()
 }
-func (c *SaaSProvisioningV1) unsubscribeTenantRequest(ctx context.Context,
-	input *UnSubscribeTenantInput) (*request.Request, *UnSubscribeTenantOutput) {
+func (c *SaaSProvisioningV1) unsubscribeTenantFromApplicationRequest(ctx context.Context,
+	input *UnSubscribeTenantFromApplicationInput) (*request.Request, *UnSubscribeTenantFromApplicationOutput) {
 	op := &request.Operation{
-		Name: applicationOperations,
+		Name: "UnSubscribe Tenant From Application",
 		Http: request.HTTP{
 			Method: request.DELETE,
 			Path:   "/application/tenants/{tenantId}/subscriptions",
@@ -245,10 +245,10 @@ func (c *SaaSProvisioningV1) unsubscribeTenantRequest(ctx context.Context,
 	}
 
 	if input == nil {
-		input = &UnSubscribeTenantInput{}
+		input = &UnSubscribeTenantFromApplicationInput{}
 	}
 
-	output := &UnSubscribeTenantOutput{}
+	output := &UnSubscribeTenantFromApplicationOutput{}
 	request := c.newRequest(ctx, op, input, output)
 
 	// TODO: This is a hack should not be use on good designed API
@@ -274,12 +274,13 @@ type UpdateSubscriptionDependenciesInput struct {
 	//Whether to skip updating dependencies. If set to true, updateApplicationURL must also be set to true.
 	//This way, you can update the application URL without updating its dependencies.
 	SkipUpdatingDependencies bool `dest:"querystring" dest-name:"skipUpdatingDependencies"`
-	//Send custom property values in the form of key-value pairs to dependent services (provider applications) during
-	//the update to notify them about a change related to an existing subscription.
-	UpdateApplicationDependencies bool `dest:"querystring" dest-name:"updateApplicationDependencies"`
 	//Whether to update the application URL returned from the app callback. If set to true together with
 	//skipUpdatingDependencies, the API call becomes synchronous.
 	UpdateApplicationURL bool `dest:"querystring" dest-name:"updateApplicationURL"`
+
+	//Send custom property values in the form of key-value pairs to dependent services (provider applications) during
+	//the update to notify them about a change related to an existing subscription.
+	UpdateApplicationDependencies map[string]interface{} `json:"appProviderCustomProperties"`
 }
 type UpdateSubscriptionDependenciesOutput struct {
 	Location string `src:"header" src-name:"Location"`
@@ -298,7 +299,7 @@ func (c *SaaSProvisioningV1) UpdateSubscriptionDependencies(ctx context.Context,
 func (c *SaaSProvisioningV1) updateSubscriptionDependenciesRequest(ctx context.Context,
 	input *UpdateSubscriptionDependenciesInput) (*request.Request, *UpdateSubscriptionDependenciesOutput) {
 	op := &request.Operation{
-		Name: applicationOperations,
+		Name: "Update Subscription Dependencies",
 		Http: request.HTTP{
 			Method: request.PATCH,
 			Path:   "/application/tenants/{tenantId}/subscriptions",
@@ -418,7 +419,7 @@ func (c *SaaSProvisioningV1) GetEntitledApplications(ctx context.Context,
 func (c *SaaSProvisioningV1) getEntitledApplicationsRequest(ctx context.Context,
 	input *GetEntitledApplicationsInput) (*request.Request, *GetEntitledApplicationsOutput) {
 	op := &request.Operation{
-		Name: applicationOperations,
+		Name: "Get Entitled Applications",
 		Http: request.HTTP{
 			Method: request.GET,
 			Path:   "/applications",
@@ -458,7 +459,7 @@ func (c *SaaSProvisioningV1) GetDetailsApplications(ctx context.Context,
 func (c *SaaSProvisioningV1) getDetailsApplicationsRequest(ctx context.Context,
 	input *GetDetailsApplicationsInput) (*request.Request, *GetDetailsApplicationsOutput) {
 	op := &request.Operation{
-		Name: applicationOperations,
+		Name: "Get Details Applications",
 		Http: request.HTTP{
 			Method: request.GET,
 			Path:   "/applications/{appName}",
@@ -495,7 +496,7 @@ func (c *SaaSProvisioningV1) SubscribeToApplication(ctx context.Context,
 func (c *SaaSProvisioningV1) getSubscribeToApplicationRequest(ctx context.Context,
 	input *SubscribeToApplicationInput) (*request.Request, *SubscribeToApplicationOutput) {
 	op := &request.Operation{
-		Name: applicationOperations,
+		Name: "Subscribe To Application",
 		Http: request.HTTP{
 			Method: request.POST,
 			Path:   "/applications/{appName}/subscription",
@@ -529,7 +530,7 @@ func (c *SaaSProvisioningV1) UnSubscribeFromApplication(ctx context.Context,
 func (c *SaaSProvisioningV1) unSubscribeFromApplicationRequest(ctx context.Context,
 	input *UnSubscribeFromApplicationInput) (*request.Request, *UnSubscribeFromApplicationOutput) {
 	op := &request.Operation{
-		Name: applicationOperations,
+		Name: "UnSubscribe From Application",
 		Http: request.HTTP{
 			Method: request.DELETE,
 			Path:   "/applications/{appName}/subscription",
@@ -575,7 +576,7 @@ func (c *SaaSProvisioningV1) SubscribeSubAccountTenantToApplication(ctx context.
 func (c *SaaSProvisioningV1) subscribeSubAccountTenantToApplicationRequest(ctx context.Context,
 	input *SubscribeSubAccountTenantToApplicationInput) (*request.Request, *UnSubscribeFromApplicationOutput) {
 	op := &request.Operation{
-		Name: applicationOperations,
+		Name: "Subscribe SubAccount Tenant To Application",
 		Http: request.HTTP{
 			Method: request.PUT,
 			Path:   "/applications/{appName}/subscription",
