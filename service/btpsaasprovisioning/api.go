@@ -143,12 +143,12 @@ type Dependency struct {
 }
 
 func (c *SaaSProvisioningV1) GetApplicationSubscriptions(ctx context.Context,
-	input *GetApplicationRegistrationInput) (*GetApplicationRegistrationOutput, error) {
+	input *GetApplicationSubscriptionsInput) (*GetApplicationSubscriptionsOutput, error) {
 	req, out := c.getApplicationSubscriptionsRequest(ctx, input)
 	return out, req.Send()
 }
 func (c *SaaSProvisioningV1) getApplicationSubscriptionsRequest(ctx context.Context,
-	input *GetApplicationRegistrationInput) (*request.Request, *GetApplicationRegistrationOutput) {
+	input *GetApplicationSubscriptionsInput) (*request.Request, *GetApplicationSubscriptionsOutput) {
 	op := &request.Operation{
 		Name: "Get Application Subscriptions",
 		Http: request.HTTP{
@@ -158,10 +158,10 @@ func (c *SaaSProvisioningV1) getApplicationSubscriptionsRequest(ctx context.Cont
 	}
 
 	if input == nil {
-		input = &GetApplicationRegistrationInput{}
+		input = &GetApplicationSubscriptionsInput{}
 	}
 
-	output := &GetApplicationRegistrationOutput{}
+	output := &GetApplicationSubscriptionsOutput{}
 	return c.newRequest(ctx, op, input, output), output
 }
 
