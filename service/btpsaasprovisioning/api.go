@@ -2,6 +2,7 @@ package btpsaasprovisioning
 
 import (
 	"context"
+	"fmt"
 	"github.com/nnicora/sap-sdk-go/sap/http/request"
 	"github.com/nnicora/sap-sdk-go/service/types"
 )
@@ -173,6 +174,8 @@ type SubscribeTenantInput struct {
 type SubscribeTenantOutput struct {
 	Location string `src:"header" src-name:"Location"`
 
+	JobStatusId string `json:"jobStatusId"`
+
 	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
@@ -197,7 +200,18 @@ func (c *SaaSProvisioningV1) subscribeTenantRequest(ctx context.Context,
 	}
 
 	output := &SubscribeTenantOutput{}
-	return c.newRequest(ctx, op, input, output), output
+	request := c.newRequest(ctx, op, input, output)
+
+	// TODO: This is a hack should not be use on good designed API
+	wrapperBody := "{ \"jobStatusId\": \"%v\" }"
+	request.ResponseBodyHandler = func(statusCode int, body []byte) ([]byte, error) {
+		if statusCode == 202 {
+			return []byte(fmt.Sprintf(wrapperBody, string(body))), nil
+		}
+		return body, nil
+	}
+
+	return request, output
 }
 
 // DELETE /saas-manager/v1/application/tenants/{tenantId}/subscriptions
@@ -208,6 +222,8 @@ type UnSubscribeTenantInput struct {
 }
 type UnSubscribeTenantOutput struct {
 	Location string `src:"header" src-name:"Location"`
+
+	JobStatusId string `json:"jobStatusId"`
 
 	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
@@ -233,7 +249,18 @@ func (c *SaaSProvisioningV1) unsubscribeTenantRequest(ctx context.Context,
 	}
 
 	output := &UnSubscribeTenantOutput{}
-	return c.newRequest(ctx, op, input, output), output
+	request := c.newRequest(ctx, op, input, output)
+
+	// TODO: This is a hack should not be use on good designed API
+	wrapperBody := "{ \"jobStatusId\": \"%v\" }"
+	request.ResponseBodyHandler = func(statusCode int, body []byte) ([]byte, error) {
+		if statusCode == 202 {
+			return []byte(fmt.Sprintf(wrapperBody, string(body))), nil
+		}
+		return body, nil
+	}
+
+	return request, output
 }
 
 // PATCH /saas-manager/v1/application/tenants/{tenantId}/subscriptions
@@ -256,6 +283,8 @@ type UpdateSubscriptionDependenciesInput struct {
 }
 type UpdateSubscriptionDependenciesOutput struct {
 	Location string `src:"header" src-name:"Location"`
+
+	JobStatusId string `json:"jobStatusId"`
 
 	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
@@ -281,7 +310,18 @@ func (c *SaaSProvisioningV1) updateSubscriptionDependenciesRequest(ctx context.C
 	}
 
 	output := &UpdateSubscriptionDependenciesOutput{}
-	return c.newRequest(ctx, op, input, output), output
+	request := c.newRequest(ctx, op, input, output)
+
+	// TODO: This is a hack should not be use on good designed API
+	wrapperBody := "{ \"jobStatusId\": \"%v\" }"
+	request.ResponseBodyHandler = func(statusCode int, body []byte) ([]byte, error) {
+		if statusCode == 202 {
+			return []byte(fmt.Sprintf(wrapperBody, string(body))), nil
+		}
+		return body, nil
+	}
+
+	return request, output
 }
 
 // GET /saas-manager/v1/applications
@@ -521,6 +561,8 @@ type SubscribeSubAccountTenantToApplicationInput struct {
 	SubscriptionUrl string `json:"subscriptionUrl,omitempty"`
 }
 type SubscribeSubAccountTenantToApplicationOutput struct {
+	JobStatusId string `json:"jobStatusId"`
+
 	Error *types.Error `json:"error,omitempty"`
 	types.StatusAndBodyFromResponse
 }
@@ -545,5 +587,16 @@ func (c *SaaSProvisioningV1) subscribeSubAccountTenantToApplicationRequest(ctx c
 	}
 
 	output := &UnSubscribeFromApplicationOutput{}
-	return c.newRequest(ctx, op, input, output), output
+	request := c.newRequest(ctx, op, input, output)
+
+	// TODO: This is a hack should not be use on good designed API
+	wrapperBody := "{ \"jobStatusId\": \"%v\" }"
+	request.ResponseBodyHandler = func(statusCode int, body []byte) ([]byte, error) {
+		if statusCode == 202 {
+			return []byte(fmt.Sprintf(wrapperBody, string(body))), nil
+		}
+		return body, nil
+	}
+
+	return request, output
 }
