@@ -84,6 +84,9 @@ func TestGetSubAccountServiceManagementBinding(t *testing.T) {
 	}
 	if acc, err := svc.GetSubAccountServiceManagementBinding(context.Background(), input); err != nil {
 		t.Error(err)
+		if acc.Error != nil {
+			t.Logf(*acc.Error.Message)
+		}
 	} else {
 		if data, err := json.Marshal(acc); err != nil {
 			t.Error(err)
@@ -97,10 +100,13 @@ func TestCreateSubAccountServiceManagementBinding(t *testing.T) {
 	svc := btpaccounts.New(sess)
 
 	input := &btpaccounts.CreateServiceManagementBindingInput{
-		SubAccountGuid: "24d360fd-8e28-48a3-ab69-f574f388761b",
+		SubAccountGuid: "829ef5f8-0dd3-4d89-bda9-28688d79fba9",
 	}
 	if acc, err := svc.CreateSubAccountServiceManagementBinding(context.Background(), input); err != nil {
 		t.Error(err)
+		if acc.Error != nil {
+			t.Logf(*acc.Error.Message)
+		}
 	} else {
 		if data, err := json.Marshal(acc); err != nil {
 			t.Error(err)
@@ -114,10 +120,13 @@ func TestDeleteSubAccountServiceManagementBinding(t *testing.T) {
 	svc := btpaccounts.New(sess)
 
 	input := &btpaccounts.DeleteServiceManagementBindingInput{
-		SubAccountGuid: "24d360fd-8e28-48a3-ab69-f574f388761b",
+		SubAccountGuid: "829ef5f8-0dd3-4d89-bda9-28688d79fba9",
 	}
 	if acc, err := svc.DeleteSubAccountServiceManagementBinding(context.Background(), input); err != nil {
 		t.Error(err)
+		if acc.Error != nil {
+			t.Logf(*acc.Error.Message)
+		}
 	} else {
 		if data, err := json.Marshal(acc); err != nil {
 			t.Error(err)

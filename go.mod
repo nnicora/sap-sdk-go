@@ -1,6 +1,6 @@
 module github.com/nnicora/sap-sdk-go
 
-go 1.15
+go 1.16
 
 require (
 	golang.org/x/net v0.0.0-20200822124328-c89045814202

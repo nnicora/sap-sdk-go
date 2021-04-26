@@ -55,7 +55,7 @@ type Config struct {
 
 	Timeout time.Duration
 
-	DefaultHttpClient *http.Client
+	//DefaultHttpClient *http.Client
 }
 
 func NewOAuth2Client(conf *Config) (*http.Client, error) {
@@ -146,4 +146,22 @@ func NewOAuth2ClientWithContext(ctx context.Context, conf *Config) (*http.Client
 	}
 
 	return nil, errors.New("unsupported grant type")
+}
+
+func (c *Config) Clone() *Config {
+	return &Config{
+		GrantType:      c.GrantType,
+		Username:       c.Username,
+		Password:       c.Password,
+		ClientID:       c.ClientID,
+		ClientSecret:   c.ClientSecret,
+		AuthURL:        c.AuthURL,
+		RedirectURL:    c.RedirectURL,
+		TokenURL:       c.TokenURL,
+		Scopes:         c.Scopes,
+		EndpointParams: c.EndpointParams,
+		AuthStyle:      c.AuthStyle,
+		Timeout:        c.Timeout,
+		//DefaultHttpClient: c.DefaultHttpClient,
+	}
 }

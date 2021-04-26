@@ -25,7 +25,18 @@ func init() {
 		SAP_ACCOUNTS_HOST_SERVICE     = "SAP_ACCOUNTS_HOST_SERVICE"
 		SAP_ENTITLEMENTS_HOST_SERVICE = "SAP_ENTITLEMENTS_HOST_SERVICE"
 		SAP_EVENTS_HOST_SERVICE       = "SAP_EVENTS_HOST_SERVICE"
+		SAP_SAAS_MANAGER_HOST_SERVICE = "SAP_SAAS_MANAGER_HOST_SERVICE"
 	)
+
+	oauth2 := &oauth2.Config{
+		GrantType:    os.Getenv(SAP_OAUTH2_GRANT_TYPE),
+		ClientID:     os.Getenv(SAP_OAUTH2_CLIENT_ID),
+		ClientSecret: os.Getenv(SAP_OAUTH2_CLIENT_SECRET),
+		TokenURL:     os.Getenv(SAP_OAUTH2_TOKEN_URL),
+		Username:     os.Getenv(SAP_OAUTH2_USERNAME),
+		Password:     os.Getenv(SAP_OAUTH2_PASSWORD),
+	}
+	//oauth2Manager := oauth2.Clone()
 
 	var cfg = &sap.Config{
 		Endpoints: map[string]*sap.EndpointConfig{
@@ -38,16 +49,13 @@ func init() {
 			"events": {
 				Host: os.Getenv(SAP_EVENTS_HOST_SERVICE),
 			},
+			"saas-manager": {
+				Host: os.Getenv(SAP_SAAS_MANAGER_HOST_SERVICE),
+				//OAuth2: oauth2Manager,
+			},
 		},
 
-		DefaultOAuth2: &oauth2.Config{
-			GrantType:    os.Getenv(SAP_OAUTH2_GRANT_TYPE),
-			ClientID:     os.Getenv(SAP_OAUTH2_CLIENT_ID),
-			ClientSecret: os.Getenv(SAP_OAUTH2_CLIENT_SECRET),
-			TokenURL:     os.Getenv(SAP_OAUTH2_TOKEN_URL),
-			Username:     os.Getenv(SAP_OAUTH2_USERNAME),
-			Password:     os.Getenv(SAP_OAUTH2_PASSWORD),
-		},
+		DefaultOAuth2: oauth2,
 	}
 
 	sessTmp, err := session.BuildFromConfig(cfg)

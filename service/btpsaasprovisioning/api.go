@@ -93,6 +93,14 @@ type GetApplicationSubscriptionsInput struct {
 	TenantId string `dest:"querystring" dest-name:"tenantId"`
 }
 type GetApplicationSubscriptionsOutput struct {
+	Values []ApplicationSubscription `json:"values,omitempty"`
+
+	//Error *types.Error `json:"error,omitempty"`
+	Error            string `json:"error,omitempty"`
+	ErrorDescription string `json:"error_description,omitempty"`
+	types.StatusAndBodyFromResponse
+}
+type ApplicationSubscription struct {
 	//Specifies the ability to use the service plan of the subscribed application. The actual amount has no bearing on
 	//the maximum consumption limit of the application.
 	Amount int64 `json:"amount,omitempty"`
@@ -127,9 +135,6 @@ type GetApplicationSubscriptionsOutput struct {
 	Subdomain string `json:"subdomain,omitempty"`
 	//Application URL
 	Url string `json:"url,omitempty"`
-
-	//Error *types.Error `json:"error,omitempty"`
-	types.StatusAndBodyFromResponse
 }
 type Dependency struct {
 	//The unique registration name of the linked dependency application.
@@ -162,7 +167,18 @@ func (c *SaaSProvisioningV1) getApplicationSubscriptionsRequest(ctx context.Cont
 	}
 
 	output := &GetApplicationSubscriptionsOutput{}
-	return c.newRequest(ctx, op, input, output), output
+	request := c.newRequest(ctx, op, input, output)
+
+	// TODO: This is a hack should not be use on good designed API
+	wrapperBody := "{ \"values\": %v }"
+	request.ResponseBodyHandler = func(statusCode int, body []byte) ([]byte, error) {
+		if statusCode == 202 {
+			return []byte(fmt.Sprintf(wrapperBody, string(body))), nil
+		}
+		return body, nil
+	}
+
+	return request, output
 }
 
 // POST /saas-manager/v1/application/tenants/{tenantId}/subscriptions
