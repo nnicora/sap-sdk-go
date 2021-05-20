@@ -49,6 +49,18 @@ func (s *RuntimeSession) HardUpdate(c *sap.Config) error {
 	return s.update(c, false)
 }
 
+func (s *RuntimeSession) AddEndpoint(serviceId string, endpointConfig *sap.EndpointConfig) error {
+	if endpoint, err := s.createEndpoint(endpointConfig); err != nil {
+		return err
+	} else {
+		if _, ok := s.RuntimeConfig.Endpoints[serviceId]; ok {
+			return fmt.Errorf("endpoint mapped to '%s' id already exist", serviceId)
+		}
+		s.RuntimeConfig.Endpoints[serviceId] = endpoint
+		return nil
+	}
+}
+
 // Update the existent RuntimeSession Configuration; Used for cases when new endpoints was added into configuration and
 // session should be updated to have it too.
 func (s *RuntimeSession) update(c *sap.Config, light bool) error {
@@ -57,15 +69,13 @@ func (s *RuntimeSession) update(c *sap.Config, light bool) error {
 		if _, ok := s.RuntimeConfig.Endpoints[k]; light && ok {
 			continue
 		}
-		if httpClient, err := createOAuth2Client(v.OAuth2, defaultHttpClient); err != nil {
+		if endpoint, err := s.createEndpointWithDefault(v, defaultHttpClient); err != nil {
 			return err
-		} else if httpClient != nil {
-			s.RuntimeConfig.Endpoints[k] = &endpoints.Endpoint{
-				Host:   v.Host,
-				Client: httpClient,
+		} else {
+			if endpoint.Client == defaultHttpClient && defErr != nil {
+				return defErr
 			}
-		} else if defErr != nil {
-			return defErr
+			s.RuntimeConfig.Endpoints[k] = endpoint
 		}
 	}
 
@@ -82,6 +92,26 @@ func (s *RuntimeSession) update(c *sap.Config, light bool) error {
 	}
 
 	return nil
+}
+func (s *RuntimeSession) createEndpointWithDefault(ec *sap.EndpointConfig, defaultHttpClient *http.Client) (*endpoints.Endpoint, error) {
+	if httpClient, err := createOAuth2ClientWithDefault(ec.OAuth2, defaultHttpClient); err != nil {
+		return nil, err
+	} else {
+		return &endpoints.Endpoint{
+			Host:   ec.Host,
+			Client: httpClient,
+		}, nil
+	}
+}
+func (s *RuntimeSession) createEndpoint(ec *sap.EndpointConfig) (*endpoints.Endpoint, error) {
+	if httpClient, err := createOAuth2Client(ec.OAuth2); err != nil {
+		return nil, err
+	} else {
+		return &endpoints.Endpoint{
+			Host:   ec.Host,
+			Client: httpClient,
+		}, nil
+	}
 }
 
 // Build new RuntimeSession from sap.Config data
@@ -100,10 +130,10 @@ func BuildFromConfig(c *sap.Config) (*RuntimeSession, error) {
 }
 
 // Create http.Client from oauth2.Config
-func createOAuth2Client(cfg *oauth2.Config, defaultHttpClient *http.Client) (*http.Client, error) {
+func createOAuth2ClientWithDefault(cfg *oauth2.Config, defaultHttpClient *http.Client) (*http.Client, error) {
 	var client *http.Client
 	if cfg != nil {
-		if httpClient, err := oauth2.NewOAuth2Client(cfg); err != nil {
+		if httpClient, err := createOAuth2Client(cfg); err != nil {
 			return nil, err
 		} else {
 			client = httpClient
@@ -112,4 +142,12 @@ func createOAuth2Client(cfg *oauth2.Config, defaultHttpClient *http.Client) (*ht
 		client = defaultHttpClient
 	}
 	return client, nil
+}
+
+func createOAuth2Client(cfg *oauth2.Config) (*http.Client, error) {
+	if httpClient, err := oauth2.NewOAuth2Client(cfg); err != nil {
+		return nil, err
+	} else {
+		return httpClient, nil
+	}
 }
