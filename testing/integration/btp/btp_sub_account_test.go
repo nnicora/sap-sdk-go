@@ -100,7 +100,7 @@ func TestCreateSubAccountServiceManagementBinding(t *testing.T) {
 	svc := btpaccounts.New(sess)
 
 	input := &btpaccounts.CreateServiceManagementBindingInput{
-		SubAccountGuid: "829ef5f8-0dd3-4d89-bda9-28688d79fba9",
+		SubAccountGuid: "24d360fd-8e28-48a3-ab69-f574f388761b",
 	}
 	if acc, err := svc.CreateSubAccountServiceManagementBinding(context.Background(), input); err != nil {
 		t.Error(err)
@@ -120,7 +120,7 @@ func TestDeleteSubAccountServiceManagementBinding(t *testing.T) {
 	svc := btpaccounts.New(sess)
 
 	input := &btpaccounts.DeleteServiceManagementBindingInput{
-		SubAccountGuid: "829ef5f8-0dd3-4d89-bda9-28688d79fba9",
+		SubAccountGuid: "24d360fd-8e28-48a3-ab69-f574f388761b",
 	}
 	if acc, err := svc.DeleteSubAccountServiceManagementBinding(context.Background(), input); err != nil {
 		t.Error(err)
