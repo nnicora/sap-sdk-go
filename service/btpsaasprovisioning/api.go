@@ -52,7 +52,9 @@ type GetApplicationRegistrationOutput struct {
 	//Name of the formations solution associated with the multitenant application.
 	FormationSolutionName string `json:"formationSolutionName,omitempty"`
 
-	Error *types.Error `json:"error,omitempty"`
+	//Error *types.Error `json:"error,omitempty"`
+	Error            string `json:"error,omitempty"`
+	ErrorDescription string `json:"error_description,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -192,7 +194,9 @@ type SubscribeTenantToApplicationOutput struct {
 
 	JobStatusId string `json:"jobStatusId"`
 
-	Error *types.Error `json:"error,omitempty"`
+	//Error *types.Error `json:"error,omitempty"`
+	Error            string `json:"error,omitempty"`
+	ErrorDescription string `json:"error_description,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -241,7 +245,9 @@ type UnSubscribeTenantFromApplicationOutput struct {
 
 	JobStatusId string `json:"jobStatusId"`
 
-	Error *types.Error `json:"error,omitempty"`
+	//Error *types.Error `json:"error,omitempty"`
+	Error            string `json:"error,omitempty"`
+	ErrorDescription string `json:"error_description,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -303,7 +309,9 @@ type UpdateSubscriptionDependenciesOutput struct {
 
 	JobStatusId string `json:"jobStatusId"`
 
-	Error *types.Error `json:"error,omitempty"`
+	//Error *types.Error `json:"error,omitempty"`
+	Error            string `json:"error,omitempty"`
+	ErrorDescription string `json:"error_description,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -350,7 +358,9 @@ type GetEntitledApplicationsOutput struct {
 	//The response list of all the multitenant applications to which a specified subaccount is entitled to subscribe.
 	Applications []Application `json:"applications,omitempty"`
 
-	Error *types.Error `json:"error,omitempty"`
+	//Error *types.Error `json:"error,omitempty"`
+	Error            string `json:"error,omitempty"`
+	ErrorDescription string `json:"error_description,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 type Application struct {
@@ -374,8 +384,6 @@ type Application struct {
 	CategoryDisplayName string `json:"categoryDisplayName,omitempty"`
 	//The commercial name of the deployed multitenant application as defined by the app developer.
 	CommercialAppName string `json:"commercialAppName,omitempty"`
-	//The date the subscription was created. Dates and times are in UTC format.
-	CreatedDate string `json:"createdDate,omitempty"`
 	//Whether the application was developed by a customer. If not, then the application
 	//is developed by the cloud operator, such as SAP.
 	CustomerDeveloped bool `json:"customerDeveloped,omitempty"`
@@ -392,7 +400,9 @@ type Application struct {
 	//The application's incident-tracking component provided in metadata for customer-facing UIs.
 	IncidentTrackingComponent string `json:"incidentTrackingComponent,omitempty"`
 	//The date the subscription was last modified. Dates and times are in UTC format.
-	ModifiedDate string `json:"modifiedDate,omitempty"`
+	ModifiedDate int64 `json:"modifiedDate,omitempty"`
+	//The date the subscription was created. Dates and times are in UTC format.
+	CreatedDate int64 `json:"createdDate,omitempty"`
 	//The plan name of the application to which the consumer has subscribed.
 	PlanName string `json:"planName,omitempty"`
 	//ID of the landscape-specific environment.
@@ -463,7 +473,9 @@ type GetDetailsApplicationsInput struct {
 type GetDetailsApplicationsOutput struct {
 	Application
 
-	Error *types.Error `json:"error,omitempty"`
+	//Error *types.Error `json:"error,omitempty"`
+	Error            string `json:"error,omitempty"`
+	ErrorDescription string `json:"error_description,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -534,7 +546,9 @@ type UnSubscribeFromApplicationInput struct {
 	AppName string `dest:"uri" dest-name:"appName"`
 }
 type UnSubscribeFromApplicationOutput struct {
-	Error *types.Error `json:"error,omitempty"`
+	//Error *types.Error `json:"error,omitempty"`
+	Error            string `json:"error,omitempty"`
+	ErrorDescription string `json:"error_description,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
@@ -580,7 +594,9 @@ type SubscribeSubAccountTenantToApplicationInput struct {
 type SubscribeSubAccountTenantToApplicationOutput struct {
 	JobStatusId string `json:"jobStatusId"`
 
-	Error *types.Error `json:"error,omitempty"`
+	//Error *types.Error `json:"error,omitempty"`
+	Error            string `json:"error,omitempty"`
+	ErrorDescription string `json:"error_description,omitempty"`
 	types.StatusAndBodyFromResponse
 }
 
