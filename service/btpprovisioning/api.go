@@ -175,7 +175,7 @@ type EnvironmentInstance struct {
 	//The commercial type of the environment broker.
 	CommercialType string `json:"commercialType,omitempty"`
 	//The date the environment instance was created. Dates and times are in UTC format.
-	CreatedDate string `json:"createdDate,omitempty"`
+	CreatedDate int64 `json:"createdDate,omitempty"`
 	//The URL of the service dashboard, which is a web-based management user interface for the service instances.
 	DashboardUrl string `json:"dashboardUrl,omitempty"`
 	//The description of the environment instance.
@@ -193,7 +193,7 @@ type EnvironmentInstance struct {
 	//The name of the landscape within the logged-in region on which the environment instance is created.
 	LandscapeLabel string `json:"landscapeLabel,omitempty"`
 	//The last date the environment instance was last modified. Dates and times are in UTC format.
-	ModifiedDate string `json:"modifiedDate,omitempty"`
+	ModifiedDate int64 `json:"modifiedDate,omitempty"`
 	//Name of the environment instance.
 	Name string `json:"name,omitempty"`
 	//An identifier that represents the last operation. This ID is returned by the environment brokers.
