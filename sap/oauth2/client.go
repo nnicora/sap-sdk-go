@@ -66,9 +66,9 @@ func NewOAuth2ClientWithContext(ctx context.Context, conf *Config) (*http.Client
 	ctx = context.WithValue(ctx, oauth2.HTTPClient, httpClient)
 
 	if ok, err := utils.HostAlive(conf.TokenURL); err != nil {
-		return nil, fmt.Errorf("oauth2 token url unreachable; %v", err)
+		return nil, fmt.Errorf("oauth2 token url '%s' unreachable; %v", conf.TokenURL, err)
 	} else if !ok {
-		return nil, fmt.Errorf("oauth2 token url unreachable")
+		return nil, fmt.Errorf("oauth2 token url '%s' unreachable", conf.TokenURL)
 	}
 
 	if conf.GrantType == "client_credentials" {
