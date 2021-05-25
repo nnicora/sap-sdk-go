@@ -251,6 +251,8 @@ type UpdateServiceInstanceInput struct {
 	Labels map[string][]string `json:"labels,omitempty"`
 }
 type UpdateServiceInstanceOutput struct {
+	InstanceItem
+
 	Error
 	types.StatusAndBodyFromResponse
 }
