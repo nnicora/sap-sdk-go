@@ -108,7 +108,7 @@ func (c *ServiceManagementV1) getPlatformsRequest(ctx context.Context,
 
 // POST /v1/platforms
 // Register a platform
-type RegisterPlatformInput struct {
+type CreatePlatformInput struct {
 	//The CLI-friendly name of the platform.
 	//A CLI-friendly name is a short string that only contains alphanumeric characters, periods, and hyphens.
 	//It can't contain white spaces.
@@ -128,7 +128,7 @@ type RegisterPlatformInput struct {
 	//Additional data associated with the resource entity.
 	Labels map[string][]string `json:"labels,omitempty"`
 }
-type RegisterPlatformOutput struct {
+type CreatePlatformOutput struct {
 	// The ID of the platform.
 	//You can use this ID to get details about the platform, to update, or to delete the platform.
 	//See the GET, PATCH, and DELETE APIs for the Platforms group.
@@ -168,13 +168,13 @@ type RegisterPlatformOutput struct {
 	types.StatusAndBodyFromResponse
 }
 
-func (c *ServiceManagementV1) RegisterPlatform(ctx context.Context,
-	input *RegisterPlatformInput) (*RegisterPlatformOutput, error) {
-	req, out := c.registerPlatformRequest(ctx, input)
+func (c *ServiceManagementV1) CreatePlatform(ctx context.Context,
+	input *CreatePlatformInput) (*CreatePlatformOutput, error) {
+	req, out := c.createPlatformRequest(ctx, input)
 	return out, req.Send()
 }
-func (c *ServiceManagementV1) registerPlatformRequest(ctx context.Context,
-	input *RegisterPlatformInput) (*request.Request, *RegisterPlatformOutput) {
+func (c *ServiceManagementV1) createPlatformRequest(ctx context.Context,
+	input *CreatePlatformInput) (*request.Request, *CreatePlatformOutput) {
 	op := &request.Operation{
 		Name: platforms,
 		Http: request.HTTP{
@@ -184,10 +184,10 @@ func (c *ServiceManagementV1) registerPlatformRequest(ctx context.Context,
 	}
 
 	if input == nil {
-		input = &RegisterPlatformInput{}
+		input = &CreatePlatformInput{}
 	}
 
-	output := &RegisterPlatformOutput{}
+	output := &CreatePlatformOutput{}
 	return c.newRequest(ctx, op, input, output), output
 }
 
@@ -236,7 +236,7 @@ type GetPlatformOutput struct {
 	types.StatusAndBodyFromResponse
 }
 
-func (c *ServiceManagementV1) GetPlatformDetails(ctx context.Context,
+func (c *ServiceManagementV1) GetPlatform(ctx context.Context,
 	input *GetPlatformInput) (*GetPlatformOutput, error) {
 	req, out := c.getPlatformRequest(ctx, input)
 	return out, req.Send()
@@ -261,25 +261,25 @@ func (c *ServiceManagementV1) getPlatformRequest(ctx context.Context,
 
 // DELETE /v1/platforms/{platformID}
 // Unregister a platform
-type UnregisterPlatformInput struct {
+type DeletePlatformInput struct {
 	//The ID of the platform to unregister.
 	PlatformID string `dest:"uri" dest-name:"platformID"`
 
 	//Whether to cascade-delete all the services and bindings that are related to the platform.
 	Cascade bool `dest:"querystring" dest-name:"cascade"`
 }
-type UnregisterPlatformOutput struct {
+type DeletePlatformOutput struct {
 	Error
 	types.StatusAndBodyFromResponse
 }
 
-func (c *ServiceManagementV1) UnregisterPlatform(ctx context.Context,
-	input *UnregisterPlatformInput) (*UnregisterPlatformOutput, error) {
-	req, out := c.unregisterPlatformRequest(ctx, input)
+func (c *ServiceManagementV1) DeletePlatform(ctx context.Context,
+	input *DeletePlatformInput) (*DeletePlatformOutput, error) {
+	req, out := c.deletePlatformRequest(ctx, input)
 	return out, req.Send()
 }
-func (c *ServiceManagementV1) unregisterPlatformRequest(ctx context.Context,
-	input *UnregisterPlatformInput) (*request.Request, *UnregisterPlatformOutput) {
+func (c *ServiceManagementV1) deletePlatformRequest(ctx context.Context,
+	input *DeletePlatformInput) (*request.Request, *DeletePlatformOutput) {
 	op := &request.Operation{
 		Name: platforms,
 		Http: request.HTTP{
@@ -289,10 +289,10 @@ func (c *ServiceManagementV1) unregisterPlatformRequest(ctx context.Context,
 	}
 
 	if input == nil {
-		input = &UnregisterPlatformInput{}
+		input = &DeletePlatformInput{}
 	}
 
-	output := &UnregisterPlatformOutput{}
+	output := &DeletePlatformOutput{}
 	return c.newRequest(ctx, op, input, output), output
 }
 

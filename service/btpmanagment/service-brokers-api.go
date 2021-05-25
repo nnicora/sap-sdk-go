@@ -112,7 +112,7 @@ type GetServiceBrokerOutput struct {
 	types.StatusAndBodyFromResponse
 }
 
-func (c *ServiceManagementV1) GetServiceBrokerDetails(ctx context.Context,
+func (c *ServiceManagementV1) GetServiceBroker(ctx context.Context,
 	input *GetServiceBrokerInput) (*GetServiceBrokerOutput, error) {
 	req, out := c.getServiceBrokerRequest(ctx, input)
 	return out, req.Send()

@@ -120,7 +120,7 @@ type GetServicePlanOutput struct {
 	types.StatusAndBodyFromResponse
 }
 
-func (c *ServiceManagementV1) GetServicePlanDetails(ctx context.Context,
+func (c *ServiceManagementV1) GetServicePlan(ctx context.Context,
 	input *GetServicePlanInput) (*GetServicePlanOutput, error) {
 	req, out := c.getServicePlanRequest(ctx, input)
 	return out, req.Send()

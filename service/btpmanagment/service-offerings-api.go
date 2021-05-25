@@ -130,7 +130,7 @@ type GetServiceOfferingOutput struct {
 	types.StatusAndBodyFromResponse
 }
 
-func (c *ServiceManagementV1) GetServiceOfferingDetails(ctx context.Context,
+func (c *ServiceManagementV1) GetServiceOffering(ctx context.Context,
 	input *GetServiceOfferingInput) (*GetServiceOfferingOutput, error) {
 	req, out := c.getServiceOfferingRequest(ctx, input)
 	return out, req.Send()

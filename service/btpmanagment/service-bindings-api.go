@@ -166,12 +166,12 @@ type GetServiceBindingOutput struct {
 	types.StatusAndBodyFromResponse
 }
 
-func (c *ServiceManagementV1) GetServiceBindingDetails(ctx context.Context,
+func (c *ServiceManagementV1) GetServiceBinding(ctx context.Context,
 	input *GetServiceBindingInput) (*GetServiceBindingOutput, error) {
-	req, out := c.getServiceBindingDetailsRequest(ctx, input)
+	req, out := c.getServiceBindingRequest(ctx, input)
 	return out, req.Send()
 }
-func (c *ServiceManagementV1) getServiceBindingDetailsRequest(ctx context.Context,
+func (c *ServiceManagementV1) getServiceBindingRequest(ctx context.Context,
 	input *GetServiceBindingInput) (*request.Request, *GetServiceBindingOutput) {
 	op := &request.Operation{
 		Name: serviceBindings,
