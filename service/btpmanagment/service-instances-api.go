@@ -199,7 +199,7 @@ type DeleteServiceInstanceInput struct {
 	ServiceInstanceID string `dest:"uri" dest-name:"serviceInstanceID"`
 
 	//Whether to perform this operation asynchronously.
-	Async string `dest:"querystring" dest-name:"async"`
+	Async bool `dest:"querystring" dest-name:"async"`
 }
 type DeleteServiceInstanceOutput struct {
 	Error
@@ -235,7 +235,7 @@ type UpdateServiceInstanceInput struct {
 	//The ID of the provisioned service instance to update.
 	ServiceInstanceID string `dest:"uri" dest-name:"serviceInstanceID"`
 	//Whether to perform this operation asynchronously.
-	Async string `dest:"querystring" dest-name:"async"`
+	Async bool `dest:"querystring" dest-name:"async"`
 
 	//The name of the service instance to update.
 	Name string `json:"name,omitempty"`
