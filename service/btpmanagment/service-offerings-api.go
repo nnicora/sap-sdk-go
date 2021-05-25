@@ -119,11 +119,11 @@ func (c *ServiceManagementV1) getServiceOfferingsRequest(ctx context.Context,
 
 // GET /v1/service_offerings/{serviceOfferingID}
 // Get service offering details
-type GetServiceOfferingDetailsInput struct {
+type GetServiceOfferingInput struct {
 	//The ID of the service offering for which to get details.
 	ServiceOfferingID string `dest:"uri" dest-name:"serviceOfferingID"`
 }
-type GetServiceOfferingDetailsOutput struct {
+type GetServiceOfferingOutput struct {
 	OfferingItem
 
 	Error
@@ -131,12 +131,12 @@ type GetServiceOfferingDetailsOutput struct {
 }
 
 func (c *ServiceManagementV1) GetServiceOfferingDetails(ctx context.Context,
-	input *GetServiceOfferingDetailsInput) (*GetServiceOfferingDetailsOutput, error) {
-	req, out := c.getServiceOfferingDetailsRequest(ctx, input)
+	input *GetServiceOfferingInput) (*GetServiceOfferingOutput, error) {
+	req, out := c.getServiceOfferingRequest(ctx, input)
 	return out, req.Send()
 }
-func (c *ServiceManagementV1) getServiceOfferingDetailsRequest(ctx context.Context,
-	input *GetServiceOfferingDetailsInput) (*request.Request, *GetServiceOfferingDetailsOutput) {
+func (c *ServiceManagementV1) getServiceOfferingRequest(ctx context.Context,
+	input *GetServiceOfferingInput) (*request.Request, *GetServiceOfferingOutput) {
 	op := &request.Operation{
 		Name: serviceOfferings,
 		Http: request.HTTP{
@@ -146,9 +146,9 @@ func (c *ServiceManagementV1) getServiceOfferingDetailsRequest(ctx context.Conte
 	}
 
 	if input == nil {
-		input = &GetServiceOfferingDetailsInput{}
+		input = &GetServiceOfferingInput{}
 	}
 
-	output := &GetServiceOfferingDetailsOutput{}
+	output := &GetServiceOfferingOutput{}
 	return c.newRequest(ctx, op, input, output), output
 }

@@ -193,11 +193,11 @@ func (c *ServiceManagementV1) registerPlatformRequest(ctx context.Context,
 
 // GET /v1/platforms/{platformID}
 // Get all platforms
-type GetPlatformDetailsInput struct {
+type GetPlatformInput struct {
 	//The ID of the registered platform for which to get details.
 	PlatformID string `dest:"uri" dest-name:"platformID"`
 }
-type GetPlatformDetailsOutput struct {
+type GetPlatformOutput struct {
 	//The ID of the platform.
 	//You can use this ID to update or to delete the platform.
 	//See the PATCH and DELETE calls for the Platforms group.
@@ -237,12 +237,12 @@ type GetPlatformDetailsOutput struct {
 }
 
 func (c *ServiceManagementV1) GetPlatformDetails(ctx context.Context,
-	input *GetPlatformDetailsInput) (*GetPlatformDetailsOutput, error) {
-	req, out := c.getPlatformDetailsRequest(ctx, input)
+	input *GetPlatformInput) (*GetPlatformOutput, error) {
+	req, out := c.getPlatformRequest(ctx, input)
 	return out, req.Send()
 }
-func (c *ServiceManagementV1) getPlatformDetailsRequest(ctx context.Context,
-	input *GetPlatformDetailsInput) (*request.Request, *GetPlatformDetailsOutput) {
+func (c *ServiceManagementV1) getPlatformRequest(ctx context.Context,
+	input *GetPlatformInput) (*request.Request, *GetPlatformOutput) {
 	op := &request.Operation{
 		Name: platforms,
 		Http: request.HTTP{
@@ -252,10 +252,10 @@ func (c *ServiceManagementV1) getPlatformDetailsRequest(ctx context.Context,
 	}
 
 	if input == nil {
-		input = &GetPlatformDetailsInput{}
+		input = &GetPlatformInput{}
 	}
 
-	output := &GetPlatformDetailsOutput{}
+	output := &GetPlatformOutput{}
 	return c.newRequest(ctx, op, input, output), output
 }
 

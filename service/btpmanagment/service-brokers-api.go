@@ -100,11 +100,11 @@ func (c *ServiceManagementV1) getServiceBrokersRequest(ctx context.Context,
 
 // GET /v1/service_brokers/{serviceBrokerID}
 // Get service broker details
-type GetServiceBrokerDetailsInput struct {
+type GetServiceBrokerInput struct {
 	//The ID of the service broker for which to get details.
 	ServiceBrokerID string `dest:"uri" dest-name:"serviceBrokerID"`
 }
-type GetServiceBrokerDetailsOutput struct {
+type GetServiceBrokerOutput struct {
 	BrokerItem
 	LastOperation Operation `json:"last_operation,omitempty"`
 
@@ -113,12 +113,12 @@ type GetServiceBrokerDetailsOutput struct {
 }
 
 func (c *ServiceManagementV1) GetServiceBrokerDetails(ctx context.Context,
-	input *GetServiceBrokerDetailsInput) (*GetServiceBrokerDetailsOutput, error) {
-	req, out := c.getServiceBrokerDetailsRequest(ctx, input)
+	input *GetServiceBrokerInput) (*GetServiceBrokerOutput, error) {
+	req, out := c.getServiceBrokerRequest(ctx, input)
 	return out, req.Send()
 }
-func (c *ServiceManagementV1) getServiceBrokerDetailsRequest(ctx context.Context,
-	input *GetServiceBrokerDetailsInput) (*request.Request, *GetServiceBrokerDetailsOutput) {
+func (c *ServiceManagementV1) getServiceBrokerRequest(ctx context.Context,
+	input *GetServiceBrokerInput) (*request.Request, *GetServiceBrokerOutput) {
 	op := &request.Operation{
 		Name: serviceBrokers,
 		Http: request.HTTP{
@@ -128,9 +128,9 @@ func (c *ServiceManagementV1) getServiceBrokerDetailsRequest(ctx context.Context
 	}
 
 	if input == nil {
-		input = &GetServiceBrokerDetailsInput{}
+		input = &GetServiceBrokerInput{}
 	}
 
-	output := &GetServiceBrokerDetailsOutput{}
+	output := &GetServiceBrokerOutput{}
 	return c.newRequest(ctx, op, input, output), output
 }

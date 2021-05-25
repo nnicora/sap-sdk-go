@@ -154,11 +154,11 @@ func (c *ServiceManagementV1) createServiceBindingRequest(ctx context.Context,
 
 // GET /v1/service_bindings/{serviceBindingID}
 // Get service Binding details
-type GetServiceBindingDetailsInput struct {
+type GetServiceBindingInput struct {
 	//The ID of the service binding for which to get details.
 	ServiceBindingID string `dest:"uri" dest-name:"serviceBindingID"`
 }
-type GetServiceBindingDetailsOutput struct {
+type GetServiceBindingOutput struct {
 	BindingItem
 	LastOperation Operation `json:"last_operation,omitempty"`
 
@@ -167,12 +167,12 @@ type GetServiceBindingDetailsOutput struct {
 }
 
 func (c *ServiceManagementV1) GetServiceBindingDetails(ctx context.Context,
-	input *GetServiceBindingDetailsInput) (*GetServiceBindingDetailsOutput, error) {
+	input *GetServiceBindingInput) (*GetServiceBindingOutput, error) {
 	req, out := c.getServiceBindingDetailsRequest(ctx, input)
 	return out, req.Send()
 }
 func (c *ServiceManagementV1) getServiceBindingDetailsRequest(ctx context.Context,
-	input *GetServiceBindingDetailsInput) (*request.Request, *GetServiceBindingDetailsOutput) {
+	input *GetServiceBindingInput) (*request.Request, *GetServiceBindingOutput) {
 	op := &request.Operation{
 		Name: serviceBindings,
 		Http: request.HTTP{
@@ -182,10 +182,10 @@ func (c *ServiceManagementV1) getServiceBindingDetailsRequest(ctx context.Contex
 	}
 
 	if input == nil {
-		input = &GetServiceBindingDetailsInput{}
+		input = &GetServiceBindingInput{}
 	}
 
-	output := &GetServiceBindingDetailsOutput{}
+	output := &GetServiceBindingOutput{}
 	return c.newRequest(ctx, op, input, output), output
 }
 

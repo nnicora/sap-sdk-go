@@ -157,11 +157,11 @@ func (c *ServiceManagementV1) createServiceInstanceRequest(ctx context.Context,
 
 // GET /v1/service_instances/{serviceInstanceID}
 // Get service instance details
-type GetServiceInstanceDetailsInput struct {
+type GetServiceInstanceInput struct {
 	//The ID of the provisioned service instance for which to get details.
 	ServiceInstanceID string `dest:"uri" dest-name:"serviceInstanceID"`
 }
-type GetServiceInstanceDetailsOutput struct {
+type GetServiceInstanceOutput struct {
 	InstanceItem
 	LastOperation Operation `json:"last_operation,omitempty"`
 
@@ -169,13 +169,13 @@ type GetServiceInstanceDetailsOutput struct {
 	types.StatusAndBodyFromResponse
 }
 
-func (c *ServiceManagementV1) GetServiceInstanceDetails(ctx context.Context,
-	input *GetServiceInstanceDetailsInput) (*GetServiceInstanceDetailsOutput, error) {
-	req, out := c.getServiceInstanceDetailsRequest(ctx, input)
+func (c *ServiceManagementV1) GetServiceInstance(ctx context.Context,
+	input *GetServiceInstanceInput) (*GetServiceInstanceOutput, error) {
+	req, out := c.getServiceInstanceRequest(ctx, input)
 	return out, req.Send()
 }
-func (c *ServiceManagementV1) getServiceInstanceDetailsRequest(ctx context.Context,
-	input *GetServiceInstanceDetailsInput) (*request.Request, *GetServiceInstanceDetailsOutput) {
+func (c *ServiceManagementV1) getServiceInstanceRequest(ctx context.Context,
+	input *GetServiceInstanceInput) (*request.Request, *GetServiceInstanceOutput) {
 	op := &request.Operation{
 		Name: serviceInstances,
 		Http: request.HTTP{
@@ -185,10 +185,10 @@ func (c *ServiceManagementV1) getServiceInstanceDetailsRequest(ctx context.Conte
 	}
 
 	if input == nil {
-		input = &GetServiceInstanceDetailsInput{}
+		input = &GetServiceInstanceInput{}
 	}
 
-	output := &GetServiceInstanceDetailsOutput{}
+	output := &GetServiceInstanceOutput{}
 	return c.newRequest(ctx, op, input, output), output
 }
 

@@ -109,11 +109,11 @@ func (c *ServiceManagementV1) getServicePlansRequest(ctx context.Context,
 
 // GET /v1/service_plans/{servicePlanID}
 // Get service plan details
-type GetServicePlanDetailsInput struct {
+type GetServicePlanInput struct {
 	//The ID of the service plan for which to get details.
 	ServicePlanID string `dest:"uri" dest-name:"servicePlanID"`
 }
-type GetServicePlanDetailsOutput struct {
+type GetServicePlanOutput struct {
 	PlanItem
 
 	Error
@@ -121,12 +121,12 @@ type GetServicePlanDetailsOutput struct {
 }
 
 func (c *ServiceManagementV1) GetServicePlanDetails(ctx context.Context,
-	input *GetServicePlanDetailsInput) (*GetServicePlanDetailsOutput, error) {
-	req, out := c.getServicePlanDetailsRequest(ctx, input)
+	input *GetServicePlanInput) (*GetServicePlanOutput, error) {
+	req, out := c.getServicePlanRequest(ctx, input)
 	return out, req.Send()
 }
-func (c *ServiceManagementV1) getServicePlanDetailsRequest(ctx context.Context,
-	input *GetServicePlanDetailsInput) (*request.Request, *GetServicePlanDetailsOutput) {
+func (c *ServiceManagementV1) getServicePlanRequest(ctx context.Context,
+	input *GetServicePlanInput) (*request.Request, *GetServicePlanOutput) {
 	op := &request.Operation{
 		Name: servicePlans,
 		Http: request.HTTP{
@@ -136,9 +136,9 @@ func (c *ServiceManagementV1) getServicePlanDetailsRequest(ctx context.Context,
 	}
 
 	if input == nil {
-		input = &GetServicePlanDetailsInput{}
+		input = &GetServicePlanInput{}
 	}
 
-	output := &GetServicePlanDetailsOutput{}
+	output := &GetServicePlanOutput{}
 	return c.newRequest(ctx, op, input, output), output
 }
