@@ -107,8 +107,15 @@ type CreateServiceInstanceInput struct {
 	//The name of the new service instance.
 	//Can't be an empty object.
 	Name string `json:"name,omitempty"`
+
 	//The ID of the service plan to use for the service instance.
 	ServicePlanId string `json:"service_plan_id,omitempty"`
+
+	//The name of the service offering to use for the service instance.
+	ServiceOfferingName string `json:"service_offering_name,omitempty"`
+	//The name of the service plan to use for the service instance.
+	ServicePlanName string `json:"service_plan_name,omitempty"`
+
 	//Some services support providing of additional configuration parameters during instance creation.
 	//Pass these parameters as key-value pairs.
 	//For the list of supported configuration parameters, see the documentation of a particular service offering.
