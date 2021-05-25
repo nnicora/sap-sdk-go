@@ -195,7 +195,7 @@ type DeleteServiceBindingInput struct {
 	//The ID of the service binding to delete.
 	ServiceBindingID string `dest:"uri" dest-name:"serviceBindingID"`
 	//Whether to perform this operation asynchronously.
-	Async string `dest:"querystring" dest-name:"async"`
+	Async bool `dest:"querystring" dest-name:"async"`
 }
 type DeleteServiceBindingOutput struct {
 	Error
