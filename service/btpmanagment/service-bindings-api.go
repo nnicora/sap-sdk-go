@@ -59,7 +59,7 @@ type BindingItem struct {
 	//Contains the resources associated with the binding.
 	BindResource map[string]string `json:"bind_resource,omitempty"`
 	//Credentials to access the binding.
-	Credentials Credentials `json:"credentials,omitempty"`
+	Credentials map[string]interface{} `json:"credentials,omitempty"`
 	//The time the binding was created.
 	//In ISO 8601 format:
 	//	YYYY-MM-DDThh:mm:ssTZD
