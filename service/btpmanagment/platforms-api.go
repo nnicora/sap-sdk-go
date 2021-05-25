@@ -266,7 +266,7 @@ type UnregisterPlatformInput struct {
 	PlatformID string `dest:"uri" dest-name:"platformID"`
 
 	//Whether to cascade-delete all the services and bindings that are related to the platform.
-	Cascade string `dest:"querystring" dest-name:"cascade"`
+	Cascade bool `dest:"querystring" dest-name:"cascade"`
 }
 type UnregisterPlatformOutput struct {
 	Error
