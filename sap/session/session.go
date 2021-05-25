@@ -61,6 +61,15 @@ func (s *RuntimeSession) AddEndpoint(serviceId string, endpointConfig *sap.Endpo
 	}
 }
 
+func (s *RuntimeSession) AddEndpointWithReplace(serviceId string, endpointConfig *sap.EndpointConfig) error {
+	if endpoint, err := s.createEndpoint(endpointConfig); err != nil {
+		return err
+	} else {
+		s.RuntimeConfig.Endpoints[serviceId] = endpoint
+		return nil
+	}
+}
+
 // Update the existent RuntimeSession Configuration; Used for cases when new endpoints was added into configuration and
 // session should be updated to have it too.
 func (s *RuntimeSession) update(c *sap.Config, light bool) error {
