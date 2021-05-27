@@ -1,4 +1,4 @@
-package btpsaasprovisioning
+package btpsaasmanager
 
 import (
 	"context"
@@ -6,8 +6,6 @@ import (
 	"github.com/nnicora/sap-sdk-go/sap/http/request"
 	"github.com/nnicora/sap-sdk-go/service/types"
 )
-
-const applicationOperations = "Application Operations for App Providers"
 
 // GET /saas-manager/v1/application
 // Get application registration details

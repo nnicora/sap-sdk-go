@@ -1,12 +1,10 @@
-package btpsaasprovisioning
+package btpsaasmanager
 
 import (
 	"context"
 	"github.com/nnicora/sap-sdk-go/sap/http/request"
 	"github.com/nnicora/sap-sdk-go/service/types"
 )
-
-const jobManagement = "Job Management"
 
 // GET /jobs-management/v1/jobs/{jobInstanceIdOrUniqueId}/status
 // Get available jobs
@@ -112,7 +110,7 @@ func (c *SaaSProvisioningV1) GetErrorJobStatus(ctx context.Context, input *GetEr
 }
 func (c *SaaSProvisioningV1) getErrorJobStatusRequest(ctx context.Context, input *GetErrorJobStatusInput) (*request.Request, *GetErrorJobStatusOutput) {
 	op := &request.Operation{
-		Name: jobManagement,
+		Name: "Job Management",
 		Http: request.HTTP{
 			Method:      request.GET,
 			Path:        "/api/v2.0/jobs/{jobUuid}",

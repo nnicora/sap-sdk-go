@@ -1,4 +1,4 @@
-package btpsaasprovisioning
+package btpsaasmanager
 
 import (
 	"context"
