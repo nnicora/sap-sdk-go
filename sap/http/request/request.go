@@ -57,9 +57,10 @@ type Operation struct {
 	Http HTTP
 }
 type HTTP struct {
-	Method      HTTPMethod
-	Path        string
-	UsePathAsIs bool
+	Method       HTTPMethod
+	Path         string
+	VersionFirst bool
+	UsePathAsIs  bool
 }
 
 func New(ctx context.Context, cfg *sap.RuntimeConfig, serviceInfo metainfo.ServiceInfo, processors *processors.Processors,
@@ -84,15 +85,24 @@ func createHttpRequest(ctx context.Context, serviceInfo *metainfo.ServiceInfo, o
 	httpOp := operation.Http
 	httpReq, _ := http.NewRequestWithContext(ctx, httpOp.Method.String(), "", nil)
 
-	path := buildPath(
-		strings.TrimSuffix(serviceInfo.Endpoint.Host, "/"),
-		serviceInfo.ServiceID,
-		serviceInfo.APIVersion,
-		strings.TrimPrefix(httpOp.Path, "/"),
-	)
+	var path string
 	if httpOp.UsePathAsIs {
 		path = buildPath(
 			strings.TrimSuffix(serviceInfo.Endpoint.Host, "/"),
+			strings.TrimPrefix(httpOp.Path, "/"),
+		)
+	} else if httpOp.VersionFirst {
+		path = buildPath(
+			strings.TrimSuffix(serviceInfo.Endpoint.Host, "/"),
+			serviceInfo.APIVersion,
+			serviceInfo.ServiceID,
+			strings.TrimPrefix(httpOp.Path, "/"),
+		)
+	} else {
+		path = buildPath(
+			strings.TrimSuffix(serviceInfo.Endpoint.Host, "/"),
+			serviceInfo.ServiceID,
+			serviceInfo.APIVersion,
 			strings.TrimPrefix(httpOp.Path, "/"),
 		)
 	}
